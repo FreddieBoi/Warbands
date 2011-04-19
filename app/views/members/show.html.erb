@@ -1,25 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @member.name %>
+<p id="notice">
+	<%= notice %>
 </p>
-
 <p>
-  <b>Level:</b>
-  <%= @member.level %>
+	<b>Name:</b>
+	<%= @member.name %>
 </p>
-
 <p>
-  <b>Experience:</b>
-  <%= @member.experience %>
+	<b>Level:</b>
+	<%= @member.level %>
 </p>
-
 <p>
-  <b>Health:</b>
-  <%= @member.health %>
+	<b>Experience:</b>
+	<%= @member.experience %>
 </p>
-
+<p>
+	<b>Health:</b>
+	<%= @member.health %>
+</p>
+<h2>Items</h2>
+<%= render :partial => "items/item",
+           :collection => @member.items %>
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>
