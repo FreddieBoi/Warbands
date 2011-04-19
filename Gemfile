@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.6'
+gem 'rails', '3.0.7'
 gem 'jquery-rails', :git => 'git://github.com/pgericson/jquery-rails.git'
 
 # Bundle edge Rails instead:
