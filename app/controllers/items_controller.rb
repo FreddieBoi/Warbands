@@ -1,8 +1,14 @@
 class ItemsController < ApplicationController
   # GET /items
   # GET /items.xml
+  # GET /members/1/items
+  # GET /members/1/items.xml
   def index
-    @items = Item.all
+    if params[:member_id].blank?
+      @items = Item.all
+    else
+      @items = Item.where(:member_id => params[:member_id])
+    end
 
     respond_to do |format|
       format.html # index.html.erb

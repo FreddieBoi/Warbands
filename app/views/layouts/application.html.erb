@@ -1,16 +1,44 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Warbands</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-
-<h1>Warbands</h1>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Warbands Online</title>
+    <%= stylesheet_link_tag :all %>
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <%= link_to "Warbands", warbands_path%>
+            </li>
+            <li>
+              <%= link_to "Members", members_path%>
+            </li>
+            <li>
+              <%= link_to "Items", items_path%>
+            </li>
+          </ul>
+        </nav>
+      </header>
+      <section>
+        <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+        <% end %>
+        <%= yield %>
+      </section>
+      <footer>
+        <nav>
+          <ul>
+            <li>
+              <%= link_to "Warbands Online", root_path %> &copy; 2011 <b>fpdt<b>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+      <%= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
 </html>

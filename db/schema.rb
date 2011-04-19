@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(:version => 20110419143038) do
     t.integer  "member_id"
   end
 
-  add_index "items", ["member_id"], :name => "items_member_id_index"
   add_index "items", ["name"], :name => "items_name_index"
 
   create_table "members", :force => true do |t|

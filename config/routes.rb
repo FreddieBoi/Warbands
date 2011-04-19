@@ -1,9 +1,13 @@
 Warbands::Application.routes.draw do
-  resources :items
-
-  resources :members
-
   resources :warbands
+  
+  resources :members do
+  	resources :items
+  end
+	
+  resources :items
+  
+  root :to => "warbands#index"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
