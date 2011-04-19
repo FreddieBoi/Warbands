@@ -1,4 +1,10 @@
 Warbands::Application.routes.draw do
+  resources :items
+
+  resources :members
+
+  resources :warbands
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

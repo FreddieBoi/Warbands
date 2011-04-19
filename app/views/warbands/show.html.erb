@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @warband.name %>
+</p>
+
+<p>
+  <b>Reputation:</b>
+  <%= @warband.reputation %>
+</p>
+
+<p>
+  <b>Pos x:</b>
+  <%= @warband.pos_x %>
+</p>
+
+<p>
+  <b>Pos y:</b>
+  <%= @warband.pos_y %>
+</p>
+
+
+<%= link_to 'Edit', edit_warband_path(@warband) %> |
+<%= link_to 'Back', warbands_path %>

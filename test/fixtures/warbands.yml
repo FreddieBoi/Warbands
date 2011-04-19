@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  reputation: 1
+  pos_x: 1
+  pos_y: 1
+
+two:
+  name: MyString
+  reputation: 1
+  pos_x: 1
+  pos_y: 1
