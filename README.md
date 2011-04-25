@@ -14,9 +14,13 @@ Links
 
 Testing
 -------
-Make sure all the requirements (**rspec** etc.) are met before continuing:
+Make sure all the requirements (**rspec** etc.) are met before continuing through:
 
     bundle install
+
+Prepare the test database:
+
+    rake db:test:prepare
 
 You can run all the tests manually at any time:
 
@@ -33,3 +37,17 @@ Start testing:
     autotest
 
 *Note: You may want to dedicate another terminal to **autotest***
+
+Documentation
+-------------
+Make sure all the requirements (**rdoc**, **annotate-models** etc.) are met before continuing through:
+
+    bundle install
+
+Build the documentation for the app:
+
+    rake doc:app
+
+Add comments containing the data model to all the model files:
+
+    bundle exec annotate
