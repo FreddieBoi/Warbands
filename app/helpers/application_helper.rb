@@ -4,12 +4,17 @@ module ApplicationHelper
     "Warbands Online"
   end
 
+  # Get the title separator (used when combining app and page titles)
+  def title_separator
+    ">"
+  end
+
   # Get the title of the page
   def page_title
-    if @title.nil?
+    if @title.blank?
       app_title
     else
-      "#{app_title} > #{@title}"
+      "#{app_title} #{title_separator} #{@title}"
     end
   end
 end
