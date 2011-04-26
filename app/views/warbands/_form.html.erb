@@ -1,16 +1,5 @@
 <%= form_for(@warband) do |f| %>
-  <% if @warband.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@warband.errors.count, "error") %> prohibited this warband from being saved:</h2>
-
-      <ul>
-      <% @warband.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
+  <%= render 'shared/error_messages', :object => f.object %>
   <div class="field">
     <%= f.label :name %><br />
     <%= f.text_field :name %>
