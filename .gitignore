@@ -7,3 +7,5 @@ doc/
 *.swp
 *~
 *Thumbs.db
+spec/views/
+spec/helpers/
