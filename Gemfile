@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.0.7'
 gem 'jquery-rails', :git => 'git://github.com/pgericson/jquery-rails.git'
 gem 'sqlite3-ruby', :require => 'sqlite3'
+gem 'devise'
 
 group :development do
   gem 'rspec-rails'

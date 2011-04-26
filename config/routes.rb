@@ -1,4 +1,6 @@
 Warbands::Application.routes.draw do
+  devise_for :users
+
   match '/about',   :to => 'pages#about'
   match '/contact', :to => 'pages#contact'
   match '/help',    :to => 'pages#help'
