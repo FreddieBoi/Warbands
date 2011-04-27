@@ -7,16 +7,25 @@
     <%= javascript_include_tag :defaults %>
   </head>
   <body>
-    <div class="container">
-      <%= render 'layouts/header' %>
+    <div id="container" class="container_12">
+      <div id="header" class="grid_6 alpha">
+      	<h1><%= app_title %></h1>
+      </div>
+      <%= render 'layouts/login' %>
+      
+	  <%= render 'layouts/nav' %>
+	  
       <section>
         <% flash.each do |key, value| %>
         <%= content_tag(:div, value, :class => "flash #{key}") %>
         <% end %>
         <%= yield %>
       </section>
+      
       <%= render 'layouts/footer' %>
-      <%= debug(params) if Rails.env.development? %>
+
     </div>
+    
+  <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
