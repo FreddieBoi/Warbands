@@ -9,23 +9,20 @@
   <body>
     <div id="container" class="container_12">
       <div id="header" class="grid_6 alpha">
-      	<h1><%= app_title %></h1>
+        <h1><%= app_title %></h1>
       </div>
       <%= render 'layouts/login' %>
-      
-	  <%= render 'layouts/nav' %>
-	  
+
+      <%= render 'layouts/nav' %>
+
       <section>
         <% flash.each do |key, value| %>
         <%= content_tag(:div, value, :class => "flash #{key}") %>
         <% end %>
         <%= yield %>
       </section>
-      
       <%= render 'layouts/footer' %>
-
     </div>
-    
-  <%= debug(params) if Rails.env.development? %>
+    <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
