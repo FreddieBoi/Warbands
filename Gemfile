@@ -4,6 +4,8 @@ gem 'rails', '3.0.7'
 gem 'jquery-rails', :git => 'git://github.com/pgericson/jquery-rails.git'
 gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'devise'
+gem 'friendly_id'
+gem 'gravatar_image_tag'
 
 group :development do
   gem 'rspec-rails'

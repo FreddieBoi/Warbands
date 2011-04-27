@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110426090101
+# Schema version: 20110427211119
 #
 # Table name: users
 #
@@ -14,6 +14,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
+#  name                   :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
 #
@@ -25,5 +26,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+
+  validates :name, :presence => true, :length => { :within => 2..20 },
+                    :uniqueness => { :case_sensitive => false }
+
+  has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
 end
