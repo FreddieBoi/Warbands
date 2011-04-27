@@ -13,6 +13,8 @@ section {
 }*/
 
 body {
+  margin: 0;
+  padding: 0;
 	background-color: #333333;
 }
 
@@ -24,7 +26,10 @@ body, p, ol, ul, td {
 
 a { color: #fff; }
 a:visited { color: #999; }
-a:hover { color: #D9CB84; }
+a:hover {
+  color: #D9CB84;
+  text-shadow: 0 0 5px #fff;
+}
 
 h1 {
 	color: #D9CB84;
@@ -32,20 +37,29 @@ h1 {
 }
 
 #container {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 #header {
-
+  margin-top: 0;
+  padding-top: 0;
 }
 
 #login {
-	text-align: right;
+  background-color: #000;
+	text-align: center;
+  border-radius: 0px 0px 10px 10px;
+  -moz-border-radius: 0px 0px 10px 10px;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
 }
 
 #main-nav {
 	background-color: #42612A;
-	padding: 0 0.7em;
-	white-space: nowrap;
+	padding: 0 0;
+	margin-bottom: 10px;
+  white-space: nowrap;
 }
 #main-nav ul {
 	margin: 0;
@@ -62,8 +76,15 @@ article {
 }
 
 footer {
+  padding-top: 10px; 
+  margin-top: 20px;
 	background-color: #000;
 	color: #D9CB84;
+	background-color: ;
+  border-radius: 10px 10px 0px 0px;
+  -moz-border-radius: 10px 10px 0px 0px;
+  -webkit-border-bottom-right-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
 }
 
 footer a { color: #fff; }
