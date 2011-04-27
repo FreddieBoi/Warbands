@@ -8,6 +8,7 @@ gem 'devise'
 group :development do
   gem 'rspec-rails'
   gem 'annotate-models'
+  # gem 'ruby-debug19' # uncomment to use debugger and rails s -u
 end
 
 group :test do

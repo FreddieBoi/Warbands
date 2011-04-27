@@ -13,4 +13,11 @@
 #
 
 class Warband < ActiveRecord::Base
+  
+  def update_pos(x, y)
+    self.pos_x = x
+    self.pos_y = y
+    save!
+  end
+  
 end
