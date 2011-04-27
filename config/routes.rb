@@ -4,6 +4,7 @@ Warbands::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/contact', :to => 'pages#contact'
   match '/help',    :to => 'pages#help'
+  match '/map',     :to => 'map#index'
 
   resources :warbands
   
