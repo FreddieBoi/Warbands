@@ -17,8 +17,7 @@ $(document).ready( function() {
       pos_x: pos.x,
       pos_y: pos.y
     },
-    redraw, "json");
-    updateWarbandPos({ warband: { pos_x: pos.x, pos_y: pos.y }});
+    getWarbandPos, "json");
     return false;
   });
   // create a warband and get its position
@@ -30,7 +29,7 @@ $(document).ready( function() {
   };
   warband.x = 0;
   warband.y = 0;
-  $.get("warbands/1.json", updateWarbandPos, "json");
+  getWarbandPos();
 
   canvas = $("#map")[0];
 
@@ -53,6 +52,11 @@ $(document).ready( function() {
     alert("Sorry, but the Canvas element is not supported by your browser!");
   }
 });
+
+function getWarbandPos() {
+  $.get("warbands/1.json", updateWarbandPos, "json");
+}
+
 function updateWarbandPos(data) {
   warband.x = data['warband']['pos_x'];
   warband.y = data['warband']['pos_y'];
