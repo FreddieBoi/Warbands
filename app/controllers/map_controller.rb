@@ -4,6 +4,10 @@ class MapController < ApplicationController
   
   def index
     @warband = Warband.first
+    respond_to do |format|
+      format.html # index.html.erb
+      format.js # index.js.erb
+    end
   end
   
 end
