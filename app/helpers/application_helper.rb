@@ -17,4 +17,9 @@ module ApplicationHelper
       "#{app_title} #{title_separator} #{@title}"
     end
   end
+
+  # Check if the specifiedd user is the current user
+  def current_user?(user)
+    user == current_user
+  end
 end

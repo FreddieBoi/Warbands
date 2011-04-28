@@ -1,4 +1,7 @@
 class WarbandsController < ApplicationController
+  
+  before_filter :authenticate_user!
+  
   # GET /warbands
   # GET /warbands.xml
   def index

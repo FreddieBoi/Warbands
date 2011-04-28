@@ -95,6 +95,12 @@ ul.users {
 .users li {
   list-style: none;
 }
+img.gravatar {
+  border: 1px solid #999;
+}
+h1 img.gravatar {
+  margin-bottom: -15px;
+}
 .error, .alert, .notice, .success, .info {
   padding:0.8em;
   margin-bottom:1em;
