@@ -1,18 +1,18 @@
+<h1><%= @warband.name %></h1>
 <p>
-  <b>Name:</b>
-  <%= @warband.name %>
+  <b>Belongs to:</b>
+  <%= gravatar_for(@user, :size => 32) %> <%= link_to @user.name, @user %>
 </p>
-
 <p>
   <b>Reputation:</b>
   <%= @warband.reputation %>
 </p>
-
 <p>
-  <b>Region:</b>
-  <%= @warband.region.name %>
+  <b>Currently in region:</b>
+  <%= link_to @region.name, @region %>
 </p>
-
-
+<% if current_user?(@user) %>
 <%= link_to 'Edit', edit_warband_path(@warband) %> |
+<%= link_to 'Destroy', @warband, :confirm => 'Are you sure?', :method => :delete %> |
+<% end %>
 <%= link_to 'Back', warbands_path %>

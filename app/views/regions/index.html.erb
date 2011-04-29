@@ -1,29 +1,24 @@
-<h1>Listing regions</h1>
-
+<h1><%= @title %></h1>
 <table>
   <tr>
     <th>Name</th>
     <th>Pos x</th>
     <th>Pos y</th>
-    <th>Desc</th>
-    <th></th>
+    <th>Description</th>
     <th></th>
     <th></th>
   </tr>
-
-<% @regions.each do |region| %>
+  <% @regions.each do |region| %>
   <tr>
-    <td><%= region.name %></td>
+    <td><%= link_to region.name, region %></td>
     <td><%= region.pos_x %></td>
     <td><%= region.pos_y %></td>
     <td><%= region.desc %></td>
-    <td><%= link_to 'Show', region %></td>
     <td><%= link_to 'Edit', edit_region_path(region) %></td>
     <td><%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New Region', new_region_path %>

@@ -12,6 +12,7 @@ class WarbandsController < ApplicationController
   # GET /warbands
   # GET /warbands.xml
   def index
+    @title = "Warbands"
     @warbands = Warband.all
 
     respond_to do |format|
@@ -25,6 +26,9 @@ class WarbandsController < ApplicationController
   # GET /warbands/1.json
   def show
     @warband = Warband.find(params[:id])
+    @user = @warband.user
+    @region = @warband.region
+    @title = @warband.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -36,6 +40,9 @@ class WarbandsController < ApplicationController
   # GET /warbands/new
   # GET /warbands/new.xml
   def new
+    # Don't allow multiple Warbands!
+    redirect_to(current_user.warband, :alert => "You already have a Warband!") and return unless current_user.warband.blank?
+    @title = "New warband"
     @warband = Warband.new
 
     respond_to do |format|
@@ -46,6 +53,7 @@ class WarbandsController < ApplicationController
 
   # GET /warbands/1/edit
   def edit
+    @title = "Edit warband"
     @warband = Warband.find(params[:id])
   end
 
@@ -53,6 +61,11 @@ class WarbandsController < ApplicationController
   # POST /warbands.xml
   def create
     @warband = Warband.new(params[:warband])
+    # FIXME! Set default values in model instead?
+    @warband.region = Region.first
+    @warband.reputation = 0
+    # FIXME! Is this really the correct way?
+    current_user.warband = @warband
 
     respond_to do |format|
       if @warband.save

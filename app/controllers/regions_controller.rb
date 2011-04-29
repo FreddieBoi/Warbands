@@ -1,7 +1,10 @@
 class RegionsController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /regions
   # GET /regions.xml
   def index
+    @title = "Regions"
     @regions = Region.all
 
     respond_to do |format|
@@ -14,6 +17,7 @@ class RegionsController < ApplicationController
   # GET /regions/1.xml
   def show
     @region = Region.find(params[:id])
+    @title = @region.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,6 +28,7 @@ class RegionsController < ApplicationController
   # GET /regions/new
   # GET /regions/new.xml
   def new
+    @title = "New region"
     @region = Region.new
 
     respond_to do |format|
@@ -34,6 +39,7 @@ class RegionsController < ApplicationController
 
   # GET /regions/1/edit
   def edit
+    @title = "Edit region"
     @region = Region.find(params[:id])
   end
 

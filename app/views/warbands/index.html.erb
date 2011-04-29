@@ -1,27 +1,24 @@
-<h1>Listing warbands</h1>
-
+<h1><%= @title %></h1>
 <table>
   <tr>
     <th>Name</th>
     <th>Reputation</th>
-    <th>Region</th>
-    <th></th>
+    <th>Currently in region</th>
     <th></th>
     <th></th>
   </tr>
-
-<% @warbands.each do |warband| %>
+  <% @warbands.each do |warband| %>
   <tr>
-    <td><%= warband.name %></td>
+    <td><%= link_to warband.name, warband %></td>
     <td><%= warband.reputation %></td>
     <td><%= warband.region.name %></td>
-    <td><%= link_to 'Show', warband %></td>
-    <td><%= link_to 'Edit', edit_warband_path(warband) %></td>
-    <td><%= link_to 'Destroy', warband, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= link_to 'Edit', edit_warband_path(warband) if current_user?(warband.user) %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-
 <br />
-
-<%= link_to 'New Warband', new_warband_path %>
+<% if current_user.warband.blank? %>
+<p>
+  You don't have a warband yet. <%= link_to "Create your own Warband now!", new_warband_path %>
+</p>
+<% end %>

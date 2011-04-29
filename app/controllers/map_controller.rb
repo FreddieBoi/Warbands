@@ -5,6 +5,7 @@ class MapController < ApplicationController
     if current_user.warband.blank?
       redirect_to new_warband_path, :alert => "You need to create a warband first!"
     else
+      @title = "Map"
       @user = current_user
       @warband = current_user.warband
       @regions = Region.all

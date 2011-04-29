@@ -1,6 +1,24 @@
-<div class="push_1">&nbsp;</div>
-<div class="grid_5"><h3>Create a new Warband!</h3></div>
+<div class="push_1">
+  &nbsp;
+</div>
+<div class="grid_5">
+  <% if user_signed_in? %>
+  <h1>Hi, <%= current_user.name %>!</h1>
+  <p>
+    <% if current_user.warband.blank? %>
+    You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
+    <% else %>
+    <%= link_to "Take me to my warband!", current_user.warband %>
+    <% end %>
+  </p>
+  <% else %>
+  <h1>Home</h1>
+  <p>
+    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up now!", new_user_registration_path %>
+  </p>
+  <% end %>
+</div>
 <%= render 'pages/devblog' %>
-<div class="clear">&nbsp;</div>
-
-<!--<p>Welcome to the home of <%= link_to app_title, root_path %>!</p>-->
+<div class="clear">
+  &nbsp;
+</div>

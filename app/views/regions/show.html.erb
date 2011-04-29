@@ -1,25 +1,16 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @region.name %>
-</p>
-
+<h1><%= @region.name %></h1>
 <p>
   <b>Pos x:</b>
   <%= @region.pos_x %>
 </p>
-
 <p>
   <b>Pos y:</b>
   <%= @region.pos_y %>
 </p>
-
 <p>
-  <b>Desc:</b>
+  <b>Description:</b>
   <%= @region.desc %>
 </p>
-
-
 <%= link_to 'Edit', edit_region_path(@region) %> |
+<%= link_to 'Destroy', @region, :confirm => 'Are you sure?', :method => :delete %> |
 <%= link_to 'Back', regions_path %>
