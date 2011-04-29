@@ -10,7 +10,7 @@ gem 'gravatar_image_tag'
 group :development do
   gem 'rspec-rails'
   gem 'annotate-models'
-  gem 'heroku', '<2.0.0'
+  gem 'heroku'
   gem 'ruby-debug19'
 end
 
