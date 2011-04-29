@@ -1,13 +1,16 @@
 class MapController < ApplicationController
-  
+
   before_filter :authenticate_user!
-  
   def index
-    @warband = Warband.first
-    respond_to do |format|
-      format.html # index.html.erb
-      format.js # index.js.erb
+    if current_user.warband.blank?
+      redirect_to new_warband_path, :alert => "You need to create a warband first!"
+    else
+      @user = current_user
+      @warband = current_user.warband
+      respond_to do |format|
+        format.html # index.html.erb
+      end
     end
   end
-  
+
 end

@@ -18,8 +18,4 @@ module ApplicationHelper
     end
   end
 
-  # Check if the specifiedd user is the current user
-  def current_user?(user)
-    user == current_user
-  end
 end

@@ -31,5 +31,13 @@ class User < ActiveRecord::Base
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
 
+  # FIXME! Slugs not unique for names containing non-ASCII signs
+  # (eg. freddieboi2008, freddieboi%&, freddieboi=) etc.)
+  # Fix with something like:
+  # name_regex = /somecoolregex/
+  # validates :name, :format => { :with => name_regex }
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
+
+  has_one :warband, :dependent => :destroy
+
 end

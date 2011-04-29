@@ -10,5 +10,20 @@
 <% end %>
 <br />
 <p>
+  <b>Warband:</b>
+</p>
+<% if @warband.blank? %>
+<p>
+  <% if current_user?(@user) %>
+  You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
+  <% else %>
+  This user doesn't have a warband yet.
+  <% end %>
+</p>
+<% else %>
+<%= render @warband %>
+<% end %>
+<br />
+<p>
   <%= link_to 'List of all users', users_path %>
 </p>

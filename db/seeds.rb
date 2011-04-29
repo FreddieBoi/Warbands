@@ -10,3 +10,5 @@ freddie = User.create! :name => 'Freddie', :email => 'freddieboi@gmail.com', :pa
 puts 'New user created: ' << freddie.name
 dt = User.create! :name => 'DT', :email => 'dt@nospam.com', :password => 'please', :password_confirmation => 'please'
 puts 'New user created: ' << dt.name
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :pos_x => 300, :pos_y => 400, :user => dt
+puts 'New warband created: ' << warband.name

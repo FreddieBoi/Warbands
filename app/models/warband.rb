@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110419143038
+# Schema version: 20110427205619
 #
 # Table name: warbands
 #
@@ -8,16 +8,13 @@
 #  reputation :integer
 #  pos_x      :integer
 #  pos_y      :integer
+#  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Warband < ActiveRecord::Base
   
-  def update_pos(x, y)
-    self.pos_x = x
-    self.pos_y = y
-    save!
-  end
+  belongs_to :user
   
 end

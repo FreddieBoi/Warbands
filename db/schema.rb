@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(:version => 20110427205619) do
     t.integer  "reputation"
     t.integer  "pos_x"
     t.integer  "pos_y"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

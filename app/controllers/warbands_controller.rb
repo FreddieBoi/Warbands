@@ -1,7 +1,14 @@
 class WarbandsController < ApplicationController
-  
+
+  # Helper method current_user? is needed by ensure_correct_user
+  include UsersHelper
+
+  # Ensure that the User is signed in
   before_filter :authenticate_user!
-  
+
+  # Ensure that the current User is the same as the one that the warband
+  # belongs to
+  before_filter :ensure_correct_user, :only => [ :edit, :update, :destroy ]
   # GET /warbands
   # GET /warbands.xml
   def index
@@ -15,6 +22,7 @@ class WarbandsController < ApplicationController
 
   # GET /warbands/1
   # GET /warbands/1.xml
+  # GET /warbands/1.json
   def show
     @warband = Warband.find(params[:id])
 
@@ -59,6 +67,7 @@ class WarbandsController < ApplicationController
 
   # PUT /warbands/1
   # PUT /warbands/1.xml
+  # PUT /warbands/1.json
   def update
     @warband = Warband.find(params[:id])
 
@@ -66,9 +75,11 @@ class WarbandsController < ApplicationController
       if @warband.update_attributes(params[:warband])
         format.html { redirect_to(@warband, :notice => 'Warband was successfully updated.') }
         format.xml  { head :ok }
+        format.json { redirect_to(@warband, :format => :json) }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @warband.errors, :status => :unprocessable_entity }
+        format.json { render :json => @warband.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -84,4 +95,14 @@ class WarbandsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  # Ensure that the current User is the same as the one that the warband
+  # belongs to
+  def ensure_correct_user
+    @warband = Warband.find(params[:id])
+    redirect_to(user_path(current_user), :alert => "You may not perform this action on another user's Warband") unless current_user?(@warband.user)
+  end
+
 end
