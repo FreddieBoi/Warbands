@@ -7,6 +7,7 @@ class MapController < ApplicationController
     else
       @user = current_user
       @warband = current_user.warband
+      @regions = Region.all
       respond_to do |format|
         format.html # index.html.erb
       end

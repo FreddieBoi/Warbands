@@ -1,13 +1,27 @@
-<canvas id="map" width="1080" height="700"></canvas>
+<canvas id="map" width="800" height="700"></canvas>
 <% content_for :head do %>
   <script>
     var canvas;
     var context;
     var bg;
     var warband;
-    var mapWidth;
-    var mapHeight;
+    var mapWidth = 800;//$('#map')[0].width;
+    var mapHeight = 700; //$('#map')[0].height;
     var mapItems = new Array();
+
+    // canvas width and height must be divisible by 100
+    var regionWidth = 100;
+    var regionHeight = 100;
+
+    var cols = mapWidth/regionWidth;
+    var rows = mapHeight/regionHeight;
+
+    var regions = new Array(cols);
+    regions[0] = new Array(rows);
+
+    var offset = Object();
+    offset.x = 40;
+    offset.y = 40;
 
     // Do when document is ready
     $(document).ready( function() {
@@ -17,17 +31,22 @@
         // Get the clicked position
         var pos = getCursorPosition(e);
 
+        var x = Math.floor(pos.x/regionWidth);
+        var y = Math.floor(pos.y/regionHeight);
+        var region = getRegion(x,y);
+
         // Update the Warband position (database) by sending a PUT request and
         // then the positon of the warband (javascript object) upon success
-        var url = "<%= warband_path(@warband) %>"; // Use warbands#show
-        var data = { "warband[pos_x]": pos.x,
-                     "warband[pos_y]": pos.y,
-                     "_method": "put" }; // Use warbands#update (not edit)
+        var url = "<%= warband_path(@warband) %>"; // Go to warbands/:id path
+        var data = { "warband[region_id]": region.id,
+                     "_method": "put" }; // Use warbands#update (not show)
         $.post(url, data, updateWarbandPosition, "json");
 
         return false;
       });
   
+      initRegions();
+
       // Get the canvas
       canvas = $("#map")[0];
   
@@ -35,11 +54,17 @@
       if(canvas.getContext) {
         context = canvas.getContext('2d');
   
+        // stop the user getting a text cursor
+        canvas.onselectstart = function()
+        {
+            return false;
+        };
+
         // Create a background object
         bg = new Object();
         bg.img = new Image();
         bg.img.src = 'images/map_bg.png';
-        bg.x = 0;
+        bg.x = -100;
         bg.y = 0;
         bg.img.onload = function() {
           redraw();
@@ -53,8 +78,8 @@
           redraw();
         };
         // Get the initial position of the Warband
-        warband.x = <%= @warband.pos_x %>;
-        warband.y = <%= @warband.pos_y %>;
+        warband.x = <%= @warband.region.pos_x %>+offset.x;
+        warband.y = <%= @warband.region.pos_y %>+offset.y;
 
         // Add all the objects to be drawn
         mapItems.push(bg);
@@ -67,9 +92,24 @@
 
     // Update the Warband position from the specified data (.json) and redraw
     function updateWarbandPosition(data) {
-      warband.x = data['warband']['pos_x'];
-      warband.y = data['warband']['pos_y'];
+      var region = findRegion(data['warband']['region_id']);
+      warband.x = region.x*regionWidth + offset.x;
+      warband.y = region.y*regionHeight + offset.y;
       redraw();
+    }
+
+    function findRegion(id) {
+      for(var c = 0; c < cols; c++) {
+        for(var r = 0; r < rows; r++) {
+          if (regions[c][r].id == id) {
+            return regions[c][r];
+          }
+        }
+      }
+    }
+
+    function getRegion(x, y) {
+      return regions[x][y];
     }
   
     // Redraw all the images (mapItems) of the canvas context
@@ -112,6 +152,21 @@
       var w = canvas.width;
       canvas.width = 1;
       canvas.width = w;
+    }
+
+    // Get and initialize all the Regions 
+    function initRegions() {
+      <% @regions.each do |r| %>
+        var region = new Object();
+        var data = JSON.parse("<%= r.to_json %>".replace(/&quot;/gi, '"'));
+        data = data["region"];
+        region.id = data["id"];
+        region.x = data["pos_x"];
+        region.y = data["pos_y"];
+        region.name = data["name"];
+        region.desc = data["desc"];
+        regions[region.x][region.y] = region;
+      <% end %>
     }
   </script>
 <% end %>

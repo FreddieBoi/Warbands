@@ -10,5 +10,9 @@ freddie = User.create! :name => 'Freddie', :email => 'freddieboi@gmail.com', :pa
 puts 'New user created: ' << freddie.name
 dt = User.create! :name => 'DT', :email => 'dt@nospam.com', :password => 'please', :password_confirmation => 'please'
 puts 'New user created: ' << dt.name
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :pos_x => 300, :pos_y => 400, :user => dt
+region = Region.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0
+puts 'New region created: ' << region.name
+region2 = Region.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1
+puts 'New region created: ' << region2.name
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region, :user => dt
 puts 'New warband created: ' << warband.name

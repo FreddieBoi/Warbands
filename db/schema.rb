@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110427205619) do
+ActiveRecord::Schema.define(:version => 20110429073725) do
 
   create_table "items", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(:version => 20110427205619) do
     t.integer  "level"
     t.integer  "experience"
     t.integer  "health"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "regions", :force => true do |t|
+    t.string   "name"
+    t.integer  "pos_x"
+    t.integer  "pos_y"
+    t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,8 +77,7 @@ ActiveRecord::Schema.define(:version => 20110427205619) do
   create_table "warbands", :force => true do |t|
     t.string   "name"
     t.integer  "reputation"
-    t.integer  "pos_x"
-    t.integer  "pos_y"
+    t.integer  "region_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

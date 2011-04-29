@@ -1,5 +1,7 @@
 Warbands::Application.routes.draw do
 
+  resources :regions
+
   devise_for :users
   resources :users, :only => [:index, :show]
 

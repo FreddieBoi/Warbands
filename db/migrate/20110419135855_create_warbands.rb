@@ -3,8 +3,7 @@ class CreateWarbands < ActiveRecord::Migration
     create_table :warbands do |t|
       t.string :name
       t.integer :reputation
-      t.integer :pos_x
-      t.integer :pos_y
+      t.references :region
       t.references :user
 
       t.timestamps

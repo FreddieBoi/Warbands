@@ -4,8 +4,7 @@
   <tr>
     <th>Name</th>
     <th>Reputation</th>
-    <th>Pos x</th>
-    <th>Pos y</th>
+    <th>Region</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,8 +14,7 @@
   <tr>
     <td><%= warband.name %></td>
     <td><%= warband.reputation %></td>
-    <td><%= warband.pos_x %></td>
-    <td><%= warband.pos_y %></td>
+    <td><%= warband.region.name %></td>
     <td><%= link_to 'Show', warband %></td>
     <td><%= link_to 'Edit', edit_warband_path(warband) %></td>
     <td><%= link_to 'Destroy', warband, :confirm => 'Are you sure?', :method => :delete %></td>
