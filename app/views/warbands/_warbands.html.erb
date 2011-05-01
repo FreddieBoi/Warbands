@@ -1,0 +1,24 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "reputation" %></th>
+    <th>Currently in region</th>
+    <th></th>
+    <% unless current_user.warband.blank? %>
+    <th></th>
+    <% end %>
+  </tr>
+  <% @warbands.each do |warband| %>
+  <tr>
+    <td><%= link_to warband.name, warband %></td>
+    <td><%= warband.reputation %></td>
+    <td><%= warband.region.name %></td>
+    <% if current_user?(warband.user) %>
+    <td>[<%= link_to 'Edit your warband', edit_warband_path(warband) %>]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @warbands %>

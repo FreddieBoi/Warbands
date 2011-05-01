@@ -1,34 +1,13 @@
 <h1><%= @title %></h1>
-<%= form_tag warbands_path, :method => 'get' do %>
-<%= hidden_field_tag :direction, params[:direction] %>
-<%= hidden_field_tag :sort, params[:sort] %>
+<%= form_tag warbands_path, :method => 'get', :id => "warbands_search" do %>
 <p>
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag "Search", :name => nil %>
 </p>
+<div id="warbands">
+  <%= render 'warbands' %>
+</div>
 <% end %>
-<table>
-  <tr>
-    <th><%= sortable "name" %></th>
-    <th><%= sortable "reputation" %></th>
-    <th>Currently in region</th>
-    <th></th>
-    <% unless current_user.warband.blank? %>
-    <th></th>
-    <% end %>
-  </tr>
-  <% @warbands.each do |warband| %>
-  <tr>
-    <td><%= link_to warband.name, warband %></td>
-    <td><%= warband.reputation %></td>
-    <td><%= warband.region.name %></td>
-    <% if current_user?(warband.user) %>
-    <td>[<%= link_to 'Edit your warband', edit_warband_path(warband) %>]</td>
-    <% end %>
-  </tr>
-  <% end %>
-</table>
-<%= will_paginate @warbands %>
 <br />
 <% if current_user.warband.blank? %>
 <p>
