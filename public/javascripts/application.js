@@ -5,12 +5,24 @@ $( function() {
     $.getScript(this.href);
     return false;
   });
+  $("#warbands_search").submit( function() {
+    $.get(this.action, $(this).serialize(), null, "script");
+    return false;
+  });
   $("#warbands_search input").keyup( function() {
     $.get($("#warbands_search").attr("action"), $("#warbands_search").serialize(), null, "script");
     return false;
   });
+  $("#users_search").submit( function() {
+    $.get(this.action, $(this).serialize(), null, "script");
+    return false;
+  });
   $("#users_search input").keyup( function() {
     $.get($("#users_search").attr("action"), $("#users_search").serialize(), null, "script");
+    return false;
+  });
+  $("#regions_search").submit( function() {
+    $.get(this.action, $(this).serialize(), null, "script");
     return false;
   });
   $("#regions_search input").keyup( function() {
