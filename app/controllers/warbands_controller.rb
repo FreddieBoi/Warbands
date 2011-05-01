@@ -3,6 +3,9 @@ class WarbandsController < ApplicationController
   # Helper method current_user? is needed by ensure_correct_user
   include UsersHelper
 
+  # Make sort_column and sort_direction accesible as helper methods
+  helper_method :sort_column, :sort_direction
+
   # Ensure that the User is signed in
   before_filter :authenticate_user!
 
@@ -13,7 +16,7 @@ class WarbandsController < ApplicationController
   # GET /warbands.xml
   def index
     @title = "Warbands"
-    @warbands = Warband.all
+    @warbands = Warband.order(sort_column+" "+sort_direction)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -116,6 +119,16 @@ class WarbandsController < ApplicationController
   def ensure_correct_user
     @warband = Warband.find(params[:id])
     redirect_to(user_path(current_user), :alert => "You may not perform this action on another user's Warband") unless current_user?(@warband.user)
+  end
+
+  # Get the column to order by. Possible: name, reputation. Default: name
+  def sort_column
+    Warband.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  # Get the order direction. Possible: asc, desc. Default: asc
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end
