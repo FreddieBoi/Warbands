@@ -8,6 +8,8 @@ class CreateWarbands < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :warbands, :name, :unique => true
   end
 
   def self.down

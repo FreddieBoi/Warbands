@@ -8,6 +8,8 @@ class CreateRegions < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :regions, :name, :unique => true
   end
 
   def self.down

@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(:version => 20110430234753) do
     t.datetime "updated_at"
   end
 
+  add_index "regions", ["name"], :name => "index_regions_on_name", :unique => true
+
   create_table "slugs", :force => true do |t|
     t.string   "name"
     t.integer  "sluggable_id"
@@ -83,5 +85,7 @@ ActiveRecord::Schema.define(:version => 20110430234753) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "warbands", ["name"], :name => "index_warbands_on_name", :unique => true
 
 end

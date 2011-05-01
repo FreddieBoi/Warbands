@@ -16,8 +16,9 @@ class Region < ActiveRecord::Base
   
   has_many :warbands
   
-  def to_javascript_json
-    to_json.gsub("\"", "'")
-  end
+  validates :name, :presence => true, :length => { :within => 2..20 },
+                    :uniqueness => { :case_sensitive => false }
+
+  has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
   
 end
