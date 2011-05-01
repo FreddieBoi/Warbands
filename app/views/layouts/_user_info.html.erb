@@ -1,9 +1,7 @@
-<div id="user_info" class="grid_3 omega">
+<div id="user_info" class="grid_5 omega">
   <% if user_signed_in? %>
-  <p>
-    <%= gravatar_for current_user, :size => 16 %>
-    <b><%= link_to current_user.name, current_user %></b> (<%= current_user.email %>)
-  </p>
+  <%= gravatar_for current_user, :size => 16 %>
+  <b><%= link_to current_user.name, current_user %></b>
   <% if current_user.warband.blank? %>
   <%= link_to 'My warband', new_warband_path %>
   <% else %>

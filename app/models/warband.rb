@@ -1,13 +1,12 @@
 # == Schema Information
-# Schema version: 20110427205619
+# Schema version: 20110430234753
 #
 # Table name: warbands
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)
 #  reputation :integer
-#  pos_x      :integer
-#  pos_y      :integer
+#  region_id  :integer
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime

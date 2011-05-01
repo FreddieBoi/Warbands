@@ -3,12 +3,16 @@
 <p>
   <%= @user.email %>
 </p>
-<% if user_signed_in? and current_user?(@user) %>
+<% if @user.admin? %>
 <p>
-  <%= link_to 'Edit account', edit_user_registration_path %>
+  <em>Administrator</em>
 </p>
 <% end %>
-<br />
+<% if current_user?(@user) %>
+<p>
+  <%= link_to 'Edit your account', edit_user_registration_path %>
+</p>
+<% end %>
 <p>
   <b>Warband:</b>
 </p>

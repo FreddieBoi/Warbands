@@ -7,12 +7,18 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 puts 'SETTING UP EXAMPLE USERS'
 freddie = User.create! :name => 'Freddie', :email => 'freddieboi@gmail.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+freddie.admin = true
+freddie.save!
 puts 'New user created: ' << freddie.name
 dt = User.create! :name => 'DT', :email => 'dt@nospam.com', :password => 'please', :password_confirmation => 'please'
+dt.admin = true
+dt.save!
 puts 'New user created: ' << dt.name
-region = Region.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0
-puts 'New region created: ' << region.name
-region2 = Region.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1
-puts 'New region created: ' << region2.name
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region, :user => dt
+test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+puts 'New user created: ' << test_user.name
+region00 = Region.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0
+puts 'New region created: ' << region00.name
+region01 = Region.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1
+puts 'New region created: ' << region01.name
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :user => dt
 puts 'New warband created: ' << warband.name

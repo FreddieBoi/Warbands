@@ -11,6 +11,8 @@
   <b>Description:</b>
   <%= @region.desc %>
 </p>
+<% if current_user.admin? %>
 <%= link_to 'Edit', edit_region_path(@region) %> |
 <%= link_to 'Destroy', @region, :confirm => 'Are you sure?', :method => :delete %> |
-<%= link_to 'Back', regions_path %>
+<% end %>
+<%= link_to 'List of all regions', regions_path %>

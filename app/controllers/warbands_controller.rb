@@ -7,7 +7,7 @@ class WarbandsController < ApplicationController
   before_filter :authenticate_user!
 
   # Ensure that the current User is the same as the one that the warband
-  # belongs to
+  # belongs to before allowing editing, updating or destroying
   before_filter :ensure_correct_user, :only => [ :edit, :update, :destroy ]
   # GET /warbands
   # GET /warbands.xml

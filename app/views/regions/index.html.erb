@@ -5,8 +5,10 @@
     <th>Pos x</th>
     <th>Pos y</th>
     <th>Description</th>
+    <% if current_user.admin? %>
     <th></th>
     <th></th>
+    <% end %>
   </tr>
   <% @regions.each do |region| %>
   <tr>
@@ -14,11 +16,12 @@
     <td><%= region.pos_x %></td>
     <td><%= region.pos_y %></td>
     <td><%= region.desc %></td>
-    <td><%= link_to 'Edit', edit_region_path(region) %></td>
-    <td><%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if current_user.admin? %>
+    <td>[<%= link_to 'Edit', edit_region_path(region) %>]</td>
+    <td>[<%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %>]</td>
+    <% end %>
   </tr>
   <% end %>
 </table>
 <br />
-
-<%= link_to 'New Region', new_region_path %>
+<%= link_to 'Create new region', new_region_path if current_user.admin? %>
