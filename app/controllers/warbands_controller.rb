@@ -13,6 +13,7 @@ class WarbandsController < ApplicationController
   # belongs to before allowing editing, updating or destroying
   before_filter :ensure_correct_user, :only => [ :edit, :update, :destroy ]
   # GET /warbands
+  # GET /warbands.js
   # GET /warbands.xml
   def index
     @title = "Warbands"

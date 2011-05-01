@@ -1,0 +1,19 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th></th>
+    <th><%= sortable "name" %></th>
+    <td>
+  </tr>
+  <% @users.each do |user| %>
+  <tr>
+    <td><%= gravatar_for user, :size => 30 %></td>
+    <td><%= link_to user.name, user %></td>
+    <% if current_user?(user) %>
+    <td> [ <%= link_to "Edit your account", edit_user_registration_path %> ]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @users %>

@@ -13,12 +13,19 @@
 #
 
 class Region < ActiveRecord::Base
-  
+
   has_many :warbands
-  
+
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
 
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-  
+  # Search for Regions matching the name of the specified search term
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped # Empty scope, like calling 'all' but not performing the query
+    end
+  end
 end

@@ -1,0 +1,27 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "pos_x" %></th>
+    <th><%= sortable "pos_y" %></th>
+    <th>Description</th>
+    <% if current_user.admin? %>
+    <th></th>
+    <th></th>
+    <% end %>
+  </tr>
+  <% @regions.each do |region| %>
+  <tr>
+    <td><%= link_to region.name, region %></td>
+    <td><%= region.pos_x %></td>
+    <td><%= region.pos_y %></td>
+    <td><%= region.desc %></td>
+    <% if current_user.admin? %>
+    <td>[ <%= link_to 'Edit', edit_region_path(region) %> ]</td>
+    <td>[ <%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @regions %>

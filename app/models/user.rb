@@ -40,5 +40,12 @@ class User < ActiveRecord::Base
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
 
   has_one :warband, :dependent => :destroy
-
+  # Search for Users matching the name of the specified search term
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped # Empty scope, like calling 'all' but not performing the query
+    end
+  end
 end

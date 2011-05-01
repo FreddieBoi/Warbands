@@ -6,14 +6,19 @@ class RegionsController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   before_filter :ensure_admin_user, :only => [ :edit, :update, :destroy ]
+
+  # Make sort_column and sort_direction accesible as helper methods
+  helper_method :sort_column, :sort_direction
   # GET /regions
+  # GET /regions.js
   # GET /regions.xml
   def index
     @title = "Regions"
-    @regions = Region.all
+    @regions = Region.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
+      format.js # index.js.erb
       format.xml  { render :xml => @regions }
     end
   end
@@ -98,6 +103,16 @@ class RegionsController < ApplicationController
   # updating or destroying
   def ensure_admin_user
     redirect_to(regions_path, :alert => "You may not perform this action on Regions!") unless current_user.admin?
+  end
+
+  # Get the column to order by. Default: name
+  def sort_column
+    Region.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  # Get the sort direction (order_by). Possible: asc, desc. Default: asc
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 
 end
