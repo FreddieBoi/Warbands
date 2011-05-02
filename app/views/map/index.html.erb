@@ -1,13 +1,22 @@
-<canvas id="map" width="800" height="700"></canvas>
+<div class="grid_10">
+	<canvas id="map" width="800" height="700"></canvas>
+</div>
+<div id="currentRegion" class="grid_2">
+	<h2><%= @warband.region.name %></h2>
+	<p><%= @warband.region.desc %></p>
+</div>
+
 <% content_for :head do %>
   <script>
     var canvas;
     var context;
+    var stage;
     var bg;
     var warband;
     var mapWidth = 800;//$('#map')[0].width;
     var mapHeight = 700; //$('#map')[0].height;
     var mapItems = new Array();
+    var hasNewPos = false;
 
     // canvas width and height must be divisible by 100
     var regionWidth = 100;
@@ -53,6 +62,7 @@
       // Try to get the context
       if(canvas.getContext) {
         context = canvas.getContext('2d');
+  		stage = new Kinetic.Stage(canvas, 100);
   
         // stop the user getting a text cursor
         canvas.onselectstart = function()
@@ -63,8 +73,8 @@
         // Create a background object
         bg = new Object();
         bg.img = new Image();
-        bg.img.src = 'images/map_bg.png';
-        bg.x = -100;
+        bg.img.src = 'images/warbands_bg.png';
+        bg.x = 0;
         bg.y = 0;
         bg.img.onload = function() {
           redraw();
@@ -80,23 +90,55 @@
         // Get the initial position of the Warband
         warband.x = <%= @warband.region.pos_x %>+offset.x;
         warband.y = <%= @warband.region.pos_y %>+offset.y;
+        warband.ax = warband.x; // animation x
+        warband.ay = warband.y; // animation y
 
         // Add all the objects to be drawn
         mapItems.push(bg);
         mapItems.push(warband)
+
+	    // set updateStage method
+	    stage.setUpdateStage(updateCanvas);
+
+		// set drawStage method
+	    stage.setDrawStage(redraw);
+	    // start animation
+	    stage.start();
 
       } else { // No context available
         alert("Sorry, but the Canvas element is not supported by your browser!");
       }
     });
 
+	// update for animation
+	function  updateCanvas() {
+		if (hasNewPos) {
+			if (warband.ax < warband.x) {
+				warband.ax += 1;
+			} else if (warband.ax > warband.x) {
+				warband.ax -= 1;
+			}
+			if (warband.ay < warband.y) {
+				warband.ay += 1;
+			} else if (warband.ay > warband.y) {
+				warband.ay -= 1;
+			}
+			if (warband.ax === warband.x && warband.ay === warband.y) {
+				hasNewPos = false;
+			}
+		} 
+	}
+
     // Update the Warband position from the specified data (.json) and redraw
     function updateWarbandPosition(data) {
-      var region = findRegion(data['warband']['region_id']);
-      warband.x = region.x*regionWidth + offset.x;
-      warband.y = region.y*regionHeight + offset.y;
-      redraw();
+		var region = findRegion(data['warband']['region_id']);
+		warband.x = region.x*regionWidth + offset.x;
+		warband.y = region.y*regionHeight + offset.y;
+		$("#currentRegion h2").html(region.name);
+		$("#currentRegion p").html(region.desc);
+		hasNewPos = true;
     }
+
 
     function findRegion(id) {
       for(var c = 0; c < cols; c++) {
@@ -117,8 +159,13 @@
       // Clear the canvas
       clearCanvas();
       // Draw all images (from mapItems array)
+      
       for (var obj in mapItems) {
-        context.drawImage(mapItems[obj].img, mapItems[obj].x, mapItems[obj].y);
+      	if ("ax" in mapItems[obj] && "ay" in mapItems[obj]) { 
+        	context.drawImage(mapItems[obj].img, mapItems[obj].ax, mapItems[obj].ay);
+        } else {
+        	context.drawImage(mapItems[obj].img, mapItems[obj].x, mapItems[obj].y);
+        }
       }
     }
 
@@ -168,5 +215,6 @@
         regions[region.x][region.y] = region;
       <% end %>
     }
+
   </script>
 <% end %>
