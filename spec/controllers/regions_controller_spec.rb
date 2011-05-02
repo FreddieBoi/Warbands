@@ -6,6 +6,15 @@ require 'spec_helper'
 
 describe RegionsController do
 
+  include Devise::TestHelpers
+
+  render_views
+
+  before(:each) do
+    @user = Factory(:user)
+    sign_in @user
+  end
+
   def mock_region(stubs={})
     @mock_region ||= mock_model(Region, stubs).as_null_object
   end
