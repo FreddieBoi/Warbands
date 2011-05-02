@@ -1,8 +1,8 @@
-<div class="grid_10">
+<div class="grid_9">
 	<canvas id="map" width="800" height="700"></canvas>
 </div>
-<div id="currentRegion" class="grid_2">
-	<h2><%= @warband.region.name %></h2>
+<div id="current_region" class="grid_3">
+	<h2><%= link_to @warband.region.name, @warband.region %></h2>
 	<p><%= @warband.region.desc %></p>
 </div>
 
@@ -25,8 +25,13 @@
     var cols = mapWidth/regionWidth;
     var rows = mapHeight/regionHeight;
 
+    // Create two-dimensional array
     var regions = new Array(cols);
-    regions[0] = new Array(rows);
+    for (var i = 0; i < rows; i++) {
+      regions[i] = new Array(rows);
+    }
+    // Get all the regions of the server and put them in regions array
+    initRegions();
 
     var offset = Object();
     offset.x = 40;
@@ -44,6 +49,10 @@
         var y = Math.floor(pos.y/regionHeight);
         var region = getRegion(x,y);
 
+        // No region found at clicked location, no need to update.
+        // FIXME! Show this to the User in some way...
+        if (!region) return;
+
         // Update the Warband position (database) by sending a PUT request and
         // then the positon of the warband (javascript object) upon success
         var url = "<%= warband_path(@warband) %>"; // Go to warbands/:id path
@@ -53,8 +62,6 @@
 
         return false;
       });
-  
-      initRegions();
 
       // Get the canvas
       canvas = $("#map")[0];
@@ -88,8 +95,8 @@
           redraw();
         };
         // Get the initial position of the Warband
-        warband.x = <%= @warband.region.pos_x %>+offset.x;
-        warband.y = <%= @warband.region.pos_y %>+offset.y;
+        warband.x = <%= @warband.region.pos_x %>*regionWidth+offset.x;
+        warband.y = <%= @warband.region.pos_y %>*regionHeight+offset.y;
         warband.ax = warband.x; // animation x
         warband.ay = warband.y; // animation y
 
@@ -110,44 +117,45 @@
       }
     });
 
-	// update for animation
-	function  updateCanvas() {
-		if (hasNewPos) {
-			if (warband.ax < warband.x) {
-				warband.ax += 1;
-			} else if (warband.ax > warband.x) {
-				warband.ax -= 1;
-			}
-			if (warband.ay < warband.y) {
-				warband.ay += 1;
-			} else if (warband.ay > warband.y) {
-				warband.ay -= 1;
-			}
-			if (warband.ax === warband.x && warband.ay === warband.y) {
-				hasNewPos = false;
-			}
-		} 
-	}
+  	// update for animation
+  	function  updateCanvas() {
+  		if (hasNewPos) {
+  			if (warband.ax < warband.x) {
+  				warband.ax += 1;
+  			} else if (warband.ax > warband.x) {
+  				warband.ax -= 1;
+  			}
+  			if (warband.ay < warband.y) {
+  				warband.ay += 1;
+  			} else if (warband.ay > warband.y) {
+  				warband.ay -= 1;
+  			}
+  			if (warband.ax === warband.x && warband.ay === warband.y) {
+  				hasNewPos = false;
+  			}
+  		} 
+  	}
 
     // Update the Warband position from the specified data (.json) and redraw
     function updateWarbandPosition(data) {
-		var region = findRegion(data['warband']['region_id']);
-		warband.x = region.x*regionWidth + offset.x;
-		warband.y = region.y*regionHeight + offset.y;
-		$("#currentRegion h2").html(region.name);
-		$("#currentRegion p").html(region.desc);
-		hasNewPos = true;
+  		var region = findRegion(data['warband']['region_id']);
+  		warband.x = region.x*regionWidth + offset.x;
+  		warband.y = region.y*regionHeight + offset.y;
+      // FIXME! Make this a partial to render instead?!
+  		$("#current_region h2").html("<a href='/regions/"+region.id+"'>"+region.name+"</a>");
+  		$("#current_region p").html(region.desc);
+  		hasNewPos = true;
     }
-
 
     function findRegion(id) {
       for(var c = 0; c < cols; c++) {
         for(var r = 0; r < rows; r++) {
-          if (regions[c][r].id == id) {
+          if (regions[c][r] && regions[c][r].id == id) {
             return regions[c][r];
           }
         }
       }
+      return false;
     }
 
     function getRegion(x, y) {

@@ -20,5 +20,9 @@ region00 = Region.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!',
 puts 'New region created: ' << region00.name
 region01 = Region.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1
 puts 'New region created: ' << region01.name
+region10 = Region.create! :name => 'Riverside', :desc => 'Holy diver?!', :pos_x => 1, :pos_y => 0
+puts 'New region created: ' << region10.name
+region11 = Region.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 1, :pos_y => 1
+puts 'New region created: ' << region11.name
 warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :user => dt
 puts 'New warband created: ' << warband.name
