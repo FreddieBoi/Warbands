@@ -1,27 +1,13 @@
-<h1>Listing items</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Cost</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @items.each do |item| %>
-  <tr>
-    <td><%= item.name %></td>
-    <td><%= item.description %></td>
-    <td><%= item.cost %></td>
-    <td><%= link_to 'Show', item %></td>
-    <td><%= link_to 'Edit', edit_item_path(item) %></td>
-    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<h2><%= @title %></h2>
+<%= form_tag items_path, :method => 'get', :id => "items_search" do %>
+<p>
+  <b>Name:</b>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+</p>
+<div id="items">
+  <%= render 'items' %>
+</div>
 <% end %>
-</table>
-
 <br />
-
-<%= link_to 'New Item', new_item_path %>
+<%= link_to 'Create new item', new_item_path if current_user.admin? %>

@@ -4,8 +4,8 @@
 # Table name: warbands
 #
 #  id         :integer         not null, primary key
-#  name       :string(255)
-#  reputation :integer
+#  name       :string(255)     not null
+#  reputation :integer         default(0), not null
 #  region_id  :integer
 #  user_id    :integer
 #  created_at :datetime
@@ -31,6 +31,11 @@ class Warband < ActiveRecord::Base
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
+  end
+
+  # Get the maximum number of members allowed
+  def max_member_count
+    5
   end
 
 end

@@ -1,10 +1,8 @@
-<h2><%= link_to @warband.name, warband_url(@warband) %></h2>
-
+<h3><%= link_to @warband.name, warband_url(@warband) %></h3>
 <p>
   <b>Reputation:</b>
   <%= @warband.reputation %>
 </p>
-
 <p>
   <b>Currently in region:</b>
   <%= link_to @warband.region.name, @warband.region %>

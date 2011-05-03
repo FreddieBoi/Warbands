@@ -10,12 +10,10 @@ class CreateItems < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :items, :name, :name => "items_name_index"
+    add_index :items, :name, :unique => true
   end
 
   def self.down
-    remove_index :items, :name => "items_name_index"
-
     drop_table :items
   end
 end

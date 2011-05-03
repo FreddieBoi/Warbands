@@ -1,7 +1,7 @@
 class CreateRegions < ActiveRecord::Migration
   def self.up
     create_table :regions do |t|
-      t.string :name
+      t.string :name, :null => false
       t.integer :pos_x
       t.integer :pos_y
       t.text :desc

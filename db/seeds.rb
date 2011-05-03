@@ -26,3 +26,9 @@ region11 = Region.create! :name => 'Steppes of War', :desc => 'It is rather plai
 puts 'New region created: ' << region11.name
 warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :user => dt
 puts 'New warband created: ' << warband.name
+darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
+puts 'New member created: ' << darktemplar.name
+hightemplar = Member.create! :name => 'High Templar', :warband => warband
+puts 'New member created: ' << hightemplar.name
+sword = Item.create! :name => 'Sword', :desc => 'A mighty sword.', :member => darktemplar
+puts 'New item created: ' << sword.name

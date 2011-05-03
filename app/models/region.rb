@@ -4,7 +4,7 @@
 # Table name: regions
 #
 #  id         :integer         not null, primary key
-#  name       :string(255)
+#  name       :string(255)     not null
 #  pos_x      :integer
 #  pos_y      :integer
 #  desc       :text

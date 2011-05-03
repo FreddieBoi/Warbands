@@ -1,18 +1,14 @@
-<p>
-  <b>Name:</b>
-  <%= @item.name %>
-</p>
-
+<h2><%= @title %></h2>
 <p>
   <b>Description:</b>
-  <%= @item.description %>
+  <%= @item.desc %>
 </p>
-
 <p>
   <b>Cost:</b>
   <%= @item.cost %>
 </p>
-
-
+<% if current_user.admin? %>
 <%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+<%= link_to 'Destroy', @item, :confirm => 'Are you sure?', :method => :delete %> |
+<% end %>
+<%= link_to 'List of all items', items_path %>

@@ -1,5 +1,7 @@
+<h2><%= @title %></h2>
 <%= form_tag regions_path, :method => 'get', :id => "regions_search" do %>
 <p>
+  <b>Name:</b>
   <%= text_field_tag :search, params[:search] %>
   <%= submit_tag "Search", :name => nil %>
 </p>

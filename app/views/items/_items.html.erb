@@ -1,0 +1,25 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "cost" %></th>
+    <th>Description</th>
+    <% if current_user.admin? %>
+    <th></th>
+    <th></th>
+    <% end %>
+  </tr>
+  <% @items.each do |item| %>
+  <tr>
+    <td><%= link_to item.name.humanize, item %></td>
+    <td><%= item.cost %></td>
+    <td><%= item.desc %></td>
+    <% if current_user.admin? %>
+    <td>[ <%= link_to 'Edit', edit_item_path(item) %> ]</td>
+    <td>[ <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @items %>

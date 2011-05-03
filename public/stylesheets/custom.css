@@ -18,15 +18,19 @@ a:hover {
   color: #D9CB84;
   text-shadow: 0 0 5px #fff;
 }
-
 canvas {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
-
 h1 {
   color: #D9CB84;
   font-size: 2em;
+}
+h2 {
+  color: #D9CB84;
+}
+h3 {
+  color: #D9CB84;
 }
 #container {
   margin-top: 0;

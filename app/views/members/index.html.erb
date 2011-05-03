@@ -1,29 +1,13 @@
-<h1>Listing members</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Level</th>
-    <th>Experience</th>
-    <th>Health</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @members.each do |member| %>
-  <tr>
-    <td><%= member.name %></td>
-    <td><%= member.level %></td>
-    <td><%= member.experience %></td>
-    <td><%= member.health %></td>
-    <td><%= link_to 'Show', member %></td>
-    <td><%= link_to 'Edit', edit_member_path(member) %></td>
-    <td><%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<h2><%= @title %></h2>
+<%= form_tag members_path, :method => 'get', :id => "members_search" do %>
+<p>
+  <b>Name:</b>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+</p>
+<div id="members">
+  <%= render 'members' %>
+</div>
 <% end %>
-</table>
-
 <br />
-
-<%= link_to 'New Member', new_member_path %>
+<%= link_to 'Create new member', new_member_path if current_user.admin? %>

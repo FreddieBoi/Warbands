@@ -1,0 +1,31 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th><%= sortable "level" %></th>
+    <th><%= sortable "experience" %></th>
+    <th>Health</th>
+    <th>Warband</th>
+    <th>User</th>
+    <% if current_user.admin? %>
+    <th></th>
+    <th></th>
+    <% end %>
+  </tr>
+  <% @members.each do |member| %>
+  <tr>
+    <td><%= link_to member.name, member %></td>
+    <td><%= member.level %></td>
+    <td><%= member.experience %></td>
+    <td><%= member.health %> / <%= member.max_health %></td>
+    <td><%= link_to member.warband.name, member.warband %></td>
+    <td><%= link_to member.warband.user.name, member.warband.user %></td>
+    <% if current_user.admin? %>
+    <td>[ <%= link_to 'Edit', edit_member_path(member) %> ]</td>
+    <td>[ <%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate(@members) %>

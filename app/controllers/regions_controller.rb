@@ -5,7 +5,7 @@ class RegionsController < ApplicationController
 
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
-  before_filter :ensure_admin_user, :only => [ :edit, :update, :destroy ]
+  before_filter :ensure_admin_user!, :except => [ :index, :show ]
 
   # Make sort_column and sort_direction accesible as helper methods
   helper_method :sort_column, :sort_direction
@@ -27,7 +27,7 @@ class RegionsController < ApplicationController
   # GET /regions/1.xml
   def show
     @region = Region.find(params[:id])
-    @title = @region.name
+    @title = @region.name.humanize
 
     respond_to do |format|
       format.html # show.html.erb
@@ -101,8 +101,8 @@ class RegionsController < ApplicationController
 
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
-  def ensure_admin_user
-    redirect_to(regions_path, :alert => "You may not perform this action on Regions!") unless current_user.admin?
+  def ensure_admin_user!
+    redirect_to(regions_path, :alert => "You may not perform this action on Regions!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name

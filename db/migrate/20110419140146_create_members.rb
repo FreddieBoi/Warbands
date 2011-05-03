@@ -5,12 +5,11 @@ class CreateMembers < ActiveRecord::Migration
       t.integer :level, :null => false, :default => 0
       t.integer :experience, :null => false, :default => 0
       t.integer :health, :null => false, :default => 100
+      t.integer :max_health, :null => false, :default => 100
       t.references :warband
 
       t.timestamps
     end
-
-    add_index :members, :name, :unique => true
   end
 
   def self.down

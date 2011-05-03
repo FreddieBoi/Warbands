@@ -22,22 +22,21 @@ ActiveRecord::Schema.define(:version => 20110430234753) do
     t.datetime "updated_at"
   end
 
-  add_index "items", ["name"], :name => "items_name_index"
+  add_index "items", ["name"], :name => "index_items_on_name", :unique => true
 
   create_table "members", :force => true do |t|
     t.string   "name",                        :null => false
     t.integer  "level",      :default => 0,   :null => false
     t.integer  "experience", :default => 0,   :null => false
     t.integer  "health",     :default => 100, :null => false
+    t.integer  "max_health", :default => 100, :null => false
     t.integer  "warband_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "members", ["name"], :name => "index_members_on_name", :unique => true
-
   create_table "regions", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.integer  "pos_x"
     t.integer  "pos_y"
     t.text     "desc"
@@ -70,7 +69,7 @@ ActiveRecord::Schema.define(:version => 20110430234753) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "name"
+    t.string   "name",                                                     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "admin",                                 :default => false
@@ -81,8 +80,8 @@ ActiveRecord::Schema.define(:version => 20110430234753) do
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
   create_table "warbands", :force => true do |t|
-    t.string   "name"
-    t.integer  "reputation"
+    t.string   "name",                      :null => false
+    t.integer  "reputation", :default => 0, :null => false
     t.integer  "region_id"
     t.integer  "user_id"
     t.datetime "created_at"

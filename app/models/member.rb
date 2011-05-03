@@ -8,6 +8,7 @@
 #  level      :integer         default(0), not null
 #  experience :integer         default(0), not null
 #  health     :integer         default(100), not null
+#  max_health :integer         default(100), not null
 #  warband_id :integer
 #  created_at :datetime
 #  updated_at :datetime
@@ -19,9 +20,13 @@ class Member < ActiveRecord::Base
 
   has_many :items
 
-  validates :name, :presence => true, :length => { :within => 2..20 },
-                    :uniqueness => { :case_sensitive => false }
-
-  has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-
+  validates :name, :presence => true, :length => { :within => 2..20 }
+  # Search for Members matching the name of the specified search term
+  def self.search(search)
+    if search
+      where('name LIKE ?', "%#{search}%")
+    else
+      scoped # Empty scope, like calling 'all' but not performing the query
+    end
+  end
 end

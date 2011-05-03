@@ -1,4 +1,4 @@
-<h1><%= @warband.name %></h1>
+<h2><%= @title %></h2>
 <p>
   <b>Belongs to:</b>
   <%= gravatar_for(@user, :size => 32) %> <%= link_to @user.name, @user %>
@@ -20,4 +20,18 @@
 <p>
   You don't have a warband yet. <%= link_to "Create your own Warband now!", new_warband_path %>
 </p>
+<% end %>
+<h3>Members</h3>
+<% if current_user?(@user) && @members.count < @warband.max_member_count %>
+<p>
+  This warband has <%= @members.count %> of <%= pluralize(@warband.max_member_count, "possible member") %>.
+  <%= link_to "Add another member to complete your warband!", new_member_path %>
+</p>
+<% end %>
+<% unless @members.count <= 0 %>
+<% @members.each do |member| %>
+<ul class="members">
+  <%= render member%>
+</ul>
+<% end %>
 <% end %>

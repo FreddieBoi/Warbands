@@ -11,7 +11,7 @@ class WarbandsController < ApplicationController
 
   # Ensure that the current User is the same as the one that the warband
   # belongs to before allowing editing, updating or destroying
-  before_filter :ensure_correct_user, :only => [ :edit, :update, :destroy ]
+  before_filter :ensure_correct_user!, :only => [ :edit, :update, :destroy ]
   # GET /warbands
   # GET /warbands.js
   # GET /warbands.xml
@@ -34,6 +34,7 @@ class WarbandsController < ApplicationController
     @user = @warband.user
     @region = @warband.region
     @title = @warband.name
+    @members = @warband.members
 
     respond_to do |format|
       format.html # show.html.erb
@@ -118,9 +119,9 @@ class WarbandsController < ApplicationController
 
   # Ensure that the current User is the same as the one that the warband
   # belongs to
-  def ensure_correct_user
+  def ensure_correct_user!
     @warband = Warband.find(params[:id])
-    redirect_to(user_path(current_user), :alert => "You may not perform this action on another user's Warband") unless current_user?(@warband.user)
+    redirect_to(user_path(current_user), :alert => "You may not perform this action on another user's Warband!") and return unless current_user?(@warband.user)
   end
 
   # Get the column to order by. Possible: name, reputation. Default: name

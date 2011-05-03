@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 
+  # Ensure that the User is signed in
   before_filter :authenticate_user!
 
   # Make sort_column and sort_direction accesible as helper methods

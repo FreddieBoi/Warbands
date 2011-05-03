@@ -14,7 +14,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  name                   :string(255)
+#  name                   :string(255)     not null
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean
