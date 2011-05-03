@@ -1,17 +1,10 @@
 class ItemsController < ApplicationController
-  
+
   before_filter :authenticate_user!
-  
   # GET /items
   # GET /items.xml
-  # GET /members/1/items
-  # GET /members/1/items.xml
   def index
-    if params[:member_id].blank?
-      @items = Item.all
-    else
-      @items = Item.where(:member_id => params[:member_id])
-    end
+    @items = Item.all
 
     respond_to do |format|
       format.html # index.html.erb

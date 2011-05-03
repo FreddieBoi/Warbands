@@ -12,9 +12,7 @@ Warbands::Application.routes.draw do
 
   resources :warbands
   
-  resources :members do
-  	resources :items
-  end
+  resources :members
 	
   resources :items
   

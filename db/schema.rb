@@ -13,25 +13,28 @@
 ActiveRecord::Schema.define(:version => 20110430234753) do
 
   create_table "items", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "cost"
+    t.string   "name",                      :null => false
+    t.text     "desc"
+    t.integer  "cost",       :default => 0, :null => false
     t.string   "item_type"
+    t.integer  "member_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "member_id"
   end
 
   add_index "items", ["name"], :name => "items_name_index"
 
   create_table "members", :force => true do |t|
-    t.string   "name"
-    t.integer  "level"
-    t.integer  "experience"
-    t.integer  "health"
+    t.string   "name",                        :null => false
+    t.integer  "level",      :default => 0,   :null => false
+    t.integer  "experience", :default => 0,   :null => false
+    t.integer  "health",     :default => 100, :null => false
+    t.integer  "warband_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "members", ["name"], :name => "index_members_on_name", :unique => true
 
   create_table "regions", :force => true do |t|
     t.string   "name"

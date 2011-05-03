@@ -16,6 +16,8 @@ class Warband < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :members
+
   belongs_to :region
 
   validates :name, :presence => true, :length => { :within => 2..20 },
