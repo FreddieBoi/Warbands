@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   # GET /items/1.xml
   def show
     @item = Item.find(params[:id])
-    @title = @item.name.humanize
+    @title = @item.name.titleize
 
     respond_to do |format|
       format.html # show.html.erb

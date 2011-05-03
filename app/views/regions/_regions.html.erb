@@ -13,7 +13,7 @@
   </tr>
   <% @regions.each do |region| %>
   <tr>
-    <td><%= link_to region.name, region %></td>
+    <td><%= link_to region.name.titleize, region %></td>
     <td><%= region.pos_x %></td>
     <td><%= region.pos_y %></td>
     <td><%= region.desc %></td>

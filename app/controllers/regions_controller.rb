@@ -27,7 +27,7 @@ class RegionsController < ApplicationController
   # GET /regions/1.xml
   def show
     @region = Region.find(params[:id])
-    @title = @region.name.humanize
+    @title = @region.name.titleize
 
     respond_to do |format|
       format.html # show.html.erb
