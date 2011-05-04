@@ -26,6 +26,13 @@ h1 {
   color: #D9CB84;
   font-size: 2em;
 }
+h1 a {
+  color: #D9CB84;
+  text-decoration: none;
+}
+h1 a:visited {
+  color: #D9CB84;
+}
 h2 {
   color: #D9CB84;
 }
