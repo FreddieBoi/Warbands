@@ -50,7 +50,9 @@ class WarbandsController < ApplicationController
     redirect_to(current_user.warband, :alert => "You already have a Warband!") and return unless current_user.warband.blank?
     @title = "New warband"
     @warband = Warband.new
-    @warband.members << Member.new << Member.new
+    @warband.max_member_count.times do
+      @warband.members << Member.new
+    end
 
     respond_to do |format|
       format.html # new.html.erb

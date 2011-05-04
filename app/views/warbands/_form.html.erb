@@ -1,14 +1,18 @@
 <%= form_for(@warband) do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 <div class="field">
-  <%= f.label :name %>
+  <%= f.label :name, "Warband name" %>
   <br />
   <%= f.text_field :name %>
 </div>
-<% @warband.members.each do |member| %>
+<% @warband.members.each.with_index do |member, index| %>
+<p>
   <%= f.fields_for :members, member do |member_fields| %>
-  Name: <%= member_fields.text_field :name %>
+  <%= member_fields.label :name, "Member #{index+1}" %>
+  <br />
+  <%= member_fields.text_field :name %>
   <% end %>
+</p>
 <% end %>
 <div class="actions">
   <%= f.submit %>
