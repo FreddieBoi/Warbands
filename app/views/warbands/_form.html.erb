@@ -5,6 +5,11 @@
   <br />
   <%= f.text_field :name %>
 </div>
+<% @warband.members.each do |member| %>
+  <%= f.fields_for :members, member do |member_fields| %>
+  Name: <%= member_fields.text_field :name %>
+  <% end %>
+<% end %>
 <div class="actions">
   <%= f.submit %>
 </div>

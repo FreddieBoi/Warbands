@@ -50,6 +50,7 @@ class WarbandsController < ApplicationController
     redirect_to(current_user.warband, :alert => "You already have a Warband!") and return unless current_user.warband.blank?
     @title = "New warband"
     @warband = Warband.new
+    @warband.members << Member.new << Member.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -61,6 +62,7 @@ class WarbandsController < ApplicationController
   def edit
     @title = "Edit warband"
     @warband = Warband.find(params[:id])
+    @members = @warband.members
   end
 
   # POST /warbands
@@ -69,7 +71,6 @@ class WarbandsController < ApplicationController
     @warband = Warband.new(params[:warband])
     # FIXME! Set default values in model instead?
     @warband.region = Region.first
-    @warband.reputation = 0
     # FIXME! Is this really the correct way?
     current_user.warband = @warband
 
