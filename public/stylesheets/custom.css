@@ -67,6 +67,7 @@ h3 {
 article {
   background-color: #d2d499;
   padding: 8px;
+  margin-bottom: 10px;
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;

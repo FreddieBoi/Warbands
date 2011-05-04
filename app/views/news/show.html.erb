@@ -1,0 +1,23 @@
+<h3><%= @title %></h3>
+<p>
+  <%= @news.content %>
+</p>
+<p>
+  <%= gravatar_for(@news.user, :size => 32) %> <%= link_to @user.name, @user %>
+</p>
+<p>
+  <em>
+  <b>Posted at:</b> <%= @news.created_at %>
+  </em>
+  <% unless @news.updated_at.blank? %>
+  <br />
+  <em>
+  <b>Last updated at:</b> <%= @news.updated_at %>
+  </em>
+  <% end %>
+</p>
+<% if user_signed_in? && current_user.admin? %>
+<%= link_to 'Edit', edit_news_path(@news) %> |
+<%= link_to 'Destroy', @news, :confirm => 'Are you sure?', :method => :delete %> |
+<% end %>
+<%= link_to 'List of all news', news_index_path %>

@@ -1,0 +1,27 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "title" %></th>
+    <th>Author</th>
+    <th><%= sortable "created_at", "Posted at" %></th>
+    <th><%= sortable "updated_at", "Last updated at" %></th>
+    <% if user_signed_in? && current_user.admin? %>
+    <th></th>
+    <th></th>
+    <% end %>
+  </tr>
+  <% @news.each do |news| %>
+  <tr>
+    <td><%= link_to news.title.titleize, news %></td>
+    <td><%= news.user.name %></td>
+    <td><%= news.created_at %></td>
+    <td><%= news.updated_at %></td>
+    <% if user_signed_in? && current_user.admin? %>
+    <td>[ <%= link_to 'Edit', edit_news_path(news) %> ]</td>
+    <td>[ <%= link_to 'Destroy', news, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <% end %>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @news %>

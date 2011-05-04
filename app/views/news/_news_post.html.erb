@@ -1,0 +1,24 @@
+<article class="grid_6 omega">
+  <h3><%= link_to news_post.title.titleize, news_post %></h3>
+  <p>
+    <%= news_post.content %>
+  </p>
+  <p>
+    <%= gravatar_for(news_post.user, :size => 32) %> <%= link_to news_post.user.name, news_post.user %>
+  </p>
+  <p>
+    <em>
+    <b>Posted at:</b> <%= news_post.created_at %>
+    </em>
+    <% unless news_post.updated_at.blank? %>
+    <br />
+    <em>
+    <b>Last updated at:</b> <%= news_post.updated_at %>
+    </em>
+    <% end %>
+  </p>
+  <% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'Edit', edit_news_path(news_post) %> |
+  <%= link_to 'Destroy', news_post, :confirm => 'Are you sure?', :method => :delete %>
+  <% end %>
+</article>

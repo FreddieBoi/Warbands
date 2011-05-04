@@ -1,7 +1,7 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 $( function() {
-  $("#warbands th a, #warbands .pagination a, #users th a, #users .pagination a, #regions th a, #regions .pagination a, #members th a, #members .pagination a, #items th a, #items .pagination a").live("click", function() {
+  $("#warbands th a, #warbands .pagination a, #users th a, #users .pagination a, #regions th a, #regions .pagination a, #members th a, #members .pagination a, #items th a, #items .pagination a, #news th a, #news .pagination a").live("click", function() {
     $.getScript(this.href);
     return false;
   });
@@ -43,6 +43,14 @@ $( function() {
   });
   $("#items_search input").keyup( function() {
     $.get($("#items_search").attr("action"), $("#items_search").serialize(), null, "script");
+    return false;
+  });
+  $("#news_search").submit( function() {
+    $.get(this.action, $(this).serialize(), null, "script");
+    return false;
+  });
+  $("#news_search input").keyup( function() {
+    $.get($("#news_search").attr("action"), $("#news_search").serialize(), null, "script");
     return false;
   });
 });

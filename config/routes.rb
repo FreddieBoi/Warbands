@@ -1,5 +1,7 @@
 Warbands::Application.routes.draw do
 
+  resources :news
+
   resources :regions
 
   devise_for :users

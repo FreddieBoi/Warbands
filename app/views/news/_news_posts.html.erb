@@ -1,0 +1,9 @@
+<div id="devblog" class="grid_6 omega">
+  <h2>Developer news</h2>
+  <% @news.each do |news_post| %>
+  <%= render 'news/news_post', :news_post => news_post %>
+  <% end %>
+  <br />
+  <%= link_to "Read more news", news_index_path %>
+  <%= link_to "Create news", new_news_path if user_signed_in? && current_user.admin? %>
+</div>
