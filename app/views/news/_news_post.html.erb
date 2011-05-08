@@ -7,14 +7,10 @@
     <%= gravatar_for(news_post.user, :size => 32) %> <%= link_to news_post.user.name, news_post.user %>
   </p>
   <p>
-    <em>
-    <b>Posted at:</b> <%= news_post.created_at %>
-    </em>
-    <% unless news_post.updated_at.blank? %>
+    <strong>Posted at:</strong> <em><%= news_post.created_at %></em>
+    <% unless news_post.updated_at.blank? || news_post.updated_at == news_post.created_at %>
     <br />
-    <em>
-    <b>Last updated at:</b> <%= news_post.updated_at %>
-    </em>
+    <strong>Last updated at:</strong> <em><%= news_post.updated_at %></em>
     <% end %>
   </p>
   <% if user_signed_in? && current_user.admin? %>

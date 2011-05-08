@@ -71,6 +71,13 @@ h3 {
   list-style-type: none;
   padding: 0.2em 0;
 }
+#home {
+	padding: 8px;
+	background-color: #211815;
+	border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+}
 article {
   background-color: #d2d499;
   padding: 8px;
