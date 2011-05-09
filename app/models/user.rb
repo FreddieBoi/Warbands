@@ -29,18 +29,20 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
-  validates :name, :presence => true, :length => { :within => 2..20 },
-                    :uniqueness => { :case_sensitive => false }
+  # Don't allow non-ascii signs, will result in multiple users with same slug
+  name_regex = /\A[a-z0-9]{2,20}\z/i
 
-  # FIXME! Slugs not unique for names containing non-ASCII signs
-  # (eg. freddieboi2008, freddieboi%&, freddieboi=) etc.)
-  # Fix with something like:
-  # name_regex = /somecoolregex/
-  # validates :name, :format => { :with => name_regex }
+  # Ensure there is a valid name
+  validates :name,  :presence => true,
+                    :length => { :within => 2..20 },
+                    :uniqueness => { :case_sensitive => false },
+                    :format => { :with => name_regex }
+
+  # Make it possible to query users by name
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
 
   has_one :warband, :dependent => :destroy
-  # Search for Users matching the name of the specified search term
+  # Search for users with names matching the specified search term
   def self.search(search)
     if search
       where('name LIKE ?', "%#{search.downcase}%")
