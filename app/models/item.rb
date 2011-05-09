@@ -27,7 +27,7 @@ class Item < ActiveRecord::Base
   # Search for Items matching the name of the specified search term
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search}%")
+      where('name LIKE ?', "%#{search.downcase}%")
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end

@@ -9,22 +9,20 @@
   </head>
   <body>
     <div id="container" class="container_12">
-      <div id="header" class="grid_7 alpha">
-        <h1><%= link_to app_title, root_path %></h1>
-      </div>
-      <%= render 'layouts/user_info' %>
+      <%= render 'layouts/header' %>
 
       <%= render 'layouts/nav' %>
 
-      <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, :class => "flash #{key}") %>
-      <% end %>
-
-      <%= render 'warbands/mywarband' if user_signed_in? and not current_user.warband.blank? %>
-
-      <section>
+      <section class="grid_12 alpha omega">
+        <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, :class => "flash #{key}") %>
+        <% end %>
+        <%= render 'layouts/my_warband' if user_signed_in? and not current_user.warband.blank? %>
         <%= yield %>
       </section>
+      <div class="clear">
+        &nbsp;%
+      </div>
       <%= render 'layouts/footer' %>
     </div>
     <%= debug(params) if Rails.env.development? %>

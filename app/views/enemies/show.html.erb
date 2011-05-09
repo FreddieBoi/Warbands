@@ -1,7 +1,7 @@
-<h2><%= @enemy.name %></h2>
+<h2><%= @title %></h2>
 <p>
   <b>Region:</b>
-  <%= @enemy.region.name %>
+  <%= link_to @region.name, @region %>
 </p>
 <p>
   <b>Description:</b>
@@ -15,5 +15,19 @@
   <b>Max health:</b>
   <%= @enemy.max_health %>
 </p>
+<h3>Items</h3>
+<% if @items.empty? %>
+<p>
+  This enemy doesn't have any items.
+</p>
+<% else %>
+<ul class="items">
+  <%= render :partial => "items/item", :collection => @items %>
+</ul>
+<% end %>
+<br />
+<% if current_user.admin? %>
 <%= link_to 'Edit', edit_enemy_path(@enemy) %> |
-<%= link_to 'Back', enemies_path %>
+<%= link_to 'Destroy', @enemy, :confirm => 'Are you sure?', :method => :delete %> |
+<% end %>
+<%= link_to 'List of all enemies', enemies_path %>

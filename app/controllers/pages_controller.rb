@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     # Get the last 3 news
-    @news = News.order("created_at DESC").first(3)
+    @news = News.order("created_at DESC").first(2)
   end
 
   def about

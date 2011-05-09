@@ -1,9 +1,0 @@
-<div id="mywarband-container" class="grid_3 alpha">
-  <h2><%= current_user.warband.name %></h2>
-  <% current_user.warband.members.each do |member| %>
-  <h3><%= member.name %></h3>
-  <span><%= member.health %> / <%= member.max_health %></span>
-  <br />
-  <span><%= member.experience %> / 100 </span>
-  <% end %>
-</div>

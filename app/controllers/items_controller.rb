@@ -10,6 +10,7 @@ class ItemsController < ApplicationController
   # Make sort_column and sort_direction accesible as helper methods
   helper_method :sort_column, :sort_direction
   # GET /items
+  # GET /items.js
   # GET /items.xml
   def index
     @items = Item.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
@@ -113,4 +114,5 @@ class ItemsController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
 end
