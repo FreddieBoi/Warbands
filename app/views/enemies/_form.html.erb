@@ -1,0 +1,37 @@
+<%= form_for(@enemy) do |f| %>
+  <% if @enemy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@enemy.errors.count, "error") %> prohibited this enemy from being saved:</h2>
+
+      <ul>
+      <% @enemy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :region_id %><br />
+    <%= f.text_field :region_id %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_area :desc %>
+  </div>
+  <div class="field">
+    <%= f.label :health %><br />
+    <%= f.text_field :health %>
+  </div>
+  <div class="field">
+    <%= f.label :max_health %><br />
+    <%= f.text_field :max_health %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

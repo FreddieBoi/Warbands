@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @enemy.name %>
+</p>
+
+<p>
+  <b>Region:</b>
+  <%= @enemy.region %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%= @enemy.desc %>
+</p>
+
+<p>
+  <b>Health:</b>
+  <%= @enemy.health %>
+</p>
+
+<p>
+  <b>Max health:</b>
+  <%= @enemy.max_health %>
+</p>
+
+
+<%= link_to 'Edit', edit_enemy_path(@enemy) %> |
+<%= link_to 'Back', enemies_path %>

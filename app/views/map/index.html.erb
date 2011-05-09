@@ -1,5 +1,5 @@
-<div class="grid_9 alpha">
-	<canvas id="map" width="800" height="700"></canvas>
+<div class="grid_6">
+	<canvas id="map" width="500" height="500"></canvas>
 </div>
 <div id="current_region" class="grid_3 omega">
 	<h2><%= link_to @warband.region.name, @warband.region %></h2>
@@ -13,8 +13,9 @@
     var stage;
     var bg;
     var warband;
-    var mapWidth = 800;//$('#map')[0].width;
-    var mapHeight = 700; //$('#map')[0].height;
+    var enemy;
+    var mapWidth = 500;//$('#map')[0].width;
+    var mapHeight = 500; //$('#map')[0].height;
     var mapItems = new Array();
     var hasNewPos = false;
 
@@ -100,9 +101,16 @@
         warband.ax = warband.x; // animation x
         warband.ay = warband.y; // animation y
 
+        enemy = new Object();
+        enemy.img = new Image();
+        enemy.img.src = 'images/enemy.png';
+        enemy.x = <%= Region.find(1).pos_x %>*regionWidth+5;
+        enemy.y = <%= Region.find(1).pos_y %>*regionHeight+5;
+
         // Add all the objects to be drawn
         mapItems.push(bg);
         mapItems.push(warband)
+        mapItems.push(enemy);
 
 	    // set updateStage method
 	    stage.setUpdateStage(updateCanvas);

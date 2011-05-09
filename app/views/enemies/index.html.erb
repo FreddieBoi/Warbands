@@ -1,0 +1,31 @@
+<h1>Listing enemies</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Region</th>
+    <th>Desc</th>
+    <th>Health</th>
+    <th>Max health</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @enemies.each do |enemy| %>
+  <tr>
+    <td><%= enemy.name %></td>
+    <td><%= enemy.region.name %></td>
+    <td><%= enemy.desc %></td>
+    <td><%= enemy.health %></td>
+    <td><%= enemy.max_health %></td>
+    <td><%= link_to 'Show', enemy %></td>
+    <td><%= link_to 'Edit', edit_enemy_path(enemy) %></td>
+    <td><%= link_to 'Destroy', enemy, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Enemy', new_enemy_path %>

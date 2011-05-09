@@ -15,6 +15,8 @@
 class Region < ActiveRecord::Base
 
   has_many :warbands
+  
+  has_many :enemies
 
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }

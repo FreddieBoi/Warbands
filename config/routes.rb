@@ -1,5 +1,7 @@
 Warbands::Application.routes.draw do
 
+  resources :enemies
+
   resources :news
 
   resources :regions

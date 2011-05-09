@@ -17,6 +17,8 @@ class Item < ActiveRecord::Base
 
   belongs_to :member
 
+  belongs_to :enemy
+
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
 
