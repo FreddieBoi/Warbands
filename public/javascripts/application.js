@@ -1,6 +1,30 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
+
+// Animate the flash if any message to show
+function animate_flash() {
+  // Hide the flash div
+  $(".flash").hide();
+  // Nothing to show? Get out!
+  if (!$(".flash").html()) return;
+  
+  var flash = $(".flash")
+  //flash.show();
+  flash.fadeIn(400);
+  // Wait a bit, then fadeOut and hide
+  setTimeout( function() {
+    flash.fadeOut(800, function() {
+      flash.hide()
+    })
+  },
+  3000);
+}
+
+// On document load do...
 $( function() {
+  // Animate flash if any message
+  animate_flash();
+  
   $("#warbands th a, #warbands .pagination a, #users th a, #users .pagination a, #regions th a, #regions .pagination a, #members th a, #members .pagination a, #items th a, #items .pagination a, #news th a, #news .pagination a").live("click", function() {
     $.getScript(this.href);
     return false;
