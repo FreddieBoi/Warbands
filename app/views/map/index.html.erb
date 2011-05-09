@@ -249,7 +249,7 @@
           var enemy = new Object();
           enemy.name = "<%= e.name %>";
           enemy.id = <%= e.id %>;
-          enemy.desc = "<%= e.desc.chop %>";
+          enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
           enemy.health = <%= e.health %>;
           enemy.max_health = <%= e.max_health %>;
           region.enemies.push(enemy);
