@@ -1,3 +1,18 @@
+# == Schema Information
+# Schema version: 20110509113610
+#
+# Table name: enemies
+#
+#  id         :integer         not null, primary key
+#  name       :string(255)     not null
+#  region_id  :integer
+#  desc       :text
+#  health     :integer         default(100), not null
+#  max_health :integer         default(100), not null
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Enemy < ActiveRecord::Base
   belongs_to :region
   
