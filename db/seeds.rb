@@ -33,9 +33,14 @@ puts 'SETTING UP EXAMPLE MEMBERS'
 puts 'New member created: ' << darktemplar.name
 hightemplar = Member.create! :name => 'High Templar', :warband => warband
 puts 'New member created: ' << hightemplar.name
+puts 'SETTING UP EXAMPLE ENEMIES'
+bandit = Enemy.create! :name => "Bandit", :desc => "A nasty bandit." ,:region => region11
+puts 'New member created: ' << bandit.name
 puts 'SETTING UP EXAMPLE ITEMS'
 sword = Item.create! :name => 'Sword', :desc => 'A mighty sword.', :member => darktemplar
 puts 'New item created: ' << sword.name
+spear = Item.create! :name => 'Spear', :desc => 'A long spear.', :enemy => bandit
+puts 'New item created: ' << spear.name
 puts 'SETTING UP EXAMPLE NEWS'
 news1 = News.create! :title => "Welcome to Warbands Online", :user => freddie, :content => "Warbands Online is an online in-browser game where you take on the role of a commander of a warband consisting of about 5 other warriors. The player controls the warband navigation and actions in a medieval fantasy world. The warband will be able to fight different creatures or other warbands and complete quests in order to conquer the world. The warband gains experience, money and items as they pillage their way on the path chosen by the player."
 puts 'New news created: ' << news1.title

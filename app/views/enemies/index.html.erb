@@ -1,31 +1,30 @@
-<h1>Listing enemies</h1>
-
+<h2><%= @title %></h2>
 <table>
   <tr>
     <th>Name</th>
     <th>Region</th>
-    <th>Desc</th>
+    <th>Description</th>
     <th>Health</th>
     <th>Max health</th>
+    <% if current_user.admin? %>
     <th></th>
     <th></th>
-    <th></th>
+    <% end %>
   </tr>
-
-<% @enemies.each do |enemy| %>
+  <% @enemies.each do |enemy| %>
   <tr>
-    <td><%= enemy.name %></td>
+    <td><%= link_to enemy.name, enemy %></td>
     <td><%= enemy.region.name %></td>
-    <td><%= enemy.desc %></td>
+    <td><%= enemy.desc.blank? ? "No description" : enemy.desc.slice(0,20) %></td>
     <td><%= enemy.health %></td>
     <td><%= enemy.max_health %></td>
-    <td><%= link_to 'Show', enemy %></td>
-    <td><%= link_to 'Edit', edit_enemy_path(enemy) %></td>
-    <td><%= link_to 'Destroy', enemy, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if current_user.admin? %>
+    <td>[ <%= link_to 'Edit', edit_enemy_path(enemy) %> ]</td>
+    <td>[ <%= link_to 'Destroy', enemy, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <% end %>
   </tr>
-<% end %>
+  <% end %>
 </table>
-
 <br />
 
 <%= link_to 'New Enemy', new_enemy_path %>

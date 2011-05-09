@@ -1,8 +1,15 @@
 class EnemiesController < ApplicationController
+  # Ensure that the User is signed in
+  before_filter :authenticate_user!
+
+  # Ensure that the current User is an administrator before allowing editing,
+  # updating or destroying
+  before_filter :ensure_admin_user!, :except => [ :index, :show ]
   # GET /enemies
   # GET /enemies.xml
   def index
     @enemies = Enemy.all
+    @title = "Enemies"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,6 +21,7 @@ class EnemiesController < ApplicationController
   # GET /enemies/1.xml
   def show
     @enemy = Enemy.find(params[:id])
+    @title = @enemy.name
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,6 +33,7 @@ class EnemiesController < ApplicationController
   # GET /enemies/new.xml
   def new
     @enemy = Enemy.new
+    @title = "New enemy"
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,6 +44,7 @@ class EnemiesController < ApplicationController
   # GET /enemies/1/edit
   def edit
     @enemy = Enemy.find(params[:id])
+    @title = "Edit enemy"
   end
 
   # POST /enemies
@@ -81,4 +91,13 @@ class EnemiesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  private
+
+  # Ensure that the current User is an administrator before allowing editing,
+  # updating or destroying
+  def ensure_admin_user!
+    redirect_to(enemies_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
+  end
+
 end

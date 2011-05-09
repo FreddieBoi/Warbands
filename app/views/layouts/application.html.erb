@@ -16,12 +16,13 @@
 
       <%= render 'layouts/nav' %>
 
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+
       <%= render 'warbands/mywarband' if user_signed_in? and not current_user.warband.blank? %>
 
       <section>
-        <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, :class => "flash #{key}") %>
-        <% end %>
         <%= yield %>
       </section>
       <%= render 'layouts/footer' %>
