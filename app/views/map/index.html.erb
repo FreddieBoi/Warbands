@@ -26,21 +26,19 @@
     var cols = mapWidth/regionWidth;
     var rows = mapHeight/regionHeight;
 
+    var enemyOffset = Object();
+    enemyOffset.x = 5;
+    enemyOffset.y = 5;
+
     // Create two-dimensional array
     var regions = new Array(cols);
     for (var i = 0; i < rows; i++) {
       regions[i] = new Array(rows);
     }
-    // Get all the regions of the server and put them in regions array
-    initRegions();
 
     var offset = Object();
     offset.x = 40;
     offset.y = 40;
-
-    var enemyOffset = Object();
-    enemyOffset.x = 5;
-    enemyOffset.y = 5;
 
     // Do when document is ready
     $(document).ready( function() {
@@ -60,8 +58,9 @@
         if (!region) return;
 
         var enemy = getClickedEnemy(region, x, y);
+        if(enemy) return;
         function getClickedEnemy(region, x, y) {
-          if (!region.enemies.length < 1) { // if there are enemies in the region
+          if (region.enemies.length > 0) { // if there are enemies in the region
             if (pos.x > region.x*regionWidth+enemyOffset.x && pos.x < region.x*regionWidth+enemyOffset.x+22 && // 22 is enemy img width
                 pos.y > region.y*regionHeight+enemyOffset.y && pos.y < region.y*regionHeight+enemyOffset.y+28) { // 28 is enemy img height
               alert(region.enemies[0].name);
@@ -117,16 +116,12 @@
         warband.ax = warband.x; // animation x
         warband.ay = warband.y; // animation y
 
-        enemy = new Object();
-        enemy.img = new Image();
-        enemy.img.src = 'images/enemy.png';
-        enemy.x = <%= Region.find(1).pos_x %>*regionWidth+enemyOffset.x;
-        enemy.y = <%= Region.find(1).pos_y %>*regionHeight+enemyOffset.y;
-
         // Add all the objects to be drawn
         mapItems.push(bg);
-        mapItems.push(warband)
-        mapItems.push(enemy);
+        mapItems.push(warband);
+
+        // Get all the regions of the server and put them in regions array
+        initRegions();
 
 	    // set updateStage method
 	    stage.setUpdateStage(updateCanvas);
@@ -247,12 +242,17 @@
         region.enemies = new Array();
         <% r.enemies.each do |e| %>
           var enemy = new Object();
+          enemy.x = <%= r.pos_x %>*regionWidth+enemyOffset.x;
+          enemy.y = <%= r.pos_y %>*regionHeight+enemyOffset.y;
+          enemy.img = new Image();
+          enemy.img.src = 'images/enemy.png';
           enemy.name = "<%= e.name %>";
           enemy.id = <%= e.id %>;
           enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
           enemy.health = <%= e.health %>;
           enemy.max_health = <%= e.max_health %>;
           region.enemies.push(enemy);
+          mapItems.push(enemy);
         <% end %>
         regions[region.x][region.y] = region;
       <% end %>
