@@ -38,6 +38,10 @@
     offset.x = 40;
     offset.y = 40;
 
+    var enemyOffset = Object();
+    enemyOffset.x = 5;
+    enemyOffset.y = 5;
+
     // Do when document is ready
     $(document).ready( function() {
 
@@ -48,11 +52,23 @@
 
         var x = Math.floor(pos.x/regionWidth);
         var y = Math.floor(pos.y/regionHeight);
+        
         var region = getRegion(x,y);
 
         // No region found at clicked location, no need to update.
         // FIXME! Show this to the User in some way...
         if (!region) return;
+
+        var enemy = getClickedEnemy(region, x, y);
+        function getClickedEnemy(region, x, y) {
+          if (!region.enemies.length < 1) { // if there are enemies in the region
+            if (pos.x > region.x*regionWidth+enemyOffset.x && pos.x < region.x*regionWidth+enemyOffset.x+22 && // 22 is enemy img width
+                pos.y > region.y*regionHeight+enemyOffset.y && pos.y < region.y*regionHeight+enemyOffset.y+28) { // 28 is enemy img height
+              alert(region.enemies[0].name);
+              return region.enemies[0];
+            }
+          }
+        }
 
         // Update the Warband position (database) by sending a PUT request and
         // then the positon of the warband (javascript object) upon success
@@ -104,8 +120,8 @@
         enemy = new Object();
         enemy.img = new Image();
         enemy.img.src = 'images/enemy.png';
-        enemy.x = <%= Region.find(1).pos_x %>*regionWidth+5;
-        enemy.y = <%= Region.find(1).pos_y %>*regionHeight+5;
+        enemy.x = <%= Region.find(1).pos_x %>*regionWidth+enemyOffset.x;
+        enemy.y = <%= Region.find(1).pos_y %>*regionHeight+enemyOffset.y;
 
         // Add all the objects to be drawn
         mapItems.push(bg);
@@ -221,13 +237,23 @@
     function initRegions() {
       <% @regions.each do |r| %>
         var region = new Object();
-        var data = JSON.parse("<%= r.to_json %>".replace(/&quot;/gi, '"'));
-        data = data["region"];
-        region.id = data["id"];
-        region.x = data["pos_x"];
-        region.y = data["pos_y"];
-        region.name = data["name"];
-        region.desc = data["desc"];
+        //var data = JSON.parse("<% r.to_json(:include => :enemies) %>".replace(/&quot;/gi, '"'));
+        //data = data["region"];
+        region.id = <%= r.id %>;
+        region.x = <%= r.pos_x %>;
+        region.y = <%= r.pos_y %>;
+        region.name = "<%= r.name %>";
+        region.desc = "<%= r.desc %>";
+        region.enemies = new Array();
+        <% r.enemies.each do |e| %>
+          var enemy = new Object();
+          enemy.name = "<%= e.name %>";
+          enemy.id = <%= e.id %>;
+          enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
+          enemy.health = <%= e.health %>;
+          enemy.max_health = <%= e.max_health %>;
+          region.enemies.push(enemy);
+        <% end %>
         regions[region.x][region.y] = region;
       <% end %>
     }

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110430234753
+# Schema version: 20110509113610
 #
 # Table name: items
 #
@@ -9,6 +9,7 @@
 #  cost       :integer         default(0), not null
 #  item_type  :string(255)
 #  member_id  :integer
+#  enemy_id   :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
