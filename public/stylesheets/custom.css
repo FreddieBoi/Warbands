@@ -247,3 +247,36 @@ div.field, div.actions {
   width: 100px;
   text-align: center;
 }
+
+#combat_container {
+	background-color: #fff;
+	padding-bottom: 10px;
+	overflow: hidden;
+}
+
+#combat_warband {
+	margin-left: 10px;
+	float: left;
+}
+
+#combat_vs {
+	float: left;
+	margin: 0 10px;
+}
+
+#combat_enemy_warband {
+	float: left;
+}
+
+.hpbar_outer {
+	width: 100px;
+	height: 10px;
+	background-color: #444;
+	border: solid 2px #222;
+}
+
+.hpbar_inner {
+	width: 50px;
+	height: 10px;
+	background-color: #8A1F11;
+}

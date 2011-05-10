@@ -1,2 +1,17 @@
-<h2>Combat</h2>
-<%= @warband.combat_value - @enemy.combat_value %>
+<div id="combat_container">
+	<div id="combat_warband">
+		<h2><%= @warband.name %></h2>
+		<% @warband.members.each do |member| %>
+		<div class="combat_member">
+			<h3><%= member.name %></h3>
+			<div class="hpbar_outer"><div class="hpbar_inner"></div></div>
+		</div>
+		<% end %>
+	</div>
+	<div id="combat_vs">
+		<h2>vs</h2>
+	</div>
+	<div id="combat_enemy_warband">
+		<h2><%= @enemy.name %></h2>
+	</div>
+</div>
