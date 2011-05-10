@@ -30,4 +30,8 @@ class Enemy < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+  
+  def combat_value
+    5
+  end
 end

@@ -29,4 +29,12 @@ class Member < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+  
+  def combat_value
+    value = 0
+    items.each do |item|
+      value += item.combat_value
+    end
+    value
+  end
 end

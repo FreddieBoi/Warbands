@@ -1,0 +1,7 @@
+<div id="battle_container"><h2><%= @title %></h2>
+<%= render 'battle/warband', :warband => @warband %>
+<div class="battle vs">VS</div>
+<%= render 'battle/enemy', :enemy => @enemy %>
+</div>
+<div class="clear"></div>
+<%= button_to "Engage in battle", battle_combat_path(:enemy_id => @enemy.id) %>

@@ -32,4 +32,8 @@ class Item < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+  
+  def combat_value
+    7
+  end 
 end

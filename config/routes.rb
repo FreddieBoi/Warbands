@@ -1,5 +1,11 @@
 Warbands::Application.routes.draw do
 
+  match "battle/before"
+
+  match "battle/after"
+
+  match "battle/combat"
+
   resources :enemies
 
   resources :news

@@ -232,3 +232,18 @@ div.field, div.actions {
 .info a {
   color:#205791;
 }
+
+/* BATTLE */
+#battle_container {
+
+}
+
+.battle {
+  width: 200px;
+  float: left;
+}
+
+.vs {
+  width: 100px;
+  text-align: center;
+}

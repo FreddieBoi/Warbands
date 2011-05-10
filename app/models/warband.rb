@@ -39,4 +39,12 @@ class Warband < ActiveRecord::Base
     5
   end
 
+  def combat_value
+    value = 0
+    members.each do |member|
+      value += member.combat_value
+    end
+    value
+  end
+
 end

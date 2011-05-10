@@ -1,0 +1,21 @@
+<div class="battle enemy">
+  <h3><%= enemy.name %></h3>
+  <p>
+    <b>Description:</b>
+    <%= enemy.desc %>
+  </p>
+  <p>
+    <b>Health:</b>
+    <%= enemy.health %> / <%= enemy.max_health %>
+  </p>
+  <h4>Items</h4>
+  <% if enemy.items.empty? %>
+  <p>
+    This enemy doesn't have any items.
+  </p>
+  <% else %>
+  <ul class="items">
+    <%= render :partial => "items/item", :collection => enemy.items %>
+  </ul>
+  <% end %>
+</div>
