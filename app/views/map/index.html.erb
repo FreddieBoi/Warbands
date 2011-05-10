@@ -17,255 +17,265 @@
   </ul>
 </div>
 <% content_for :head do %>
-<script>
-  var canvas;
-  var context;
-  var stage;
-  var bg;
-  var warband;
-  var enemy;
-  var mapWidth = 500;//$('#map')[0].width;
-  var mapHeight = 500; //$('#map')[0].height;
-  var mapItems = new Array();
-  var hasNewPos = false;
+  <script>
+    var canvas;
+    var context;
+    var stage;
+    var bg;
+    var warband;
+    var enemy;
+    var mapWidth = 500;//$('#map')[0].width;
+    var mapHeight = 500; //$('#map')[0].height;
+    var mapItems = new Array();
+    var hasNewPos = false;
 
-  // canvas width and height must be divisible by 100
-  var regionWidth = 100;
-  var regionHeight = 100;
+    // canvas width and height must be divisible by 100
+    var regionWidth = 100;
+    var regionHeight = 100;
 
-  var cols = mapWidth/regionWidth;
-  var rows = mapHeight/regionHeight;
+    var cols = mapWidth/regionWidth;
+    var rows = mapHeight/regionHeight;
 
-  var enemyOffset = Object();
-  enemyOffset.x = 5;
-  enemyOffset.y = 5;
+    var enemyOffset = Object();
+    enemyOffset.x = 5;
+    enemyOffset.y = 5;
 
-  // Create two-dimensional array
-  var regions = new Array(cols);
-  for (var i = 0; i < rows; i++) {
-  regions[i] = new Array(rows);
-  }
+    // Create two-dimensional array
+    var regions = new Array(cols);
+    for (var i = 0; i < rows; i++) {
+      regions[i] = new Array(rows);
+    }
 
-  var offset = Object();
-  offset.x = 40;
-  offset.y = 40;
+    var offset = Object();
+    offset.x = 40;
+    offset.y = 40;
 
-  // Do when document is ready
-  $(document).ready( function() {
+    // Do when document is ready
+    $(document).ready( function() {
 
-  // Register a click handler on the canvas (#map)
-  $("#map").live("click", function(e) {
-  // Get the clicked position
-  var pos = getCursorPosition(e);
+      // Register a click handler on the canvas (#map)
+      $("#map").live("click", function(e) {
+        // Get the clicked position
+        var pos = getCursorPosition(e);
 
-  var x = Math.floor(pos.x/regionWidth);
-  var y = Math.floor(pos.y/regionHeight);
+        var x = Math.floor(pos.x/regionWidth);
+        var y = Math.floor(pos.y/regionHeight);
+        
+        var region = getRegion(x,y);
 
-  var region = getRegion(x,y);
+        // No region found at clicked location, no need to update.
+        // FIXME! Show this to the User in some way...
+        if (!region) return;
 
-  // No region found at clicked location, no need to update.
-  // FIXME! Show this to the User in some way...
-  if (!region) return;
+        var enemy = getClickedEnemy(region, pos);
+        if(enemy) {
+          $(window.location).attr('href', '/battle/before/?enemy_id='+enemy.id);
+          return;
+        }
 
-  var enemy = getClickedEnemy(region, x, y);
-  if(enemy) return;
-  function getClickedEnemy(region, x, y) {
-  if (region.enemies.length > 0) { // if there are enemies in the region
-  if (pos.x > region.x*regionWidth+enemyOffset.x && pos.x < region.x*regionWidth+enemyOffset.x+22 && // 22 is enemy img width
-  pos.y > region.y*regionHeight+enemyOffset.y && pos.y < region.y*regionHeight+enemyOffset.y+28) { // 28 is enemy img height
-  alert(region.enemies[0].name);
-  return region.enemies[0];
-  }
-  }
-  }
+        // Update the Warband position (database) by sending a PUT request and
+        // then the positon of the warband (javascript object) upon success
+        var url = "<%= warband_path(@warband) %>"; // Go to warbands/:id path
+        var data = { "warband[region_id]": region.id,
+                     "_method": "put" }; // Use warbands#update (not show)
+        $.post(url, data, updateWarbandPosition, "json");
 
-  // Update the Warband position (database) by sending a PUT request and
-  // then the positon of the warband (javascript object) upon success
-  var url = "<%= warband_path(@warband) %>"; // Go to warbands/:id path
-  var data = { "warband[region_id]": region.id,
-  "_method": "put" }; // Use warbands#update (not show)
-  $.post(url, data, updateWarbandPosition, "json");
+        return false;
+      });
 
-  return false;
-  });
+      // Get the canvas
+      canvas = $("#map")[0];
+  
+      // Try to get the context
+      if(canvas.getContext) {
+        context = canvas.getContext('2d');
+      stage = new Kinetic.Stage(canvas, 100);
+  
+        // stop the user getting a text cursor
+        canvas.onselectstart = function()
+        {
+            return false;
+        };
 
-  // Get the canvas
-  canvas = $("#map")[0];
+        // Create a background object
+        bg = new Object();
+        bg.img = new Image();
+        bg.img.src = 'images/warbands_bg.png';
+        bg.x = 0;
+        bg.y = 0;
+        bg.img.onload = function() {
+          redraw();
+        };
 
-  // Try to get the context
-  if(canvas.getContext) {
-  context = canvas.getContext('2d');
-  stage = new Kinetic.Stage(canvas, 100);
+        // Create a Warband object
+        warband = new Object();
+        warband.img = new Image();
+        warband.img.src = 'images/huskarl.png';
+        warband.img.onload = function() {
+          redraw();
+        };
+        // Get the initial position of the Warband
+        warband.x = <%= @warband.region.pos_x %>*regionWidth+offset.x;
+        warband.y = <%= @warband.region.pos_y %>*regionHeight+offset.y;
+        warband.ax = warband.x; // animation x
+        warband.ay = warband.y; // animation y
 
-  // stop the user getting a text cursor
-  canvas.onselectstart = function()
-  {
-  return false;
-  };
+        // Add all the objects to be drawn
+        mapItems.push(bg);
+        mapItems.push(warband);
 
-  // Create a background object
-  bg = new Object();
-  bg.img = new Image();
-  bg.img.src = 'images/warbands_bg.png';
-  bg.x = 0;
-  bg.y = 0;
-  bg.img.onload = function() {
-  redraw();
-  };
+        // Get all the regions of the server and put them in regions array
+        initRegions();
 
-  // Create a Warband object
-  warband = new Object();
-  warband.img = new Image();
-  warband.img.src = 'images/huskarl.png';
-  warband.img.onload = function() {
-  redraw();
-  };
-  // Get the initial position of the Warband
-  warband.x = <%= @warband.region.pos_x %>*regionWidth+offset.x;
-  warband.y = <%= @warband.region.pos_y %>*regionHeight+offset.y;
-  warband.ax = warband.x; // animation x
-  warband.ay = warband.y; // animation y
+      // set updateStage method
+      stage.setUpdateStage(updateCanvas);
 
-  // Add all the objects to be drawn
-  mapItems.push(bg);
-  mapItems.push(warband);
+    // set drawStage method
+      stage.setDrawStage(redraw);
+      // start animation
+      stage.start();
 
-  // Get all the regions of the server and put them in regions array
-  initRegions();
+      } else { // No context available
+        alert("Sorry, but the Canvas element is not supported by your browser!");
+      }
+    });
 
-  // set updateStage method
-  stage.setUpdateStage(updateCanvas);
+    // update for animation
+    function  updateCanvas() {
+      if (hasNewPos) {
+        if (warband.ax < warband.x) {
+          warband.ax += 1;
+        } else if (warband.ax > warband.x) {
+          warband.ax -= 1;
+        }
+        if (warband.ay < warband.y) {
+          warband.ay += 1;
+        } else if (warband.ay > warband.y) {
+          warband.ay -= 1;
+        }
+        if (warband.ax === warband.x && warband.ay === warband.y) {
+          hasNewPos = false;
+        }
+      } 
+    }
 
-  // set drawStage method
-  stage.setDrawStage(redraw);
-  // start animation
-  stage.start();
+    // Update the Warband position from the specified data (.json) and redraw
+    function updateWarbandPosition(data) {
+      var region = findRegion(data['warband']['region_id']);
+      warband.x = region.x*regionWidth + offset.x;
+      warband.y = region.y*regionHeight + offset.y;
+      // FIXME! Make this a partial to render instead?!
+      $("#current_region h2").html("<a href='/regions/"+region.id+"'>"+region.name+"</a>");
+      $("#current_region p").html(region.desc);
+      var enemies = "";
+      for (var enemy in region.enemies) {
+        e = region.enemies[enemy];
+        enemies += '<li><a href="/battle/before?enemy_id='+e.id+'">'+e.name+"</a></li>";
+      }
+      $("#current_enemies").html(enemies);
+      hasNewPos = true;
+    }
 
-  } else { // No context available
-  alert("Sorry, but the Canvas element is not supported by your browser!");
-  }
-  });
+    function findRegion(id) {
+      for(var c = 0; c < cols; c++) {
+        for(var r = 0; r < rows; r++) {
+          if (regions[c][r] && regions[c][r].id == id) {
+            return regions[c][r];
+          }
+        }
+      }
+      return false;
+    }
 
-  // update for animation
-  function  updateCanvas() {
-  if (hasNewPos) {
-  if (warband.ax < warband.x) {
-  warband.ax += 1;
-  } else if (warband.ax > warband.x) {
-  warband.ax -= 1;
-  }
-  if (warband.ay < warband.y) {
-  warband.ay += 1;
-  } else if (warband.ay > warband.y) {
-  warband.ay -= 1;
-  }
-  if (warband.ax === warband.x && warband.ay === warband.y) {
-  hasNewPos = false;
-  }
-  }
-  }
+    function getRegion(x, y) {
+      return regions[x][y];
+    }
 
-  // Update the Warband position from the specified data (.json) and redraw
-  function updateWarbandPosition(data) {
-  var region = findRegion(data['warband']['region_id']);
-  warband.x = region.x*regionWidth + offset.x;
-  warband.y = region.y*regionHeight + offset.y;
-  // FIXME! Make this a partial to render instead?!
-  $("#current_region h2").html("<a href='/regions/"+region.id+"'>"+region.name+"</a>");
-  $("#current_region p").html(region.desc);
-  var enemies = "";
-  for (var enemy in region.enemies) {
-    e = region.enemies[enemy];
-    enemies += '<li><a href="/battle/before/'+e.id+'">'+e.name+"</a></li>";
-  }
-  $("#current_enemies").html(enemies); 
-  hasNewPos = true;
-  }
+    function getClickedEnemy(region, pos) {
+      if (region.enemies.length > 0) { // if there are enemies in the region
+        if (pos.x > region.x*regionWidth+enemyOffset.x && pos.x < region.x*regionWidth+enemyOffset.x+22 && // 22 is enemy img width
+            pos.y > region.y*regionHeight+enemyOffset.y && pos.y < region.y*regionHeight+enemyOffset.y+28) { // 28 is enemy img height
+          return region.enemies[0];
+        }
+      }
+    }
+  
+    // Redraw all the images (mapItems) of the canvas context
+    function redraw() {
+      // Clear the canvas
+      clearCanvas();
+      // Draw all images (from mapItems array)
+      
+      for (var obj in mapItems) {
+        if ("ax" in mapItems[obj] && "ay" in mapItems[obj]) { 
+          context.drawImage(mapItems[obj].img, mapItems[obj].ax, mapItems[obj].ay);
+        } else {
+          context.drawImage(mapItems[obj].img, mapItems[obj].x, mapItems[obj].y);
+        }
+      }
+    }
 
-  function findRegion(id) {
-  for(var c = 0; c < cols; c++) {
-  for(var r = 0; r < rows; r++) {
-  if (regions[c][r] && regions[c][r].id == id) {
-  return regions[c][r];
-  }
-  }
-  }
-  return false;
-  }
+    // Get the cursor position (pos.x and pos.y) from the specified event e
+    function getCursorPosition(e) {
+      var x;
+      var y;
+      if (e.pageX != undefined && e.pageY != undefined) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = 0;
+        y = 0;
+      }
+  
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+  
+      //x = Math.floor(x/80)*80+29;
+      //y = Math.floor(y/80)*80+24;
+  
+      var pos = new Object();
+      pos.x = x;
+      pos.y = y;
+      return pos;
+    }
+  
+    // Clear the canvas
+    function clearCanvas() {
+      context.clearRect(0, 0, canvas.width, canvas.height);
+      var w = canvas.width;
+      canvas.width = 1;
+      canvas.width = w;
+    }
 
-  function getRegion(x, y) {
-  return regions[x][y];
-  }
+    // Get and initialize all the Regions 
+    function initRegions() {
+      <% @regions.each do |r| %>
+        var region = new Object();
+        //var data = JSON.parse("<% r.to_json(:include => :enemies) %>".replace(/&quot;/gi, '"'));
+        //data = data["region"];
+        region.id = <%= r.id %>;
+        region.x = <%= r.pos_x %>;
+        region.y = <%= r.pos_y %>;
+        region.name = "<%= r.name %>";
+        region.desc = "<%= r.desc %>";
+        region.enemies = new Array();
+        <% r.enemies.each do |e| %>
+          var enemy = new Object();
+          enemy.x = <%= r.pos_x %>*regionWidth+enemyOffset.x;
+          enemy.y = <%= r.pos_y %>*regionHeight+enemyOffset.y;
+          enemy.img = new Image();
+          enemy.img.src = 'images/enemy.png';
+          enemy.name = "<%= e.name %>";
+          enemy.id = <%= e.id %>;
+          enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
+          enemy.health = <%= e.health %>;
+          enemy.max_health = <%= e.max_health %>;
+          region.enemies.push(enemy);
+          mapItems.push(enemy);
+        <% end %>
+        regions[region.x][region.y] = region;
+      <% end %>
+    }
 
-  // Redraw all the images (mapItems) of the canvas context
-  function redraw() {
-  // Clear the canvas
-  clearCanvas();
-  // Draw all images (from mapItems array)
-
-  for (var obj in mapItems) {
-  if ("ax" in mapItems[obj] && "ay" in mapItems[obj]) {
-  context.drawImage(mapItems[obj].img, mapItems[obj].ax, mapItems[obj].ay);
-  } else {
-  context.drawImage(mapItems[obj].img, mapItems[obj].x, mapItems[obj].y);
-  }
-  }
-  }
-
-  // Get the cursor position (pos.x and pos.y) from the specified event e
-  function getCursorPosition(e) {
-  var x;
-  var y;
-  if (e.pageX != undefined && e.pageY != undefined) {
-  x = e.pageX;
-  y = e.pageY;
-  } else {
-  x = 0;
-  y = 0;
-  }
-
-  x -= canvas.offsetLeft;
-  y -= canvas.offsetTop;
-
-  //x = Math.floor(x/80)*80+29;
-  //y = Math.floor(y/80)*80+24;
-
-  var pos = new Object();
-  pos.x = x;
-  pos.y = y;
-  return pos;
-  }
-
-  // Clear the canvas
-  function clearCanvas() {
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  var w = canvas.width;
-  canvas.width = 1;
-  canvas.width = w;
-  }
-
-  // Get and initialize all the Regions
-  function initRegions() {
-  <% @regions.each do |r| %>
-  var region = new Object();
-  //var data = JSON.parse("<% r.to_json(:include => :enemies) %>".replace(/&quot;/gi, '"'));
-  //data = data["region"];
-  region.id = <%= r.id %>;
-  region.x = <%= r.pos_x %>;
-  region.y = <%= r.pos_y %>;
-  region.name = "<%= r.name %>";
-  region.desc = "<%= r.desc %>";
-region.enemies = new Array();<% r.enemies.each do |e| %>
-  var enemy = new Object();
-  enemy.x = <%= r.pos_x %>*regionWidth+enemyOffset.x;
-  enemy.y = <%= r.pos_y %>*regionHeight+enemyOffset.y;
-  enemy.img = new Image();
-  enemy.img.src = 'images/enemy.png';
-  enemy.name = "<%= e.name %>";
-  enemy.id = <%= e.id %>;
-  enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
-  enemy.health = <%= e.health %>;
-  enemy.max_health = <%= e.max_health %>;
-region.enemies.push(enemy);
-mapItems.push(enemy);<% end %>regions[region.x][region.y] = region;<% end %>}</script>
+  </script>
 <% end %>
