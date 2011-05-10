@@ -88,15 +88,15 @@ Kinetic.Stage = function(canvas, fps){
             }
             
             setMousePosition(e);
-            if (canvasOnmouseover !== null) {
+            /*if (canvasOnmouseover !== null) {
                 canvasOnmouseover();
-            }
+            }*/
         };
         canvas.onmouseout = function(){
             mousePos = null;
-            if (canvasOnmouseout !== null) {
+            /*if (canvasOnmouseout !== null) {
                 canvasOnmouseout();
-            }
+            }*/
         };
         canvas.onmousemove = function(e){
             if (!e) {
@@ -104,9 +104,9 @@ Kinetic.Stage = function(canvas, fps){
             }
             reset(e);
             
-            if (canvasOnmousemove !== null) {
+           /* if (canvasOnmousemove !== null) {
                 canvasOnmousemove();
-            }
+            }*/
         };
         canvas.onmousedown = function(e){
             if (!e) {
@@ -115,9 +115,11 @@ Kinetic.Stage = function(canvas, fps){
             mouseDown = true;
             reset(e);
             
+/*
             if (canvasOnmousedown !== null) {
                 canvasOnmousedown();
-            }
+            }*/
+
         };
         canvas.onmouseup = function(e){
             if (!e) {
@@ -126,9 +128,11 @@ Kinetic.Stage = function(canvas, fps){
             mouseUp = true;
             reset(e);
             
+/*
             if (canvasOnmouseup !== null) {
                 canvasOnmouseup();
-            }
+            }*/
+
         };
     };
     this.beginRegion = function(){

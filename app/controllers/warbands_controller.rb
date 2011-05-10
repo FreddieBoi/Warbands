@@ -92,12 +92,11 @@ class WarbandsController < ApplicationController
   # PUT /warbands/1.json
   def update
     @warband = Warband.find(params[:id])
-
     respond_to do |format|
       if @warband.update_attributes(params[:warband])
         format.html { redirect_to(@warband, :notice => 'Warband was successfully updated.') }
         format.xml  { head :ok }
-        format.json { redirect_to(@warband, :format => :json) }
+        format.json { render :json => @warband }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @warband.errors, :status => :unprocessable_entity }
