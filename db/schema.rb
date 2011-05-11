@@ -10,11 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110511085155) do
+ActiveRecord::Schema.define(:version => 20110511090306) do
 
   create_table "enemies", :force => true do |t|
     t.integer  "health",            :default => 100, :null => false
     t.integer  "enemy_template_id",                  :null => false
+    t.integer  "region_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -110,11 +111,17 @@ ActiveRecord::Schema.define(:version => 20110511085155) do
     t.string   "name",                      :null => false
     t.integer  "reputation", :default => 0, :null => false
     t.integer  "region_id"
-    t.integer  "user_id"
+    t.integer  "world_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "warbands", ["name"], :name => "index_warbands_on_name", :unique => true
+
+  create_table "worlds", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

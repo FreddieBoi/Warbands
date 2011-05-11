@@ -3,6 +3,7 @@ class CreateEnemies < ActiveRecord::Migration
     create_table :enemies do |t|
       t.integer :health, :null => false, :default => 100
       t.references :enemy_template, :null => false
+      t.references :region
 
       t.timestamps
     end

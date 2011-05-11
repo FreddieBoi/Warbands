@@ -41,7 +41,9 @@ class User < ActiveRecord::Base
   # Make it possible to query users by name
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
 
-  has_one :warband, :dependent => :destroy
+  has_one :world, :dependent => :destroy
+
+  has_one :warband, :through => :world
   # Search for users with names matching the specified search term
   def self.search(search)
     if search

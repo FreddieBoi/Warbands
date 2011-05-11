@@ -14,17 +14,21 @@
 
 class Warband < ActiveRecord::Base
 
-  belongs_to :user
-
   has_many :members
   accepts_nested_attributes_for :members
 
   belongs_to :region
+  belongs_to :world
 
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
 
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
+
+  def user
+    world.user
+  end
+
   # Search for Warbands matching the name of the specified search term
   def self.search(search)
     if search

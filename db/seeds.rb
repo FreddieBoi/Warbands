@@ -16,6 +16,8 @@ dt.save!
 puts 'New user created: ' << dt.name
 test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
 puts 'New user created: ' << test_user.name
+puts 'SETTING UP AN EXAMPLE WORLD'
+world = World.create! :user => dt
 puts 'SETTING UP EXAMPLE REGIONS'
 region00 = Region.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0
 puts 'New region created: ' << region00.name
@@ -26,7 +28,7 @@ puts 'New region created: ' << region10.name
 region11 = Region.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 1, :pos_y => 1
 puts 'New region created: ' << region11.name
 puts 'SETTING UP EXAMPLE WARBANDS'
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :user => dt
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :world => world
 puts 'New warband created: ' << warband.name
 darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
 puts 'SETTING UP EXAMPLE MEMBERS'

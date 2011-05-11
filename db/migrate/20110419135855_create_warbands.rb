@@ -4,7 +4,7 @@ class CreateWarbands < ActiveRecord::Migration
       t.string :name, :null => false
       t.integer :reputation, :null => false, :default => 0
       t.references :region
-      t.references :user
+      t.references :world
 
       t.timestamps
     end
