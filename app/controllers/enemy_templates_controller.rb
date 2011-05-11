@@ -1,4 +1,4 @@
-class EnemiesController < ApplicationController
+class EnemyTemplatesController < ApplicationController
 
   # Ensure that the User is signed in
   before_filter :authenticate_user!
@@ -13,7 +13,7 @@ class EnemiesController < ApplicationController
   # GET /enemies.js
   # GET /enemies.xml
   def index
-    @enemies = Enemy.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @enemies = EnemyTemplate.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
     @title = "Enemies"
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class EnemiesController < ApplicationController
   # GET /enemies/1
   # GET /enemies/1.xml
   def show
-    @enemy = Enemy.find(params[:id])
+    @enemy = EnemyTemplate.find(params[:id])
     @title = @enemy.name.titleize
     @region = @enemy.region
     @items = @enemy.items
@@ -40,7 +40,7 @@ class EnemiesController < ApplicationController
   # GET /enemies/new
   # GET /enemies/new.xml
   def new
-    @enemy = Enemy.new
+    @enemy = EnemyTemplate.new
     @title = "New enemy"
 
     respond_to do |format|
@@ -51,15 +51,15 @@ class EnemiesController < ApplicationController
 
   # GET /enemies/1/edit
   def edit
-    @enemy = Enemy.find(params[:id])
+    @enemy = EnemyTemplate.find(params[:id])
     @title = "Edit enemy"
   end
 
   # POST /enemies
   # POST /enemies.xml
   def create
-    @enemy = Enemy.new(params[:enemy])
-    @enemy.region = Region.find(params[:enemy][:region_id])
+    @enemy = EnemyTemplate.new(params[:enemy_template])
+    @enemy.region = Region.find(params[:enemy_template][:region_id])
 
     respond_to do |format|
       if @enemy.save
@@ -75,10 +75,10 @@ class EnemiesController < ApplicationController
   # PUT /enemies/1
   # PUT /enemies/1.xml
   def update
-    @enemy = Enemy.find(params[:id])
+    @enemy = EnemyTemplate.find(params[:id])
 
     respond_to do |format|
-      if @enemy.update_attributes(params[:enemy])
+      if @enemy.update_attributes(params[:enemy_template])
         format.html { redirect_to(@enemy, :notice => 'Enemy was successfully updated.') }
         format.xml  { head :ok }
       else
@@ -91,7 +91,7 @@ class EnemiesController < ApplicationController
   # DELETE /enemies/1
   # DELETE /enemies/1.xml
   def destroy
-    @enemy = Enemy.find(params[:id])
+    @enemy = EnemyTemplate.find(params[:id])
     @enemy.destroy
 
     respond_to do |format|

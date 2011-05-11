@@ -6,7 +6,9 @@ Warbands::Application.routes.draw do
 
   match "battle/combat"
 
-  resources :enemies
+  #scope "/templates" do
+    resources :enemy_templates, :path => "enemies"
+  #end
 
   resources :news
 

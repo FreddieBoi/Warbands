@@ -9,7 +9,7 @@
   </p>
   <h3>Enemies in this region</h3>
   <ul id="current_enemies">
-    <% @warband.region.enemies.each do |enemy| %>
+    <% @warband.region.enemy_templates.each do |enemy| %>
     <li>
       <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id) %>
     </li>
@@ -251,7 +251,7 @@
     function initRegions() {
       <% @regions.each do |r| %>
         var region = new Object();
-        //var data = JSON.parse("<% r.to_json(:include => :enemies) %>".replace(/&quot;/gi, '"'));
+        //var data = JSON.parse("<% r.to_json(:include => :enemy_templates) %>".replace(/&quot;/gi, '"'));
         //data = data["region"];
         region.id = <%= r.id %>;
         region.x = <%= r.pos_x %>;
@@ -259,7 +259,7 @@
         region.name = "<%= r.name %>";
         region.desc = "<%= r.desc %>";
         region.enemies = new Array();
-        <% r.enemies.each do |e| %>
+        <% r.enemy_templates.each do |e| %>
           var enemy = new Object();
           enemy.x = <%= r.pos_x %>*regionWidth+enemyOffset.x;
           enemy.y = <%= r.pos_y %>*regionHeight+enemyOffset.y;
@@ -268,7 +268,6 @@
           enemy.name = "<%= e.name %>";
           enemy.id = <%= e.id %>;
           enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
-          enemy.health = <%= e.health %>;
           enemy.max_health = <%= e.max_health %>;
           region.enemies.push(enemy);
           mapItems.push(enemy);

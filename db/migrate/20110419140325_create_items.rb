@@ -6,7 +6,7 @@ class CreateItems < ActiveRecord::Migration
       t.integer :cost, :null => false, :default => 0
       t.string :item_type
       t.references :member
-      t.references :enemy
+      t.references :enemy_template
 
       t.timestamps
     end

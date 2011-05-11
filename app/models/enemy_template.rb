@@ -1,28 +1,30 @@
 # == Schema Information
-# Schema version: 20110430234753
+# Schema version: 20110509113610
 #
-# Table name: regions
+# Table name: enemies
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)     not null
-#  pos_x      :integer
-#  pos_y      :integer
+#  region_id  :integer
 #  desc       :text
+#  health     :integer         default(100), not null
+#  max_health :integer         default(100), not null
 #  created_at :datetime
 #  updated_at :datetime
 #
 
-class Region < ActiveRecord::Base
+class EnemyTemplate < ActiveRecord::Base
+  belongs_to :region
 
-  has_many :warbands
+  has_many :items
   
-  has_many :enemy_templates
+  has_many :enemies
 
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
 
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-  # Search for Regions matching the name of the specified search term
+  # Search for Enemies with a name matching the specified search term
   def self.search(search)
     if search
       where('name LIKE ?', "%#{search.downcase}%")
@@ -30,4 +32,9 @@ class Region < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+
+  def combat_value
+    5
+  end
+
 end

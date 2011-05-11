@@ -1,5 +1,5 @@
 <h2><%= @title %></h2>
-<%= form_tag enemies_path, :method => 'get', :id => "enemies_search" do %>
+<%= form_tag enemy_templates_path, :method => 'get', :id => "enemies_search" do %>
 <p>
   <b>Name:</b>
   <%= text_field_tag :search, params[:search] %>
@@ -10,4 +10,4 @@
 </div>
 <% end %>
 <br />
-<%= link_to 'Create new enemy', new_enemy_path if current_user.admin? %>
+<%= link_to 'Create new enemy', new_enemy_template_path if current_user.admin? %>

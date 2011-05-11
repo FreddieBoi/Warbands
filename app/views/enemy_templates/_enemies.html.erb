@@ -14,11 +14,11 @@
   <% @enemies.each do |enemy| %>
   <tr>
     <td><%= link_to enemy.name.titleize, enemy %></td>
-    <td><%= enemy.health %> / <%= enemy.max_health %></td>
+    <td><%= enemy.max_health %></td>
     <td><%= link_to enemy.region.name.titleize, enemy.region %></td>
     <td><%= enemy.desc.blank? ? "No description" : enemy.desc.slice(0,20) %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_enemy_path(enemy) %> ]</td>
+    <td>[ <%= link_to 'Edit', edit_enemy_template_path(enemy) %> ]</td>
     <td>[ <%= link_to 'Destroy', enemy, :confirm => 'Are you sure?', :method => :delete %> ]</td>
     <% end %>
   </tr>

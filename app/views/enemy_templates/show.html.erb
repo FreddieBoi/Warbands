@@ -8,10 +8,6 @@
   <%= @enemy.desc %>
 </p>
 <p>
-  <b>Health:</b>
-  <%= @enemy.health %>
-</p>
-<p>
   <b>Max health:</b>
   <%= @enemy.max_health %>
 </p>
@@ -27,7 +23,7 @@
 <% end %>
 <br />
 <% if current_user.admin? %>
-<%= link_to 'Edit', edit_enemy_path(@enemy) %> |
+<%= link_to 'Edit', edit_enemy_template_path(@enemy) %> |
 <%= link_to 'Destroy', @enemy, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>
-<%= link_to 'List of all enemies', enemies_path %>
+<%= link_to 'List of all enemies', enemy_templates_path %>

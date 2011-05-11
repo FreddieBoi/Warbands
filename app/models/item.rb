@@ -18,7 +18,7 @@ class Item < ActiveRecord::Base
 
   belongs_to :member
 
-  belongs_to :enemy
+  belongs_to :enemy_template
 
   validates :name, :presence => true, :length => { :within => 2..20 },
                     :uniqueness => { :case_sensitive => false }
@@ -32,8 +32,8 @@ class Item < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
-  
+
   def combat_value
     7
-  end 
+  end
 end
