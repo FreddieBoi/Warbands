@@ -105,7 +105,7 @@ class EnemyTemplatesController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   def ensure_admin_user!
-    redirect_to(enemies_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
+    redirect_to(enemy_templates_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name

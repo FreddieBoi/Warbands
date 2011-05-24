@@ -10,6 +10,8 @@ Warbands::Application.routes.draw do
     resources :enemy_templates, :path => "enemies"
   #end
 
+  resources :item_templates, :path => "items"
+
   resources :news
 
   resources :regions
@@ -25,8 +27,6 @@ Warbands::Application.routes.draw do
   resources :warbands
   
   resources :members
-	
-  resources :items
   
   root :to => "pages#home"
 

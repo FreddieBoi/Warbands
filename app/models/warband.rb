@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110430234753
+# Schema version: 20110511090306
 #
 # Table name: warbands
 #
@@ -7,24 +7,33 @@
 #  name       :string(255)     not null
 #  reputation :integer         default(0), not null
 #  region_id  :integer
-#  user_id    :integer
+#  world_id   :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Warband < ActiveRecord::Base
 
+  # The warband consist of 0 to max_member_count members
   has_many :members
+
+  # Make it possible to update members through their warband.
   accepts_nested_attributes_for :members
 
-  belongs_to :region
   belongs_to :world
 
+  belongs_to :region
+
+  # Don't allow non-ascii signs, will result in multiple warbands with same slug
+  name_regex = /\A[a-z 0-9]{2,20}\z/i
+
+  # Ensure there is a valid name
   validates :name, :presence => true, :length => { :within => 2..20 },
-                    :uniqueness => { :case_sensitive => false }
+                    :uniqueness => { :case_sensitive => false },
+                    :format => { :with => name_regex }
 
+  # Make it possible to find and identify warbands by name
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-
   def user
     world.user
   end

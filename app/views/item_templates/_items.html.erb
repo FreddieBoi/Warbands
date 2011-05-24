@@ -16,7 +16,7 @@
     <td><%= item.cost %></td>
     <td><%= item.desc %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_item_path(item) %> ]</td>
+    <td>[ <%= link_to 'Edit', edit_item_template_path(item) %> ]</td>
     <td>[ <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %> ]</td>
     <% end %>
   </tr>

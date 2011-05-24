@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class ItemTemplatesController < ApplicationController
 
   # Ensure that the User is signed in
   before_filter :authenticate_user!
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
   # GET /items.js
   # GET /items.xml
   def index
-    @items = Item.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @items = ItemTemplate.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
     @title = "Items"
 
     respond_to do |format|
@@ -26,7 +26,7 @@ class ItemsController < ApplicationController
   # GET /items/1
   # GET /items/1.xml
   def show
-    @item = Item.find(params[:id])
+    @item = ItemTemplate.find(params[:id])
     @title = @item.name.titleize
 
     respond_to do |format|
@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
   # GET /items/new.xml
   def new
     @title = "New item"
-    @item = Item.new
+    @item = ItemTemplate.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,13 +50,13 @@ class ItemsController < ApplicationController
   # GET /items/1/edit
   def edit
     @title = "Edit item"
-    @item = Item.find(params[:id])
+    @item = ItemTemplate.find(params[:id])
   end
 
   # POST /items
   # POST /items.xml
   def create
-    @item = Item.new(params[:item])
+    @item = ItemTemplate.new(params[:item])
 
     respond_to do |format|
       if @item.save
@@ -72,7 +72,7 @@ class ItemsController < ApplicationController
   # PUT /items/1
   # PUT /items/1.xml
   def update
-    @item = Item.find(params[:id])
+    @item = ItemTemplate.find(params[:id])
 
     respond_to do |format|
       if @item.update_attributes(params[:item])
@@ -88,7 +88,7 @@ class ItemsController < ApplicationController
   # DELETE /items/1
   # DELETE /items/1.xml
   def destroy
-    @item = Item.find(params[:id])
+    @item = ItemTemplate.find(params[:id])
     @item.destroy
 
     respond_to do |format|
@@ -102,12 +102,12 @@ class ItemsController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   def ensure_admin_user!
-    redirect_to(items_path, :alert => "You may not perform this action on Items!") and return unless current_user.admin?
+    redirect_to(item_templates_path, :alert => "You may not perform this action on items!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name
   def sort_column
-    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    ItemTemplate.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
 
   # Get the sort direction (order_by). Possible: asc, desc. Default: asc
