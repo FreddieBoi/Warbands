@@ -12,37 +12,49 @@
 #
 
 class Enemy < ActiveRecord::Base
-  
+
   attr_accessible :enemy_template
-  
+
   belongs_to :enemy_template
   belongs_to :region
-  
+
+  has_many :items
+
   after_create :create_items
-  
   def world
-    :region.world
+    region.world
   end
-  
+
+  def template
+    enemy_template
+  end
+
   def name
-    :enemy_template.name
+    template.name
   end
-  
+
   def max_health
-    :enemy_template.max_health
+    template.max_health
   end
-  
+
   def desc
-    :enemy_template.desc
+    template.desc
   end
-  
+
+  def combat_value
+    value = template.combat_value
+    items.each do |i|
+      value += i.combat_value
+    end
+    value
+  end
+
   private
-  
+
   def create_items
-    # :enemy_template.item_templates.each do |template|
-      # item.create!(template)
-      # item.enemy = self
-    # end
+    template.item_templates.each do |t|
+      item = Item.create!(:item_template => t, :enemy => self)
+    end
   end
 
 end

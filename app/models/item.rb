@@ -1,6 +1,19 @@
+# == Schema Information
+# Schema version: 20110524170448
+#
+# Table name: items
+#
+#  id               :integer         not null, primary key
+#  item_template_id :integer         not null
+#  enemy_id         :integer
+#  member_id        :integer
+#  created_at       :datetime
+#  updated_at       :datetime
+#
+
 class Item < ActiveRecord::Base
 
-  attr_accessible :item_template
+  attr_accessible :item_template, :member, :enemy
 
   # The template the item is an instance of
   belongs_to :item_template
@@ -9,24 +22,28 @@ class Item < ActiveRecord::Base
   belongs_to :member
   # ... or an enemy
   belongs_to :enemy
+  def template
+    item_template
+  end
+
   def name
-    :item_template.name
+    template.name
   end
 
   def cost
-    :item_template.cost
+    template.cost
   end
 
   def desc
-    :item_template.desc
+    template.desc
   end
 
   def combat_value
-    :item_template.combat_value
+    template.combat_value
   end
 
   def item_type
-    :item_template.item_type
+    template.item_type
   end
 
 end

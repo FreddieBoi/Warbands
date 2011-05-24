@@ -1,14 +1,14 @@
 # == Schema Information
-# Schema version: 20110511090306
+# Schema version: 20110524170448
 #
-# Table name: items
+# Table name: item_templates
 #
 #  id                :integer         not null, primary key
 #  name              :string(255)     not null
 #  desc              :text
 #  cost              :integer         default(0), not null
 #  item_type         :string(255)
-#  member_id         :integer
+#  combat_value      :integer         default(0), not null
 #  enemy_template_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
@@ -16,8 +16,11 @@
 
 class ItemTemplate < ActiveRecord::Base
 
-  # An item template belongs to an enemy template
+  # An item template could belong to an enemy template
   belongs_to :enemy_template
+  
+  # All the items using this template
+  has_many :items
 
   # Don't allow non-ascii signs (avoid multiple items with same slug)
   name_regex = /\A[a-z 0-9]{2,20}\z/i
@@ -36,10 +39,6 @@ class ItemTemplate < ActiveRecord::Base
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
-  end
-
-  def combat_value
-    7
   end
 
 end

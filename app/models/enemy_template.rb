@@ -1,15 +1,16 @@
 # == Schema Information
-# Schema version: 20110511090306
+# Schema version: 20110524170448
 #
 # Table name: enemy_templates
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)     not null
-#  region_id  :integer
-#  desc       :text
-#  max_health :integer         default(100), not null
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer         not null, primary key
+#  name         :string(255)     not null
+#  region_id    :integer
+#  desc         :text
+#  combat_value :integer         default(0), not null
+#  max_health   :integer         default(100), not null
+#  created_at   :datetime
+#  updated_at   :datetime
 #
 
 class EnemyTemplate < ActiveRecord::Base
@@ -19,7 +20,7 @@ class EnemyTemplate < ActiveRecord::Base
 
   belongs_to :region
 
-  has_many :items
+  has_many :item_templates
 
   # Don't allow non-ascii signs, will result in multiple enemies with same slug
   name_regex = /\A[a-z 0-9]{2,20}\z/i
@@ -38,10 +39,6 @@ class EnemyTemplate < ActiveRecord::Base
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
-  end
-
-  def combat_value
-    5
   end
 
 end

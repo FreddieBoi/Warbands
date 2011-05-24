@@ -29,7 +29,7 @@ class EnemyTemplatesController < ApplicationController
     @enemy = EnemyTemplate.find(params[:id])
     @title = @enemy.name.titleize
     @region = @enemy.region
-    @items = @enemy.items
+    @items = @enemy.item_templates
 
     respond_to do |format|
       format.html # show.html.erb

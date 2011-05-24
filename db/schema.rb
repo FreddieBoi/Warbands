@@ -21,10 +21,11 @@ ActiveRecord::Schema.define(:version => 20110524170448) do
   end
 
   create_table "enemy_templates", :force => true do |t|
-    t.string   "name",                        :null => false
+    t.string   "name",                          :null => false
     t.integer  "region_id"
     t.text     "desc"
-    t.integer  "max_health", :default => 100, :null => false
+    t.integer  "combat_value", :default => 0,   :null => false
+    t.integer  "max_health",   :default => 100, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,7 +46,7 @@ ActiveRecord::Schema.define(:version => 20110524170448) do
   add_index "item_templates", ["name"], :name => "index_item_templates_on_name", :unique => true
 
   create_table "items", :force => true do |t|
-    t.integer  "item_template_id"
+    t.integer  "item_template_id", :null => false
     t.integer  "enemy_id"
     t.integer  "member_id"
     t.datetime "created_at"

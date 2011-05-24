@@ -4,6 +4,7 @@ class CreateEnemyTemplates < ActiveRecord::Migration
       t.string :name, :null => false
       t.references :region
       t.text :desc
+      t.integer :combat_value, :null => false, :default => 0
       # t.integer :health, :null => false, :default => 100
       t.integer :max_health, :null => false, :default => 100
 

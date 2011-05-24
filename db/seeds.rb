@@ -37,13 +37,19 @@ puts 'New member created: ' << darktemplar.name
 hightemplar = Member.create! :name => 'High Templar', :warband => warband
 puts 'New member created: ' << hightemplar.name
 puts 'Create ENEMY TEMPLATES'
-bandit = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region => region11
-puts 'New enemy template created: ' << bandit.name
+bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region => region11, :combat_value => 7
+puts 'New enemy template created: ' << bandit_template.name
 puts 'Create ITEM TEMPLATES'
-sword = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.'
-puts 'New item template created: ' << sword.name
-spear = ItemTemplate.create! :name => 'Spear', :desc => 'A long spear.', :enemy_template => bandit
-puts 'New item template created: ' << spear.name
+sword_template = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.', :combat_value => 3
+puts 'New item template created: ' << sword_template.name
+spear_template = ItemTemplate.create! :name => 'Spear', :desc => 'A long spear.', :combat_value => 5, :enemy_template => bandit_template
+puts 'New item template created: ' << spear_template.name
+puts 'Create ENEMIES'
+bandit = Enemy.create! :enemy_template => bandit_template
+puts 'New enemy created: ' << bandit.name
+puts 'Create ITEMS'
+sword = Item.create! :item_template => sword_template, :member => darktemplar
+puts 'New item created: ' << sword.name
 puts 'SETTING UP EXAMPLE NEWS'
 news1 = News.create! :title => "Welcome to Warbands Online", :user => freddie, :content => "Warbands Online is an online in-browser game where you take on the role of a commander of a warband consisting of about 5 other warriors. The player controls the warband navigation and actions in a medieval fantasy world. The warband will be able to fight different creatures or other warbands and complete quests in order to conquer the world. The warband gains experience, money and items as they pillage their way on the path chosen by the player."
 puts 'New news created: ' << news1.title
