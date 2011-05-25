@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include TweetButton
   # Get the title of the app
   def app_title
     "Warbands Online"
@@ -30,5 +31,7 @@ module ApplicationHelper
     content_tag :iframe, nil, :src => src, :scrolling => 'no', :frameborder => '0',
             :allowtransparency => true, :id => :facebook_like
   end
+
+  TweetButton.default_tweet_button_options = {:via => "WarbandsOnline", :count => "horizontal"}
 
 end
