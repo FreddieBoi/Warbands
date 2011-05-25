@@ -3,13 +3,13 @@
   </canvas>
 </div>
 <div id="current_region" class="grid_3 omega">
-  <h2><%= link_to @warband.region.name, @warband.region %></h2>
+  <h2><%= link_to @warband.region.name, @warband.region.template %></h2>
   <p>
     <%= @warband.region.desc %>
   </p>
   <h3>Enemies in this region</h3>
   <ul id="current_enemies">
-    <% @warband.region.enemy_templates.each do |enemy| %>
+    <% @warband.region.enemies.each do |enemy| %>
     <li>
       <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id) %>
     </li>
@@ -251,15 +251,13 @@
     function initRegions() {
       <% @regions.each do |r| %>
         var region = new Object();
-        //var data = JSON.parse("<% r.to_json(:include => :enemy_templates) %>".replace(/&quot;/gi, '"'));
-        //data = data["region"];
         region.id = <%= r.id %>;
         region.x = <%= r.pos_x %>;
         region.y = <%= r.pos_y %>;
         region.name = "<%= r.name %>";
         region.desc = "<%= r.desc %>";
         region.enemies = new Array();
-        <% r.enemy_templates.each do |e| %>
+        <% r.enemies.each do |e| %>
           var enemy = new Object();
           enemy.x = <%= r.pos_x %>*regionWidth+enemyOffset.x;
           enemy.y = <%= r.pos_y %>*regionHeight+enemyOffset.y;

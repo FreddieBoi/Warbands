@@ -95,7 +95,7 @@ class EnemyTemplatesController < ApplicationController
     @enemy.destroy
 
     respond_to do |format|
-      format.html { redirect_to(enemies_url) }
+      format.html { redirect_to(enemy_templates_url) }
       format.xml  { head :ok }
     end
   end

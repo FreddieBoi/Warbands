@@ -92,7 +92,7 @@ class ItemTemplatesController < ApplicationController
     @item.destroy
 
     respond_to do |format|
-      format.html { redirect_to(items_url) }
+      format.html { redirect_to(item_templates_url) }
       format.xml  { head :ok }
     end
   end

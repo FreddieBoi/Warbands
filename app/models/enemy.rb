@@ -13,14 +13,20 @@
 
 class Enemy < ActiveRecord::Base
 
-  attr_accessible :enemy_template
+  attr_accessible :enemy_template, :region
 
+  # The template the enemy is an instance of
   belongs_to :enemy_template
+
+  # The region this enemy is in
   belongs_to :region
 
+  # All the equipped items
   has_many :items
 
+  # Create all the items to equip upon creation
   after_create :create_items
+  # Get the world this enemy is in
   def world
     region.world
   end

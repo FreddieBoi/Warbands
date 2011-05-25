@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110524170448) do
+ActiveRecord::Schema.define(:version => 20110525111347) do
 
   create_table "enemies", :force => true do |t|
     t.integer  "health",            :default => 100, :null => false
@@ -21,11 +21,11 @@ ActiveRecord::Schema.define(:version => 20110524170448) do
   end
 
   create_table "enemy_templates", :force => true do |t|
-    t.string   "name",                          :null => false
-    t.integer  "region_id"
+    t.string   "name",                                :null => false
+    t.integer  "region_template_id"
     t.text     "desc"
-    t.integer  "combat_value", :default => 0,   :null => false
-    t.integer  "max_health",   :default => 100, :null => false
+    t.integer  "combat_value",       :default => 0,   :null => false
+    t.integer  "max_health",         :default => 100, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -72,16 +72,23 @@ ActiveRecord::Schema.define(:version => 20110524170448) do
     t.datetime "updated_at"
   end
 
-  create_table "regions", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "pos_x"
-    t.integer  "pos_y"
+  create_table "region_templates", :force => true do |t|
+    t.string   "name",                      :null => false
+    t.integer  "pos_x",      :default => 0, :null => false
+    t.integer  "pos_y",      :default => 0, :null => false
     t.text     "desc"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "regions", ["name"], :name => "index_regions_on_name", :unique => true
+  add_index "region_templates", ["name"], :name => "index_region_templates_on_name", :unique => true
+
+  create_table "regions", :force => true do |t|
+    t.integer  "region_template_id", :null => false
+    t.integer  "world_id",           :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "slugs", :force => true do |t|
     t.string   "name"

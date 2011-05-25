@@ -18,7 +18,7 @@
     <td><%= region.pos_y %></td>
     <td><%= region.desc %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_region_path(region) %> ]</td>
+    <td>[ <%= link_to 'Edit', edit_region_template_path(region) %> ]</td>
     <td>[ <%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %> ]</td>
     <% end %>
   </tr>

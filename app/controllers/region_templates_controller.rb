@@ -1,4 +1,4 @@
-class RegionsController < ApplicationController
+class RegionTemplatesController < ApplicationController
 
   # Ensure that the User is signed in
   before_filter :authenticate_user!
@@ -14,7 +14,7 @@ class RegionsController < ApplicationController
   # GET /regions.xml
   def index
     @title = "Regions"
-    @regions = Region.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
+    @regions = RegionTemplate.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +26,7 @@ class RegionsController < ApplicationController
   # GET /regions/1
   # GET /regions/1.xml
   def show
-    @region = Region.find(params[:id])
+    @region = RegionTemplate.find(params[:id])
     @title = @region.name.titleize
 
     respond_to do |format|
@@ -39,7 +39,7 @@ class RegionsController < ApplicationController
   # GET /regions/new.xml
   def new
     @title = "New region"
-    @region = Region.new
+    @region = RegionTemplate.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,13 +50,13 @@ class RegionsController < ApplicationController
   # GET /regions/1/edit
   def edit
     @title = "Edit region"
-    @region = Region.find(params[:id])
+    @region = RegionTemplate.find(params[:id])
   end
 
   # POST /regions
   # POST /regions.xml
   def create
-    @region = Region.new(params[:region])
+    @region = RegionTemplate.new(params[:region])
 
     respond_to do |format|
       if @region.save
@@ -72,7 +72,7 @@ class RegionsController < ApplicationController
   # PUT /regions/1
   # PUT /regions/1.xml
   def update
-    @region = Region.find(params[:id])
+    @region = RegionTemplate.find(params[:id])
 
     respond_to do |format|
       if @region.update_attributes(params[:region])
@@ -88,11 +88,11 @@ class RegionsController < ApplicationController
   # DELETE /regions/1
   # DELETE /regions/1.xml
   def destroy
-    @region = Region.find(params[:id])
+    @region = RegionTemplate.find(params[:id])
     @region.destroy
 
     respond_to do |format|
-      format.html { redirect_to(regions_url) }
+      format.html { redirect_to(region_templates_url) }
       format.xml  { head :ok }
     end
   end
@@ -102,12 +102,12 @@ class RegionsController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   def ensure_admin_user!
-    redirect_to(regions_path, :alert => "You may not perform this action on Regions!") and return unless current_user.admin?
+    redirect_to(region_templates_path, :alert => "You may not perform this action on regions!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name
   def sort_column
-    Region.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    RegionTemplate.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
 
   # Get the sort direction (order_by). Possible: asc, desc. Default: asc

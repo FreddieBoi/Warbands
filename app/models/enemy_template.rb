@@ -18,7 +18,7 @@ class EnemyTemplate < ActiveRecord::Base
   # All the enemies using this template
   has_many :enemies
 
-  belongs_to :region
+  belongs_to :region_template
 
   has_many :item_templates
 
