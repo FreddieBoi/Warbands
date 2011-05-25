@@ -1,8 +1,8 @@
 <div class="grid_3 alpha">
   <div id="my_warband">
-    <h2><%= current_user.warband.name %></h2>
+    <h2><%= link_to current_user.warband.name, current_user.warband %></h2>
     <% current_user.warband.members.each do |member| %>
-    <h3><%= member.name %></h3>
+    <h3><%= link_to member.name, member  %></h3>
     <span><%= member.health %> / <%= member.max_health %></span>
     <br />
     <span><%= member.experience %> / 100 </span>

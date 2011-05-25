@@ -11,18 +11,21 @@
     <div id="container" class="container_12">
       <%= render 'layouts/header' %>
 
-      <%= render 'layouts/nav' %>
+			<%= render 'layouts/signup_ad' %>
 
-      <%= render 'layouts/my_warband' if user_signed_in? and not current_user.warband.blank? %>
-
-      <section class="grid_9 omega">
-        <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, :class => "flash #{key}") %>
-        <% end %>
-        <%= yield %>
-      </section>
-      <%= render 'layouts/footer' %>
+			<div id="wraper">
+	      <%= render 'layouts/my_warband' if user_signed_in? and not current_user.warband.blank? %>
+	
+	      <section class="grid_9 omega">
+	        <% flash.each do |key, value| %>
+	        <%= content_tag(:div, value, :class => "flash #{key}") %>
+	        <% end %>
+	        <%= yield %>
+	      </section>
+	    </div>  
+	    
     </div>
+    <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>
   </body>
 </html>
