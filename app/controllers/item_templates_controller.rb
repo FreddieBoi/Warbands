@@ -56,7 +56,7 @@ class ItemTemplatesController < ApplicationController
   # POST /items
   # POST /items.xml
   def create
-    @item = ItemTemplate.new(params[:item])
+    @item = ItemTemplate.new(params[:item_template])
 
     respond_to do |format|
       if @item.save
@@ -75,7 +75,7 @@ class ItemTemplatesController < ApplicationController
     @item = ItemTemplate.find(params[:id])
 
     respond_to do |format|
-      if @item.update_attributes(params[:item])
+      if @item.update_attributes(params[:item_template])
         format.html { redirect_to(@item, :notice => 'Item was successfully updated.') }
         format.xml  { head :ok }
       else

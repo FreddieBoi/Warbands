@@ -255,6 +255,9 @@ img.gravatar {
 h1 img.gravatar {
   margin-bottom: -15px;
 }
+li img.gravatar {
+  margin-bottom: -15px;
+}
 th .current {
   padding-right: 12px;
   background-repeat: no-repeat;
@@ -400,7 +403,7 @@ div.field, div.actions {
 }
 
 /**** Forms *****/
-input {
+.field input, .field textarea {
 	background: #000000;
 	color: #D9CB84;
 	padding: 5px;

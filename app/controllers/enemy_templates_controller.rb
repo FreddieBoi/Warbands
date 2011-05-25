@@ -59,7 +59,9 @@ class EnemyTemplatesController < ApplicationController
   # POST /enemies.xml
   def create
     @enemy = EnemyTemplate.new(params[:enemy_template])
-    @enemy.region = Region.find(params[:enemy_template][:region_id])
+    unless params[:enemy_template][:region_template_id].blank?
+      @enemy.region_template = RegionTemplate.find(params[:enemy_template][:region_template_id])
+    end
 
     respond_to do |format|
       if @enemy.save
