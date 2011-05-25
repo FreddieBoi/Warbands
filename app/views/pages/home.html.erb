@@ -1,28 +1,18 @@
-<div class="push_1">
-  &nbsp;
-</div>
-<div class="grid_5">
-  <div id="home">
-    <% if user_signed_in? %>
-    <h1>Hi, <%= current_user.name %>!</h1>
-    <p>
-      <% if current_user.warband.blank? %>
-      You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
-      <% else %>
-      <%= link_to "Take me to my warband!", current_user.warband %>
-      <% end %>
-    </p>
-    <% else %>
-    <h2>Welcome to Warbands Online!</h2>
-    <p>
-      An online in-browser game where you take on the role of a commander of a warband consisting of 5 other warriors.
-    </p>
-    <p>
-      <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %> now and create your own warband to start the action!
-    </p>
-    <% end %>
-  </div>
-</div>
+<% if not user_signed_in? %>
+	<div class="grid_5 alpha">
+	  <div id="home">
+	   
+	    <h2>Welcome to Warbands Online!</h2>
+	    <p>
+	      An online in-browser game where you take on the role of a commander of a warband consisting of 5 other warriors.
+	    </p>
+	    <p>
+	      <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %> now and create your own warband to start the action!
+	    </p>
+	 
+	  </div>
+	</div>
+<% end %>
 <%= render 'news/news_posts' %>
 <div class="clear">
   &nbsp;

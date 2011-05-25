@@ -1,13 +1,12 @@
-<div class="grid_4 omega">
-  <div id="user_info">
+<div>
+  <div id="user_info" class="header">
     <% if user_signed_in? %>
-    <%= gravatar_for current_user, :size => 16 %>
-    <b><%= link_to current_user.name, current_user %></b>
-    <%= link_to 'Edit account', edit_user_registration_path %>
-    <%= link_to 'Sign out', destroy_user_session_path %>
+	    <%= gravatar_for current_user, :size => 16 %>
+	    <b><%= link_to current_user.name, current_user %></b>
+	    <%= link_to 'Sign out', destroy_user_session_path %>
     <% else %>
-    <%= link_to 'Sign in', new_user_session_path %>
-    <%= link_to 'Sign up', new_user_registration_path %>
+	    <%= link_to 'Sign in', new_user_session_path %>
+	    <%= link_to 'Sign up', new_user_registration_path %>
     <% end %>
   </div>
 </div>
