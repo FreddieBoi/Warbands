@@ -1,15 +1,11 @@
-<div>
-  <div id="user_info" class="header">
-    <% if user_signed_in? %>
-	    <%= gravatar_for current_user, :size => 16 %>
-	    <b><%= link_to current_user.name, current_user %></b>
-	    <%= link_to 'Sign out', destroy_user_session_path %>
-    <% else %>
-	    <%= link_to 'Sign in', new_user_session_path %>
-	    <%= link_to 'Sign up', new_user_registration_path %>
-    <% end %>
-  </div>
-</div>
-<div class="clear">
-  &nbsp;
-</div>
+<% if user_signed_in? %>
+<li>
+  <%= gravatar_for current_user, :size => 32 %>
+  <strong><%= link_to current_user.name, current_user %></strong>
+  <%= link_to 'Sign out', destroy_user_session_path %>
+</li>
+<% else %>
+<li>
+  <%= link_to 'Sign in', new_user_session_path %>
+</li>
+<% end %>
