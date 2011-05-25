@@ -1,4 +1,4 @@
-<div id="home">
+<div id="signup">
   <% if user_signed_in? and current_user.warband.blank? %>
     <p>
       You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
