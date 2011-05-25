@@ -9,7 +9,7 @@
 </p>
 <p>
   <b>Currently in region:</b>
-  <%= link_to @region.name, @region %>
+  <%= link_to @region.name, @region.template %>
 </p>
 <% if current_user?(@user) %>
 <%= link_to 'Edit', edit_warband_path(@warband) %> |

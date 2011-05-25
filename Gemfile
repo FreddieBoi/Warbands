@@ -8,6 +8,7 @@ gem 'devise'
 gem 'friendly_id'
 gem 'gravatar_image_tag'
 gem 'will_paginate', '3.0.pre2'
+gem 'tweet-button'
 
 group :development do
   gem 'rspec-rails'

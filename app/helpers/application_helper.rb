@@ -1,4 +1,5 @@
 module ApplicationHelper
+  include TweetButton
   # Get the title of the app
   def app_title
     "Warbands Online"
@@ -24,5 +25,13 @@ module ApplicationHelper
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
   end
+
+  def facebook_like_button
+    src = "http://www.facebook.com/plugins/like.php?href=#{CGI::escape(request.url)}&layout=standard&show_faces=true&width=450&action=like&font=arial&colorscheme=light&height=80"
+    content_tag :iframe, nil, :src => src, :scrolling => 'no', :frameborder => '0',
+            :allowtransparency => true, :id => :facebook_like
+  end
+
+  TweetButton.default_tweet_button_options = {:via => "WarbandsOnline", :count => "horizontal"}
 
 end
