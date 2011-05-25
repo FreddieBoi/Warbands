@@ -72,7 +72,7 @@ class WarbandsController < ApplicationController
   def create
     @warband = Warband.new(params[:warband])
     # FIXME! Set default values in model instead?
-    @warband.region = Region.first
+    @warband.region = Region.where(:pos_x => 0, :pos_y => 0)
     # FIXME! Is this really the correct way?
     current_user.warband = @warband
 

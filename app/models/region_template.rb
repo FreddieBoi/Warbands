@@ -1,15 +1,16 @@
 # == Schema Information
-# Schema version: 20110430234753
+# Schema version: 20110525164811
 #
-# Table name: regions
+# Table name: region_templates
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)     not null
-#  pos_x      :integer
-#  pos_y      :integer
-#  desc       :text
-#  created_at :datetime
-#  updated_at :datetime
+#  id                :integer         not null, primary key
+#  name              :string(255)     not null
+#  pos_x             :integer         default(0), not null
+#  pos_y             :integer         default(0), not null
+#  desc              :text
+#  world_template_id :integer
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class RegionTemplate < ActiveRecord::Base
@@ -18,6 +19,8 @@ class RegionTemplate < ActiveRecord::Base
   has_many :regions
 
   has_many :enemy_templates
+  
+  belongs_to :world_template
 
   # Don't allow non-ascii signs, might result in multiple regions with same slug
   name_regex = /\A[a-z 0-9]{2,20}\z/i

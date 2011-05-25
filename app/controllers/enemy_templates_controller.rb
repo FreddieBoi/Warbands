@@ -28,7 +28,7 @@ class EnemyTemplatesController < ApplicationController
   def show
     @enemy = EnemyTemplate.find(params[:id])
     @title = @enemy.name.titleize
-    @region = @enemy.region
+    @region = @enemy.region_template
     @items = @enemy.item_templates
 
     respond_to do |format|

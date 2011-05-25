@@ -1,7 +1,7 @@
 class CreateWorlds < ActiveRecord::Migration
   def self.up
     create_table :worlds do |t|
-      t.references :user
+      t.references :user, :null => false
 
       t.timestamps
     end

@@ -5,14 +5,18 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+puts 'Create WORLD TEMPALTES'
+starting_world = WorldTemplate.create! :name => "Starting world"
+puts 'New template: ' << starting_world.name
+
 puts 'Create REGION TEMPLATES'
-region_template00 = RegionTemplate.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0
+region_template00 = RegionTemplate.create! :name => 'Da woods', :desc => 'Trees.... Everywhere!', :pos_x => 0, :pos_y => 0, :world_template => starting_world
 puts 'New template: ' << region_template00.name
-region_template01 = RegionTemplate.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1
+region_template01 = RegionTemplate.create! :name => 'Mountains', :desc => 'rocks and boulders', :pos_x => 0, :pos_y => 1, :world_template => starting_world
 puts 'New template: ' << region_template01.name
-region_template10 = RegionTemplate.create! :name => 'Riverside', :desc => 'Holy diver?!', :pos_x => 1, :pos_y => 0
+region_template10 = RegionTemplate.create! :name => 'Riverside', :desc => 'Holy diver?!', :pos_x => 1, :pos_y => 0, :world_template => starting_world
 puts 'New template: ' << region_template10.name
-region_template11 = RegionTemplate.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 1, :pos_y => 1
+region_template11 = RegionTemplate.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 1, :pos_y => 1, :world_template => starting_world
 puts 'New template: ' << region_template11.name
 
 puts 'Create ENEMY TEMPLATES'
@@ -38,21 +42,21 @@ test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :pas
 puts 'New user created: ' << test_user.name
 
 puts 'SETTING UP EXAMPLE WORLDS'
-dts_world = World.create! :user => dt
+dts_world = World.create! :world_template => starting_world, :user => dt
 puts 'New world created for user: ' << test_user.name
 
-puts 'SETTING UP EXAMPLE REGIONS'
-region00 = Region.create! :region_template => region_template00, :world => dts_world
-puts 'New region created: ' << region00.name
-region01 = Region.create! :region_template => region_template01, :world => dts_world
-puts 'New region created: ' << region01.name
-region10 = Region.create! :region_template => region_template10, :world => dts_world
-puts 'New region created: ' << region10.name
-region11 = Region.create! :region_template => region_template11, :world => dts_world
-puts 'New region created: ' << region11.name
+# puts 'SETTING UP EXAMPLE REGIONS'
+# region00 = Region.create! :region_template => region_template00, :world => dts_world
+# puts 'New region created: ' << region00.name
+# region01 = Region.create! :region_template => region_template01, :world => dts_world
+# puts 'New region created: ' << region01.name
+# region10 = Region.create! :region_template => region_template10, :world => dts_world
+# puts 'New region created: ' << region10.name
+# region11 = Region.create! :region_template => region_template11, :world => dts_world
+# puts 'New region created: ' << region11.name
 
 puts 'SETTING UP EXAMPLE WARBANDS'
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => region00, :world => dts_world
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => dts_world.regions.first, :world => dts_world
 puts 'New warband created: ' << warband.name
 darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
 

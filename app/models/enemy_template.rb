@@ -1,16 +1,16 @@
 # == Schema Information
-# Schema version: 20110524170448
+# Schema version: 20110525111347
 #
 # Table name: enemy_templates
 #
-#  id           :integer         not null, primary key
-#  name         :string(255)     not null
-#  region_id    :integer
-#  desc         :text
-#  combat_value :integer         default(0), not null
-#  max_health   :integer         default(100), not null
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                 :integer         not null, primary key
+#  name               :string(255)     not null
+#  region_template_id :integer
+#  desc               :text
+#  combat_value       :integer         default(0), not null
+#  max_health         :integer         default(100), not null
+#  created_at         :datetime
+#  updated_at         :datetime
 #
 
 class EnemyTemplate < ActiveRecord::Base

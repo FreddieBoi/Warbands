@@ -1,3 +1,15 @@
+# == Schema Information
+# Schema version: 20110525111347
+#
+# Table name: regions
+#
+#  id                 :integer         not null, primary key
+#  region_template_id :integer         not null
+#  world_id           :integer         not null
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 class Region < ActiveRecord::Base
 
   attr_accessible :region_template, :world

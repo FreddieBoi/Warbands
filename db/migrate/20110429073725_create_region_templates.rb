@@ -5,6 +5,7 @@ class CreateRegionTemplates < ActiveRecord::Migration
       t.integer :pos_x, :null => false, :default => 0
       t.integer :pos_y, :null => false, :default => 0
       t.text :desc
+      t.references :world_template
 
       t.timestamps
     end
