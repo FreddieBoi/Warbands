@@ -14,9 +14,12 @@
 			<%= render 'layouts/signup_ad' %>
 
 			<div id="wraper">
-	      <%= render 'layouts/my_warband' if user_signed_in? and not current_user.warband.blank? %>
-	
-	      <section class="grid_9 omega">
+	      <% if user_signed_in? and not current_user.warband.blank? %>
+	      	<%= render 'layouts/my_warband' %>
+	      	<section class="grid_9 alpha omega">
+	      <% else %>
+	      	<section class="grid_12 alpha omega">
+	      <%end%>
 	        <% flash.each do |key, value| %>
 	        <%= content_tag(:div, value, :class => "flash #{key}") %>
 	        <% end %>

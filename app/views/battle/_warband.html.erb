@@ -9,8 +9,12 @@
   <span>
     <b>Experience:</b> <%= member.experience %>
   </span>
+  <b>Items</b>
   <ul class="items">
-    <%= render :partial => "items/item", :collection => member.items %>
+    <%= render :partial => "shared/item", :collection => member.items %>
   </ul>
   <% end %>
+  <p>
+    <b>Total combat value:</b><%= warband.combat_value %>
+  </p>
 </div>

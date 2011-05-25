@@ -12,7 +12,7 @@
   <%= @region.desc %>
 </p>
 <% if current_user.admin? %>
-<%= link_to 'Edit', edit_region_path(@region) %> |
+<%= link_to 'Edit', edit_region_template_path(@region) %> |
 <%= link_to 'Destroy', @region, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>
-<%= link_to 'List of all regions', regions_path %>
+<%= link_to 'List of all regions', region_templates_path %>

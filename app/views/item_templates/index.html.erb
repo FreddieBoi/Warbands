@@ -1,5 +1,5 @@
 <h2><%= @title %></h2>
-<%= form_tag items_path, :method => 'get', :id => "items_search" do %>
+<%= form_tag item_templates_path, :method => 'get', :id => "items_search" do %>
 <p>
   <b>Name:</b>
   <%= text_field_tag :search, params[:search] %>
@@ -10,4 +10,4 @@
 </div>
 <% end %>
 <br />
-<%= link_to 'Create new item', new_item_path if current_user.admin? %>
+<%= link_to 'Create new item', new_item_template_path if current_user.admin? %>

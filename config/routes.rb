@@ -5,14 +5,14 @@ Warbands::Application.routes.draw do
   match "battle/after"
 
   match "battle/combat"
+  
+  resources :region_templates, :path => "regions"
 
-  #scope "/templates" do
-    resources :enemy_templates, :path => "enemies"
-  #end
+  resources :enemy_templates, :path => "enemies"
+
+  resources :item_templates, :path => "items"
 
   resources :news
-
-  resources :regions
 
   devise_for :users
   resources :users, :only => [:index, :show]
@@ -25,8 +25,6 @@ Warbands::Application.routes.draw do
   resources :warbands
   
   resources :members
-	
-  resources :items
   
   root :to => "pages#home"
 

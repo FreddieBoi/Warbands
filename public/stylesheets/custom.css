@@ -40,7 +40,7 @@ a {
   color: #fff;
 }
 a:visited {
-  color: #999;
+  color: #333;
 }
 a:hover {
   color: #D9CB84;
@@ -157,6 +157,10 @@ header {
 	font-size: 20px;
 	line-height: 30px;
 }
+#devblog {
+	float: left;
+}
+
 #devblog article {
   /*background-color: #37731C;*/
   padding: 8px;

@@ -29,7 +29,7 @@ class EnemyTemplatesController < ApplicationController
     @enemy = EnemyTemplate.find(params[:id])
     @title = @enemy.name.titleize
     @region = @enemy.region
-    @items = @enemy.items
+    @items = @enemy.item_templates
 
     respond_to do |format|
       format.html # show.html.erb
@@ -95,7 +95,7 @@ class EnemyTemplatesController < ApplicationController
     @enemy.destroy
 
     respond_to do |format|
-      format.html { redirect_to(enemies_url) }
+      format.html { redirect_to(enemy_templates_url) }
       format.xml  { head :ok }
     end
   end
@@ -105,7 +105,7 @@ class EnemyTemplatesController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   def ensure_admin_user!
-    redirect_to(enemies_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
+    redirect_to(enemy_templates_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name

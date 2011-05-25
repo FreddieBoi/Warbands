@@ -15,7 +15,10 @@
   </p>
   <% else %>
   <ul class="items">
-    <%= render :partial => "items/item", :collection => enemy.items %>
+    <%= render :partial => "shared/item", :collection => enemy.items %>
   </ul>
   <% end %>
+  <p>
+    <b>Total combat value:</b><%= enemy.combat_value %>
+  </p>
 </div>

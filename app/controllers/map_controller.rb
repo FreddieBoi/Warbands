@@ -8,7 +8,7 @@ class MapController < ApplicationController
       @title = "Map"
       @user = current_user
       @warband = current_user.warband
-      @regions = Region.all
+      @regions = current_user.world.regions
       respond_to do |format|
         format.html # index.html.erb
       end

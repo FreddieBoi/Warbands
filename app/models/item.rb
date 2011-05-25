@@ -1,39 +1,50 @@
 # == Schema Information
-# Schema version: 20110509113610
+# Schema version: 20110524170448
 #
 # Table name: items
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)     not null
-#  desc       :text
-#  cost       :integer         default(0), not null
-#  item_type  :string(255)
-#  member_id  :integer
-#  enemy_id   :integer
-#  created_at :datetime
-#  updated_at :datetime
+#  id               :integer         not null, primary key
+#  item_template_id :integer         not null
+#  enemy_id         :integer
+#  member_id        :integer
+#  created_at       :datetime
+#  updated_at       :datetime
 #
 
 class Item < ActiveRecord::Base
 
+  attr_accessible :item_template, :member, :enemy
+
+  # The template the item is an instance of
+  belongs_to :item_template
+
+  # An item could belong to a member, or ...
   belongs_to :member
+  # ... or an enemy
+  belongs_to :enemy
+  
+  def template
+    item_template
+  end
 
-  belongs_to :enemy_template
+  def name
+    template.name
+  end
 
-  validates :name, :presence => true, :length => { :within => 2..20 },
-                    :uniqueness => { :case_sensitive => false }
+  def cost
+    template.cost
+  end
 
-  has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-  # Search for Items matching the name of the specified search term
-  def self.search(search)
-    if search
-      where('name LIKE ?', "%#{search.downcase}%")
-    else
-      scoped # Empty scope, like calling 'all' but not performing the query
-    end
+  def desc
+    template.desc
   end
 
   def combat_value
-    7
+    template.combat_value
   end
+
+  def item_type
+    template.item_type
+  end
+
 end

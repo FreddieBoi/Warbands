@@ -1,5 +1,5 @@
 <h2><%= @title %></h2>
-<%= form_tag regions_path, :method => 'get', :id => "regions_search" do %>
+<%= form_tag region_templates_path, :method => 'get', :id => "regions_search" do %>
 <p>
   <b>Name:</b>
   <%= text_field_tag :search, params[:search] %>
@@ -10,4 +10,4 @@
 </div>
 <% end %>
 <br />
-<%= link_to 'Create new region', new_region_path if current_user.admin? %>
+<%= link_to 'Create new region', new_region_template_path if current_user.admin? %>

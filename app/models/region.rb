@@ -1,33 +1,47 @@
-# == Schema Information
-# Schema version: 20110430234753
-#
-# Table name: regions
-#
-#  id         :integer         not null, primary key
-#  name       :string(255)     not null
-#  pos_x      :integer
-#  pos_y      :integer
-#  desc       :text
-#  created_at :datetime
-#  updated_at :datetime
-#
-
 class Region < ActiveRecord::Base
 
-  has_many :warbands
-  
-  has_many :enemy_templates
+  attr_accessible :region_template, :world
 
-  validates :name, :presence => true, :length => { :within => 2..20 },
-                    :uniqueness => { :case_sensitive => false }
+  # The template the region is an instance of
+  belongs_to :region_template
 
-  has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
-  # Search for Regions matching the name of the specified search term
-  def self.search(search)
-    if search
-      where('name LIKE ?', "%#{search.downcase}%")
-    else
-      scoped # Empty scope, like calling 'all' but not performing the query
+  # The world this region exists in
+  belongs_to :world
+
+  # A warband may be in this region
+  has_one :warband
+
+  # All the enemies in this region
+  has_many :enemies
+
+  # Create all the enemies in the region upon creation
+  after_create :create_enemies
+  # Get the region template
+  def template
+    region_template
+  end
+
+  def name
+    template.name
+  end
+
+  def pos_x
+    template.pos_x
+  end
+
+  def pos_y
+    template.pos_y
+  end
+
+  def desc
+    template.desc
+  end
+
+  private
+
+  def create_enemies
+    template.enemy_templates.each do |t|
+      enemy = Enemy.create!(:enemy_template => t, :region => self)
     end
   end
 end
