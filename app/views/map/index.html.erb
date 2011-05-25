@@ -89,7 +89,7 @@
       // Try to get the context
       if(canvas.getContext) {
         context = canvas.getContext('2d');
-      stage = new Kinetic.Stage(canvas, 100);
+        stage = new Kinetic.Stage(canvas, 100);
   
         // stop the user getting a text cursor
         canvas.onselectstart = function()
@@ -127,13 +127,13 @@
         // Get all the regions of the server and put them in regions array
         initRegions();
 
-      // set updateStage method
-      stage.setUpdateStage(updateCanvas);
+        // set updateStage method
+        stage.setUpdateStage(updateCanvas);
 
-    // set drawStage method
-      stage.setDrawStage(redraw);
-      // start animation
-      stage.start();
+        // set drawStage method
+        stage.setDrawStage(redraw);
+        // start animation
+        stage.start();
 
       } else { // No context available
         alert("Sorry, but the Canvas element is not supported by your browser!");

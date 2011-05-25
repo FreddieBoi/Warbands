@@ -41,9 +41,9 @@ puts 'New user created: ' << dt.name
 test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
 puts 'New user created: ' << test_user.name
 
-puts 'SETTING UP EXAMPLE WORLDS'
-dts_world = World.create! :world_template => starting_world, :user => dt
-puts 'New world created for user: ' << test_user.name
+# puts 'SETTING UP EXAMPLE WORLDS'
+# dts_world = World.create! :world_template => starting_world, :user => dt
+# puts 'New world created for user: ' << test_user.name
 
 # puts 'SETTING UP EXAMPLE REGIONS'
 # region00 = Region.create! :region_template => region_template00, :world => dts_world
@@ -56,7 +56,7 @@ puts 'New world created for user: ' << test_user.name
 # puts 'New region created: ' << region11.name
 
 puts 'SETTING UP EXAMPLE WARBANDS'
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => dts_world.regions.first, :world => dts_world
+warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => dt.world.regions.first, :world => dt.world
 puts 'New warband created: ' << warband.name
 darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
 
