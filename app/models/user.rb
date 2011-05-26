@@ -44,12 +44,23 @@ class User < ActiveRecord::Base
   has_one :world, :dependent => :destroy
 
   has_one :warband, :through => :world
+
+  # Create a world for the user upon user creation
+  after_create :create_world
   # Search for users with names matching the specified search term
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search.downcase}%")
+      where("LOWER (name) LIKE ?", "%#{search.downcase}%")
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+
+  private
+
+  # Create a world
+  def create_world
+    my_world = World.create!(:world_template => WorldTemplate.first, :user => self)
+  end
+
 end

@@ -11,6 +11,7 @@ class NewsController < ApplicationController
   helper_method :sort_column, :sort_direction
   # GET /news
   # GET /news.xml
+  # GET /news.rss
   def index
     @news = News.search(params[:search]).order(sort_column+" "+sort_direction).paginate(:per_page => 10, :page => params[:page])
     @title = "News"
@@ -19,6 +20,7 @@ class NewsController < ApplicationController
       format.html # index.html.erb
       format.js # index.js.erb
       format.xml  { render :xml => @news }
+      format.rss  { render :layout => false } # index.rss.builder
     end
   end
 

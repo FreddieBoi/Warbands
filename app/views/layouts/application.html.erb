@@ -5,28 +5,28 @@
     <%= csrf_meta_tag %>
     <%= render 'layouts/stylesheets' %>
     <%= javascript_include_tag :defaults, "kinetic-v1.0.0.js" %>
+    <%= auto_discovery_link_tag(:rss, news_index_url(:rss)) %>
     <%= yield(:head)%>
   </head>
   <body>
     <div id="container" class="container_12">
       <%= render 'layouts/header' %>
 
-			<%= render 'layouts/signup_ad' %>
+      <%= render 'layouts/signup_ad' %>
 
-			<div id="wraper">
-	      <% if user_signed_in? and not current_user.warband.blank? %>
-	      	<%= render 'layouts/my_warband' %>
-	      	<section id="main" class="grid_9 omega" style="width: 830px">
-	      <% else %>
-	      	<section id="main" class="grid_12 alpha omega">
-	      <%end%>
-	        <% flash.each do |key, value| %>
-	        <%= content_tag(:div, value, :class => "flash #{key}") %>
-	        <% end %>
-	        <%= yield %>
-	      </section>
-	    </div>  
-	    
+      <div id="wrapper">
+        <% if user_signed_in? and not current_user.warband.blank? %>
+        <%= render 'layouts/my_warband' %>
+        <section id="main" class="grid_9 omega" style="width: 830px">
+          <% else %>
+          <section id="main" class="grid_12 alpha omega">
+            <%end%>
+            <% flash.each do |key, value| %>
+            <%= content_tag(:div, value, :class => "flash #{key}") %>
+            <% end %>
+            <%= yield %>
+          </section>
+      </div>
     </div>
     <%= render 'layouts/footer' %>
     <%= debug(params) if Rails.env.development? %>

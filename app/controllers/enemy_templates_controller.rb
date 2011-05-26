@@ -59,7 +59,9 @@ class EnemyTemplatesController < ApplicationController
   # POST /enemies.xml
   def create
     @enemy = EnemyTemplate.new(params[:enemy_template])
-    @enemy.region = Region.find(params[:enemy_template][:region_id])
+    unless params[:enemy_template][:region_template_id].blank?
+      @enemy.region_template = RegionTemplate.find(params[:enemy_template][:region_template_id])
+    end
 
     respond_to do |format|
       if @enemy.save
@@ -105,12 +107,12 @@ class EnemyTemplatesController < ApplicationController
   # Ensure that the current User is an administrator before allowing editing,
   # updating or destroying
   def ensure_admin_user!
-    redirect_to(enemy_templates_path, :alert => "You may not perform this action on Enemies!") and return unless current_user.admin?
+    redirect_to(enemy_templates_path, :alert => "You may not perform this action on enemies!") and return unless current_user.admin?
   end
 
   # Get the column to order by. Default: name
   def sort_column
-    Item.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    EnemyTemplate.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
 
   # Get the sort direction (order_by). Possible: asc, desc. Default: asc

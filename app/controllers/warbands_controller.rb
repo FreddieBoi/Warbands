@@ -71,10 +71,8 @@ class WarbandsController < ApplicationController
   # POST /warbands.xml
   def create
     @warband = Warband.new(params[:warband])
-    # FIXME! Set default values in model instead?
-    @warband.region = Region.where(:pos_x => 0, :pos_y => 0)
-    # FIXME! Is this really the correct way?
-    current_user.warband = @warband
+    @warband.world = current_user.world
+    @warband.region = current_user.world.regions.first
 
     respond_to do |format|
       if @warband.save

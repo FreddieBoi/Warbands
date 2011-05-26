@@ -56,7 +56,7 @@ class RegionTemplatesController < ApplicationController
   # POST /regions
   # POST /regions.xml
   def create
-    @region = RegionTemplate.new(params[:region])
+    @region = RegionTemplate.new(params[:region_template])
 
     respond_to do |format|
       if @region.save
@@ -75,7 +75,7 @@ class RegionTemplatesController < ApplicationController
     @region = RegionTemplate.find(params[:id])
 
     respond_to do |format|
-      if @region.update_attributes(params[:region])
+      if @region.update_attributes(params[:region_template])
         format.html { redirect_to(@region, :notice => 'Region was successfully updated.') }
         format.xml  { head :ok }
       else

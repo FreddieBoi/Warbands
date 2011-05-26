@@ -1,5 +1,6 @@
 <% if user_signed_in? %>
 <li>
+  <%= gravatar_for current_user, :size => 32 %>
   <%= link_to current_user.name, current_user %>
 </li>
 <li>

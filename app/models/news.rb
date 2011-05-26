@@ -25,7 +25,7 @@ class News < ActiveRecord::Base
   # Search for News matching the title of the specified search term
   def self.search(search)
     if search
-      where('title LIKE ?', "%#{search.downcase}%")
+      where("LOWER (title) LIKE ?", "%#{search.downcase}%")
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end

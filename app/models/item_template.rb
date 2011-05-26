@@ -18,7 +18,7 @@ class ItemTemplate < ActiveRecord::Base
 
   # An item template could belong to an enemy template
   belongs_to :enemy_template
-  
+
   # All the items using this template
   has_many :items
 
@@ -35,7 +35,7 @@ class ItemTemplate < ActiveRecord::Base
   # Search for Items matching the name of the specified search term
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search.downcase}%")
+      where("LOWER (name) LIKE ?", "%#{search.downcase}%")
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
