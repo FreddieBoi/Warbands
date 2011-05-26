@@ -111,8 +111,7 @@ header {
 #main-nav ul li {
   display: inline-block;
   list-style-type: none;
-  height: 75px;
-  padding: 0 1em 2em;
+  padding: 2em 1em 2em;
 }
 #main-nav ul li:hover {	
 	background-color: #333;
