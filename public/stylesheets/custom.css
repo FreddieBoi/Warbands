@@ -133,7 +133,7 @@ header {
 	color: #D9CB84;
 }
 
-#wraper {
+#wrapper {
 	margin: 0;
 	overflow: hidden;
 	background: #5e5946;
@@ -257,6 +257,9 @@ h1 img.gravatar {
 }
 li img.gravatar {
   margin-bottom: -15px;
+}
+img.rss {
+  margin-bottom: -3px;
 }
 th .current {
   padding-right: 12px;

@@ -4,6 +4,9 @@
   <%= render 'news/news_post', :news_post => news_post %>
   <% end %>
   <br />
-  <%= link_to "Read more news", news_index_path %>
-  <%= link_to "Create news", new_news_path if user_signed_in? && current_user.admin? %>
+  <%= link_to "Read more news", news_index_path %> |
+  <%= link_to_news_feed %>
+  <% if user_signed_in? && current_user.admin? %>
+  | <%= link_to 'New post', new_news_path %>
+  <% end %>
 </div>
