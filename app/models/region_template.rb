@@ -35,7 +35,7 @@ class RegionTemplate < ActiveRecord::Base
   # Search for Regions matching the name of the specified search term
   def self.search(search)
     if search
-      where('name LIKE ?', "%#{search.downcase}%")
+      scoped_by_user_name(search.downcase)
     else
       scoped # Empty scope, like calling 'all' but not performing the query
     end
