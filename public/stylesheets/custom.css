@@ -39,7 +39,7 @@ a {
   color: #fff;
 }
 a:visited {
-  color: #333;
+  color: #bbb;
 }
 a:hover {
   color: #D9CB84;
@@ -125,7 +125,7 @@ header {
 	border-bottom-left-radius: 20px;
 }
 #main-nav a {
-	font-size: 1.0em;
+	font-size: 1.5em;
 	font-weight: bold;
 }
 #main-nav a:visited {
@@ -406,8 +406,12 @@ div.field, div.actions {
 	background-color: #8A1F11;
 }
 
+table {
+  background: #444;
+}
+
 /**** Forms *****/
-.field input, .field textarea {
+.field input, .field textarea, #search {
 	background: #000000;
 	color: #D9CB84;
 	padding: 5px;
