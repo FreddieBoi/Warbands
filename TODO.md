@@ -11,3 +11,7 @@ Listing of what tasks that needs to be done and other cool stuff we just want to
 
 ### Misc ###
 + Google Analytics
+
+### The game ###
++ Combat resolution
++ Loot from defeated enemies 
