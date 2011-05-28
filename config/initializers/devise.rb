@@ -1,8 +1,8 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 Devise.setup do |config|
-  # ==> Mailer Configuration
-  # Configure the e-mail address which will be shown in DeviseMailer.
+# ==> Mailer Configuration
+# Configure the e-mail address which will be shown in DeviseMailer.
   config.mailer_sender = "please-change-me-at-config-initializers-devise@example.com"
 
   # Configure the class responsible to send e-mails.
@@ -191,4 +191,8 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  config.rpx_application_name = "Warbands"
+  RPXNow.api_key = "32f3962f40d7a7efacc83aac5d851f99b4412d46"
+  # config.rpx_auto_create_account = true # false if you don't want to create users automaticaly. True by default.
+  # config.rpx_additional_user_data = [:verifiedEmail, :url, :providerName, :photo] # default [], get some extra profile info from RPXnow, default only a few fields are available in the rpx_user object (https://rpxnow.com/docs#profile_data)
 end

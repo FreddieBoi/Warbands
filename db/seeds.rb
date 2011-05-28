@@ -29,17 +29,17 @@ puts 'New template: ' << sword_template.name
 spear_template = ItemTemplate.create! :name => 'Spear', :desc => 'A long spear.', :combat_value => 5, :enemy_template => bandit_template
 puts 'New template: ' << spear_template.name
 
-puts 'SETTING UP EXAMPLE USERS'
-freddie = User.create! :name => 'Freddie', :email => 'freddieboi@gmail.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
-freddie.admin = true
-freddie.save!
-puts 'New user created: ' << freddie.name
-dt = User.create! :name => 'DT', :email => 'dt@nospam.com', :password => 'please', :password_confirmation => 'please'
-dt.admin = true
-dt.save!
-puts 'New user created: ' << dt.name
-test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
-puts 'New user created: ' << test_user.name
+# puts 'SETTING UP EXAMPLE USERS'
+# freddie = User.create :name => 'freddieboi', :email => 'freddieboi@gmail.com', :rpx_identifier => 'https://www.google.com/profiles/112693975111415891225' #, :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+# freddie.admin = true
+# freddie.save(false)
+# puts 'New user created: ' << freddie.name
+# dt = User.create! :name => 'DT', :email => 'dt@nospam.com', :password => 'please', :password_confirmation => 'please'
+# dt.admin = true
+# dt.save!
+# puts 'New user created: ' << dt.name
+# test_user = User.create! :name => 'TestUser', :email => 'test@testing.com', :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
+# puts 'New user created: ' << test_user.name
 
 # puts 'SETTING UP EXAMPLE WORLDS'
 # dts_world = World.create! :world_template => starting_world, :user => dt
@@ -55,28 +55,30 @@ puts 'New user created: ' << test_user.name
 # region11 = Region.create! :region_template => region_template11, :world => dts_world
 # puts 'New region created: ' << region11.name
 
-puts 'SETTING UP EXAMPLE WARBANDS'
-warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => dt.world.regions.first, :world => dt.world
-puts 'New warband created: ' << warband.name
-darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
+# puts 'SETTING UP EXAMPLE WARBANDS'
+# warband = Warband.create! :name => 'The punkrockers', :reputation => 1337, :region => freddie.world.regions.first, :world => freddie.world
+# puts 'New warband created: ' << warband.name
 
-puts 'SETTING UP EXAMPLE MEMBERS'
-puts 'New member created: ' << darktemplar.name
-hightemplar = Member.create! :name => 'High Templar', :warband => warband
-puts 'New member created: ' << hightemplar.name
+# warband = Warband.create! :name => 'DTs Dark Templars', :reputation => 1000, :region => dt.world.regions.first, :world => dt.world
+
+# puts 'SETTING UP EXAMPLE MEMBERS'
+# darktemplar = Member.create! :name => 'Dark Templar', :warband => warband
+# puts 'New member created: ' << darktemplar.name
+# hightemplar = Member.create! :name => 'High Templar', :warband => warband
+# puts 'New member created: ' << hightemplar.name
 
 # puts 'Create ENEMIES'
 # bandit = Enemy.create! :enemy_template => bandit_template
 # puts 'New enemy created: ' << bandit.name
 
-puts 'SETTING UP EXAMPLE ITEMS'
-sword = Item.create! :item_template => sword_template, :member => darktemplar
-puts 'New item created: ' << sword.name
+# puts 'SETTING UP EXAMPLE ITEMS'
+# sword = Item.create! :item_template => sword_template, :member => darktemplar
+# puts 'New item created: ' << sword.name
 
-puts 'SETTING UP EXAMPLE NEWS'
-news1 = News.create! :title => "Welcome to Warbands Online", :user => freddie, :content => "Warbands Online is an online in-browser game where you take on the role of a commander of a warband consisting of about 5 other warriors. The player controls the warband navigation and actions in a medieval fantasy world. The warband will be able to fight different creatures or other warbands and complete quests in order to conquer the world. The warband gains experience, money and items as they pillage their way on the path chosen by the player."
-puts 'New news created: ' << news1.title
-news2 = News.create! :title => "Patch coming soon", :user => dt, :content => "Warbands Online is about to get patched very soon... Hang in there!"
-puts 'New news created: ' << news2.title
-news3 = News.create! :title => "Patch 1.3.3.7 released!", :user => freddie, :content => "Major content patch is hitting Warbands Online today. Enjoy!"
-puts 'New news created: ' << news3.title
+# puts 'SETTING UP EXAMPLE NEWS'
+# news1 = News.create! :title => "Welcome to Warbands Online", :user => freddie, :content => "Warbands Online is an online in-browser game where you take on the role of a commander of a warband consisting of about 5 other warriors. The player controls the warband navigation and actions in a medieval fantasy world. The warband will be able to fight different creatures or other warbands and complete quests in order to conquer the world. The warband gains experience, money and items as they pillage their way on the path chosen by the player."
+# puts 'New news created: ' << news1.title
+# news2 = News.create! :title => "Patch coming soon", :user => dt, :content => "Warbands Online is about to get patched very soon... Hang in there!"
+# puts 'New news created: ' << news2.title
+# news3 = News.create! :title => "Patch 1.3.3.7 released!", :user => freddie, :content => "Major content patch is hitting Warbands Online today. Enjoy!"
+# puts 'New news created: ' << news3.title

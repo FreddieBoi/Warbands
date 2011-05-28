@@ -5,6 +5,7 @@
     <%= csrf_meta_tag %>
     <%= render 'layouts/stylesheets' %>
     <%= javascript_include_tag :defaults, "kinetic-v1.0.0.js" %>
+    <%= javascript_include_rpx(user_session_url) %>
     <%= auto_discovery_link_tag(:rss, news_index_url(:rss)) %>
     <%= yield(:head)%>
   </head>
@@ -12,19 +13,20 @@
     <div id="container" class="container_12">
       <%= render 'layouts/header' %>
 
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, :class => "flash #{key}") %>
+      <% end %>
+
       <%= render 'layouts/signup_ad' %>
 
       <div id="wrapper">
         <% if user_signed_in? and not current_user.warband.blank? %>
-        <%= render 'layouts/my_warband' %>
-        <section id="main" class="grid_9 omega" style="width: 830px">
-          <% else %>
+          <%= render 'layouts/my_warband' %>
+          <section id="main" class="grid_9 omega" style="width: 830px">
+        <% else %>
           <section id="main" class="grid_12 alpha omega">
-            <%end%>
-            <% flash.each do |key, value| %>
-            <%= content_tag(:div, value, :class => "flash #{key}") %>
-            <% end %>
-            <%= yield %>
+        <%end%>
+          <%= yield %>
           </section>
       </div>
     </div>

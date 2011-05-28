@@ -1,17 +1,16 @@
 <% if not user_signed_in? %>
-	<div class="grid_5 alpha">
-	  <div id="home">
-	   
-	    <h2>Welcome to Warbands Online!</h2>
-	    <p>
-	      An online in-browser game where you take on the role of a commander of a warband consisting of 5 other warriors.
-	    </p>
-	    <p>
-	      <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up", new_user_registration_path %> now and create your own warband to start the action!
-	    </p>
-	 
-	  </div>
-	</div>
+<div class="grid_5 alpha">
+  <div id="home">
+
+    <h2>Welcome to Warbands Online!</h2>
+    <p>
+      An online in-browser game where you take on the role of a commander of a warband consisting of 5 other warriors.
+    </p>
+    <p>
+      <%= link_to_rpx "Sign in", user_session_url %> now and create your own warband to start the action!
+    </p>
+  </div>
+</div>
 <% end %>
 <%= render 'news/news_posts' %>
 <div class="clear">

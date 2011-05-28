@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110430234753
+# Schema version: 20110526224251
 #
 # Table name: users
 #
@@ -18,16 +18,16 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  admin                  :boolean
+#  rpx_identifier         :string(255)
 #
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # :token_authenticatable, :encryptable, :confirmable, :lockable, :recoverable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable, :rememberable, :trackable, :validatable, :rpx_connectable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :name, :password, :password_confirmation, :remember_me
 
   # Don't allow non-ascii signs, will result in multiple users with same slug
   name_regex = /\A[a-z0-9]{2,20}\z/i
@@ -47,6 +47,9 @@ class User < ActiveRecord::Base
 
   # Create a world for the user upon user creation
   after_create :create_world
+
+  # A bit of an ugly fix, to not require users to have passwords.
+  before_validation :default_password
   # Search for users with names matching the specified search term
   def self.search(search)
     if search
@@ -56,11 +59,35 @@ class User < ActiveRecord::Base
     end
   end
 
+  # def before_rpx_success(rpx_user)
+
+  # end
+
+  def before_rpx_auto_create(rpx_user)
+    # Get email (if the provider supports it). This is already done?
+    # self.email = rpx_user["email"]
+    # This might cause conflicts, should we use the email as name instead?
+    self.name = rpx_user["username"]
+  end
+
+  def update_with_password(params={})
+    if params[:password].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation) if params[:password_confirmation].blank?
+    end
+    update_attributes(params)
+  end
+
   private
 
-  # Create a world
+  # Create a world for the user
   def create_world
     my_world = World.create!(:world_template => WorldTemplate.first, :user => self)
+  end
+
+  def default_password
+    self.password = "password_dummy"
+    self.password_confirmation = "password_dummy"
   end
 
 end

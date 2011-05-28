@@ -10,9 +10,7 @@
   <%= link_to 'Edit your account', edit_user_registration_path %>
 </p>
 <% end %>
-<p>
-  <b>Warband:</b>
-</p>
+<h3>Warband</h3>
 <% if @warband.blank? %>
 <p>
   <% if current_user?(@user) %>

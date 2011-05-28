@@ -1,11 +1,12 @@
 <div id="signup">
   <% if user_signed_in? and current_user.warband.blank? %>
-    <p>
-      You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
-    </p>
+  <p>
+    You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
+  </p>
   <% elsif not user_signed_in? %>
-    <p>
-      <%= link_to "Sign up and create your own Warband!", new_user_registration_path %>
-    </p>
+  <%= embed_rpx user_session_url %>
+  <p>
+    <%= link_to_rpx "Sign in now and create your own Warband!", user_session_url %>
+  </p>
   <% end %>
 </div>
