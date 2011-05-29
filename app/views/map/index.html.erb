@@ -165,7 +165,7 @@
       warband.x = region.x*regionWidth + offset.x;
       warband.y = region.y*regionHeight + offset.y;
       // FIXME! Make this a partial to render instead?!
-      $("#current_region h2").html("<a href='/regions/"+region.id+"'>"+region.name+"</a>");
+      $("#current_region h2").html("<a href='/regions/"+region.template_id+"'>"+region.name+"</a>");
       $("#current_region p").html(region.desc);
       var enemies = "";
       for (var enemy in region.enemies) {
@@ -252,6 +252,7 @@
       <% @regions.each do |r| %>
         var region = new Object();
         region.id = <%= r.id %>;
+        region.template_id = <%= r.template.id %>;
         region.x = <%= r.pos_x %>;
         region.y = <%= r.pos_y %>;
         region.name = "<%= r.name %>";
