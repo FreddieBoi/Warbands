@@ -15,7 +15,7 @@
 class Warband < ActiveRecord::Base
 
   # The warband consist of 0 to max_member_count members
-  has_many :members
+  has_many :members, :dependent => :destroy
 
   # Make it possible to update members through their warband.
   accepts_nested_attributes_for :members
