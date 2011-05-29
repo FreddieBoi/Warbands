@@ -26,7 +26,7 @@
     var enemy;
     var mapWidth = 500;//$('#map')[0].width;
     var mapHeight = 500; //$('#map')[0].height;
-    var mapItems = new Array();
+    var enemies = new Array();
     var hasNewPos = false;
 
     // canvas width and height must be divisible by 100
@@ -120,10 +120,6 @@
         warband.ax = warband.x; // animation x
         warband.ay = warband.y; // animation y
 
-        // Add all the objects to be drawn
-        mapItems.push(bg);
-        mapItems.push(warband);
-
         // Get all the regions of the server and put them in regions array
         initRegions();
 
@@ -200,18 +196,24 @@
       }
     }
   
-    // Redraw all the images (mapItems) of the canvas context
+    // Redraw all the images of the canvas context
     function redraw() {
       // Clear the canvas
       clearCanvas();
-      // Draw all images (from mapItems array)
+
+      // Draw the background (map)
+      context.drawImage(bg.img, bg.x, bg.y);
+
+      // Draw all enemies
+      for (var e in enemies) {
+        context.drawImage(enemies[e].img, enemies[e].x, enemies[e].y);
+      }
       
-      for (var obj in mapItems) {
-        if ("ax" in mapItems[obj] && "ay" in mapItems[obj]) { 
-          context.drawImage(mapItems[obj].img, mapItems[obj].ax, mapItems[obj].ay);
-        } else {
-          context.drawImage(mapItems[obj].img, mapItems[obj].x, mapItems[obj].y);
-        }
+      // Draw the warband (on top)
+      if ("ax" in warband && "ay" in warband) { 
+        context.drawImage(warband.img, warband.ax, warband.ay);
+      } else {
+        context.drawImage(warband.img, warband.x, warband.y);
       }
     }
 
@@ -269,7 +271,7 @@
           enemy.desc = "<%= e.desc.sub("\r"," ").sub("\n", " ").squeeze %>";
           enemy.max_health = <%= e.max_health %>;
           region.enemies.push(enemy);
-          mapItems.push(enemy);
+          enemies.push(enemy);
         <% end %>
         regions[region.x][region.y] = region;
       <% end %>
