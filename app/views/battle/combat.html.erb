@@ -1,9 +1,12 @@
+<%= @winner.name %>
+
 <div id="combat_container">
 	<div id="combat_warband">
 		<h2><%= @warband.name %></h2>
 		<% @warband.members.each do |member| %>
 		<div class="combat_member">
 			<h3><%= member.name %></h3>
+			<%= member.health %>
 			<div class="hpbar_outer"><div class="hpbar_inner"></div></div>
 		</div>
 		<% end %>
