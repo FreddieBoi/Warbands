@@ -25,7 +25,7 @@ class Warband < ActiveRecord::Base
   belongs_to :region
 
   # Don't allow non-ascii signs, will result in multiple warbands with same slug
-  name_regex = /\A[a-z 0-9]{2,20}\z/i
+  name_regex = /\A[a-z 0-9]*\z/i
 
   # Ensure there is a valid name
   validates :name, :presence => true, :length => { :within => 2..20 },

@@ -1,13 +1,15 @@
-<%= form_for(@news) do |f| %>
+<%= form_for @news, :validate => true do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 <div class="field">
   <%= f.label :title %>
-  <br />
+</div>
+<div class="field">
   <%= f.text_field :title %>
 </div>
 <div class="field">
   <%= f.label :content %>
-  <br />
+</div>
+<div class="field">
   <%= f.text_area :content %>
 </div>
 <div class="actions">

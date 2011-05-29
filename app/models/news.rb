@@ -16,8 +16,12 @@ class News < ActiveRecord::Base
 
   validates :user, :presence => true
 
+  # Don't allow non-ascii signs in titles, might result in slug duplicates
+  title_regex = /\A[a-z 0-9]*\z/i
+
   validates :title, :presence => true, :length => { :within => 2..30 },
-                    :uniqueness => { :case_sensitive => false }
+                    :uniqueness => { :case_sensitive => false },
+                    :format => { :with => title_regex }
 
   validates :content, :presence => true
 

@@ -23,7 +23,7 @@ class RegionTemplate < ActiveRecord::Base
   belongs_to :world_template
 
   # Don't allow non-ascii signs, might result in multiple regions with same slug
-  name_regex = /\A[a-z 0-9]{2,20}\z/i
+  name_regex = /\A[a-z 0-9]*\z/i
 
   # Ensure there is a valid name
   validates :name, :presence => true, :length => { :within => 2..20 },

@@ -1,7 +1,11 @@
 <h2><%= @title %></h2>
 <p>
   <b>Region:</b>
+  <% if @region.blank? %>
+  Currently not in any region.
+  <% else %>
   <%= link_to @region.name, @region %>
+  <%end %>
 </p>
 <p>
   <b>Description:</b>

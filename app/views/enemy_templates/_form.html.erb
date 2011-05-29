@@ -1,23 +1,27 @@
-<%= form_for(@enemy) do |f| %>
+<%= form_for @enemy, :validate => true do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 <div class="field">
   <%= f.label :name %>
-  <br />
+</div>
+<div class="field">
   <%= f.text_field :name %>
 </div>
 <div class="field">
   <%= f.label :region_template_id %>
-  <br />
+</div>
+<div class="field">
   <%= f.text_field :region_template_id %>
 </div>
 <div class="field">
-  <%= f.label :desc %>
-  <br />
+  <%= f.label "Description" %>
+</div>
+<div class="field">
   <%= f.text_area :desc %>
 </div>
 <div class="field">
-  <%= f.label :max_health %>
-  <br />
+  <%= f.label "Maximum health" %>
+</div>
+<div class="field">
   <%= f.text_field :max_health %>
 </div>
 <div class="actions">

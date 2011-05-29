@@ -25,6 +25,20 @@ function animate_flash() {
 $( function() {
   // Animate flash if any message
   animate_flash();
+  
+  // Show form error messages if any
+  clientSideValidations.callbacks.element.fail = function(element, message, callback) {
+    callback();
+    if (element.data('valid') !== false) {
+      element.parent().find('.message').hide().show('slide', {direction: "left", easing: "easeOutBounce"}, 500);
+    }
+  }
+  
+  clientSideValidations.callbacks.element.pass = function(element, callback) {
+    // Take note how we're passing the callback to the hide() 
+    // method so it is run after the animation is complete.
+    element.parent().find('.message').hide('slide', {direction: "left"}, 500, callback);
+  }
 
   $("#warbands th a, #warbands .pagination a, #users th a, #users .pagination a, #regions th a, #regions .pagination a, #members th a, #members .pagination a, #items th a, #items .pagination a, #news th a, #news .pagination a, #enemies th a, #enemies .pagination a").live("click", function() {
     $.getScript(this.href);

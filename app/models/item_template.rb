@@ -23,7 +23,7 @@ class ItemTemplate < ActiveRecord::Base
   has_many :items
 
   # Don't allow non-ascii signs (avoid multiple items with same slug)
-  name_regex = /\A[a-z 0-9]{2,20}\z/i
+  name_regex = /\A[a-z 0-9]*\z/i
 
   # Ensure there is a valid name
   validates :name, :presence => true, :length => { :within => 2..20 },

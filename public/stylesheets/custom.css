@@ -291,11 +291,24 @@ th .desc {
 div.field, div.actions {
   margin-bottom: 10px;
 }
-.field_with_errors {
-  padding: 2px;
+/*.field_with_errors {
   background-color: red;
   display: table;
+}*/
+
+.message {
+  background-color: #f0f0f0;
+  color: red;
+  font-size: 14px;
+  border-bottom-right-radius: 5px 5px;
+  border-top-right-radius: 5px 5px;
+  padding: 2px 5px;
 }
+
+div.field_with_errors div.ui-effects-wrapper {
+  display: inline-block !important;
+}
+
 #error_explanation {
   width: 400px;
   border: 2px solid red;

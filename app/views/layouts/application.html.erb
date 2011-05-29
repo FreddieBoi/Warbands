@@ -4,7 +4,7 @@
     <title><%= page_title %></title>
     <%= csrf_meta_tag %>
     <%= render 'layouts/stylesheets' %>
-    <%= javascript_include_tag :defaults, "kinetic-v1.0.0.js" %>
+    <%= javascript_include_tag :defaults, "rails.validations", "kinetic-v1.0.0.js" %>
     <%= javascript_include_rpx(user_session_url) %>
     <%= auto_discovery_link_tag(:rss, news_index_url(:rss)) %>
     <%= yield(:head)%>

@@ -15,7 +15,11 @@
   <tr>
     <td><%= link_to enemy.name.titleize, enemy %></td>
     <td><%= enemy.max_health %></td>
+    <% if enemy.region_template.blank? %>
+    <td>No region</td>
+    <% else %>
     <td><%= link_to enemy.region_template.name.titleize, enemy.region_template %></td>
+    <% end %>
     <td><%= enemy.desc.blank? ? "No description" : enemy.desc.slice(0,20) %></td>
     <% if current_user.admin? %>
     <td>[ <%= link_to 'Edit', edit_enemy_template_path(enemy) %> ]</td>

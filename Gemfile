@@ -10,6 +10,7 @@ gem 'friendly_id'
 gem 'gravatar_image_tag'
 gem 'will_paginate', '3.0.pre2'
 gem 'tweet-button'
+gem 'client_side_validations'
 
 group :development do
   gem 'rspec-rails'
