@@ -7,15 +7,22 @@
     <%= gravatar_for(news_post.user, :size => 32) %> <%= link_to news_post.user.name, news_post.user %>
   </p>
   <p>
-    <strong>Posted at:</strong> <em><%= news_post.created_at %></em>
+    <strong>Posted at:</strong>
+    <em><%= news_post.created_at.to_s(:rfc822) %></em>
     <% unless news_post.updated_at.blank? || news_post.updated_at == news_post.created_at %>
     <br />
-    <strong>Last updated at:</strong> <em><%= news_post.updated_at %></em>
+    <strong>Last updated at:</strong>
+    <em><%= news_post.updated_at.to_s(:rfc822) %></em>
     <% end %>
   </p>
-  <% if user_signed_in? && current_user.admin? %>
-  <%= link_to 'Edit', edit_news_path(news_post) %> |
-  <%= link_to 'Destroy', news_post, :confirm => 'Are you sure?', :method => :delete %>
-  <% end %>
+  <p>
+    <%= link_to("View comments", news_path(news_post, :anchor => "disqus_thread")) %>
+    <%= raw(disqus_comment_counts) %>
+    <% if user_signed_in? && current_user.admin? %>
+    | <%= link_to 'Edit', edit_news_path(news_post) %> |
+    <%= link_to 'Destroy', news_post, :confirm => 'Are you sure?', :method => :delete %>
+    <% end %>
+  </p>
 </article>
-<div class="clear"></div>
+<div class="clear">
+</div>

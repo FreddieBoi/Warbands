@@ -7,18 +7,21 @@
 </p>
 <p>
   <em>
-  <b>Posted at:</b> <%= @news.created_at %>
+  <b>Posted at:</b> <%= @news.created_at.to_s(:rfc822) %>
   </em>
   <% unless @news.updated_at.blank? %>
   <br />
   <em>
-  <b>Last updated at:</b> <%= @news.updated_at %>
+  <b>Last updated at:</b> <%= @news.updated_at.to_s(:rfc822) %>
   </em>
   <% end %>
 </p>
-<% if user_signed_in? && current_user.admin? %>
-<%= link_to 'Edit', edit_news_path(@news) %> |
-<%= link_to 'Destroy', @news, :confirm => 'Are you sure?', :method => :delete %> |
-<% end %>
-<%= link_to 'List of all news', news_index_path %> |
-<%= link_to_news_feed %>
+<p>
+  <% if user_signed_in? && current_user.admin? %>
+  <%= link_to 'Edit', edit_news_path(@news) %> |
+  <%= link_to 'Destroy', @news, :confirm => 'Are you sure?', :method => :delete %> |
+  <% end %>
+  <%= link_to 'Read more news', news_index_path %>
+</p>
+<br />
+<%= raw(disqus_thread) %>

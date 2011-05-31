@@ -1,5 +1,4 @@
 require File.expand_path('../boot', __FILE__)
-
 require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -38,5 +37,9 @@ module Warbands
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password, :password_confirmation]
+
+    # Configure disqus
+    Disqus::defaults[:account] = 'warband'
+    Disqus::defaults[:developer] = true # if you want to test it on the localhost
   end
 end

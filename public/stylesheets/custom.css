@@ -309,6 +309,10 @@ div.field_with_errors div.ui-effects-wrapper {
   display: inline-block !important;
 }
 
+#disqus_thread {
+  /*background: #444;*/
+}
+
 #error_explanation {
   width: 400px;
   border: 2px solid red;
@@ -420,7 +424,7 @@ div.field_with_errors div.ui-effects-wrapper {
 	background-color: #8A1F11;
 }
 
-table {
+.index {
   background: #444;
 }
 
