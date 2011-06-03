@@ -9,7 +9,7 @@
 	  <h2><%= link_to current_user.warband.name, current_user.warband %></h2>
 	  <% current_user.warband.members.each do |member| %>
 	  <h3><%= link_to member.name, member  %></h3>
-	  <span><%= member.health %> / <%= member.max_health %></span>
+	  <div class="hpbar_outer"><div class="hpbar_inner" style="width: <%= member.health.to_f/member.max_health*100 %>%"></div></div>
 	  <br />
 	  <span><%= member.experience %> / 100 </span>
 	  <% end %>

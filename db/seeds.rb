@@ -22,6 +22,8 @@ puts 'New template: ' << region_template11.name
 puts 'Create ENEMY TEMPLATES'
 bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region_template => region_template11, :combat_value => 7
 puts 'New template: ' << bandit_template.name
+poacher_template = EnemyTemplate.create! :name => "Poacher", :desc => "A nasty poacher." ,:region_template => region_template10, :combat_value => 5
+puts 'New template: ' << poacher_template.name
 
 puts 'Create ITEM TEMPLATES'
 sword_template = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.', :combat_value => 3, :world_template => starting_world
@@ -30,6 +32,8 @@ dagger_template = ItemTemplate.create! :name => 'Dagger', :desc => 'A dagger.', 
 puts 'New template: ' << dagger_template.name
 spear_template = ItemTemplate.create! :name => 'Spear', :desc => 'A long spear.', :combat_value => 5, :enemy_template => bandit_template
 puts 'New template: ' << spear_template.name
+bow_template = ItemTemplate.create! :name => 'Bow', :desc => 'A fine bow.', :combat_value => 6, :enemy_template => poacher_template
+puts 'New template: ' << bow_template.name
 
 # puts 'SETTING UP EXAMPLE USERS'
 # freddie = User.create :name => 'freddieboi', :email => 'freddieboi@gmail.com', :rpx_identifier => 'https://www.google.com/profiles/112693975111415891225' #, :password => 'asdfasdf', :password_confirmation => 'asdfasdf'

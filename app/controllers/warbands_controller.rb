@@ -115,6 +115,23 @@ class WarbandsController < ApplicationController
     end
   end
 
+  def rest
+    warband = Warband.find(params[:id])
+    warband.members.each do |m|
+      m.health = m.max_health
+    end
+    
+    respond_to do |format|
+      if warband.save
+        format.html { redirect_to(map_path, :notice => 'Warband successfully rested.') }
+        format.json { render :json => warband, :include => :members }
+      else
+        format.html { redirect_to(map_path, :alert => 'Warband did not rest.') }
+        format.json { render :json => warband.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   private
 
   # Ensure that the current User is the same as the one that the warband

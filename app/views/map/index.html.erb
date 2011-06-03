@@ -7,14 +7,18 @@
   <p>
     <%= @warband.region.desc %>
   </p>
-  <h3>Enemies in this region</h3>
-  <ul id="current_enemies">
-    <% @warband.region.enemies.each do |enemy| %>
-    <li>
-      <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id) %>
-    </li>
-    <% end %>
-  </ul>
+  <% if @warband.region.enemies.count > 0 %>
+    <h3>Enemies in this region</h3>
+    <ul id="current_enemies">
+      <% @warband.region.enemies.each do |enemy| %>
+      <li>
+        <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id) %>
+      </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <a href="#" id="rest">Rest</a>
+  <% end %>
 </div>
 <% content_for :head do %>
   <script>
@@ -52,6 +56,8 @@
 
     // Do when document is ready
     $(document).ready( function() {
+
+      $("#current_region a").live("click", rest);
 
       // Register a click handler on the canvas (#map)
       $("#map").live("click", function(e) {
@@ -155,21 +161,42 @@
       } 
     }
 
+    function rest() {
+      var url = "<%= warband_rest_path(@warband) %>"; // Go to warbands/:id path
+      var data = { "warband[id]": <%= @warband.id %>, "_method": "put"}
+      $.post(url, data, updateWarbandHealth, "json");
+      return false;
+    };
+
     // Update the Warband position from the specified data (.json) and redraw
     function updateWarbandPosition(data) {
       var region = findRegion(data['warband']['region_id']);
       warband.x = region.x*regionWidth + offset.x;
       warband.y = region.y*regionHeight + offset.y;
       // FIXME! Make this a partial to render instead?!
-      $("#current_region h2").html("<a href='/regions/"+region.template_id+"'>"+region.name+"</a>");
-      $("#current_region p").html(region.desc);
+      $("#current_region").html("");
+      $("#current_region").append("<h2><a href='/regions/"+region.template_id+"'>"+region.name+"</a></h2>");
+      $("#current_region").append("<p>"+region.desc+"</p>");
       var enemies = "";
       for (var enemy in region.enemies) {
         e = region.enemies[enemy];
         enemies += '<li><a href="/battle/before?enemy_id='+e.id+'">'+e.name+"</a></li>";
       }
-      $("#current_enemies").html(enemies);
+      if (enemies !== "") {
+        $("#current_region").append('<h3>Enemies in this region</h3><ul id="current_enemies">').append(enemies).append('</ul>');
+      }
+      else {
+        $("#current_region").append("<a href='' id='rest'>Rest</a>");
+      }
       hasNewPos = true;
+    }
+
+    function updateWarbandHealth(data) {
+      var bars = $(".hpbar_inner");
+      for (var i = 0; i < bars.length; i++) {
+        var member = data["warband"]["members"][i];
+        bars[i].style.width = ""+member["health"]/member["max_health"]*100+"%";
+      }
     }
 
     function findRegion(id) {

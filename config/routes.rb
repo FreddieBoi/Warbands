@@ -24,6 +24,8 @@ Warbands::Application.routes.draw do
 
   resources :warbands
   
+  match "warbands/:id/rest", :to => "warbands#rest", :path => "warbands/:id/rest", :as => :warband_rest
+  
   resources :members
   
   root :to => "pages#home"

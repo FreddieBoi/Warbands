@@ -1,1 +1,7 @@
 <h2><%= @battle.outcome.humanize %></h2>
+<% if @win %>
+<%= render :partial => "shared/item", :collection => @items %>
+<% else %>
+
+<% end %>
+<%= link_to "Return to the map", map_path %>
