@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
-puts 'Create WORLD TEMPALTES'
+puts 'Create WORLD TEMPLATES'
 starting_world = WorldTemplate.create! :name => "Starting world"
 puts 'New template: ' << starting_world.name
 
@@ -24,8 +24,10 @@ bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty ban
 puts 'New template: ' << bandit_template.name
 
 puts 'Create ITEM TEMPLATES'
-sword_template = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.', :combat_value => 3
+sword_template = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.', :combat_value => 3, :world_template => starting_world
 puts 'New template: ' << sword_template.name
+dagger_template = ItemTemplate.create! :name => 'Dagger', :desc => 'A dagger.', :combat_value => 3, :world_template => starting_world
+puts 'New template: ' << dagger_template.name
 spear_template = ItemTemplate.create! :name => 'Spear', :desc => 'A long spear.', :combat_value => 5, :enemy_template => bandit_template
 puts 'New template: ' << spear_template.name
 

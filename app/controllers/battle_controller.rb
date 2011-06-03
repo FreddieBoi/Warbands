@@ -16,35 +16,19 @@ class BattleController < ApplicationController
     @title = "The battle is waging!"
     @warband = current_user.warband
     @enemy = Enemy.find(params[:enemy_id])
+    @battle = Battle.create(:warband => @warband, :enemy => @enemy, :outcome => "ongoing")
     
-    @winner = resolveCombat(@warband, @enemy)
+    @battle.resolve
+    @battle.save
     
-    respond_to do |format|
-      format.html # combat.html.erb
-    end
+    redirect_to( :action => :after, :battle_id => @battle.id)
   end
 
   def after
+    @battle = Battle.find(params[:battle_id])
+    respond_to do |format|
+      format.html # after.html.erb
+    end
   end
-
-	def resolveCombat(warband, enemy)
-		casualties = 0
-		while true
-			warband.members.each_with_index do |member, index|
-				enemy.health =- member.combat_value
-				member.health =- enemy.combat_value
-				
-				if enemy.health <= 0
-					return warband
-				end
-				if member.health <= 0
-					casualties += 1
-				end
-				if casualties >= warband.members.length
-					return enemy
-				end
-			end
-		end
-	end
 
 end

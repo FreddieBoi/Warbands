@@ -1,12 +1,13 @@
 # == Schema Information
-# Schema version: 20110525111347
+# Schema version: 20110603071110
 #
 # Table name: worlds
 #
-#  id         :integer         not null, primary key
-#  user_id    :integer         not null
-#  created_at :datetime
-#  updated_at :datetime
+#  id                :integer         not null, primary key
+#  user_id           :integer         not null
+#  world_template_id :integer         not null
+#  created_at        :datetime
+#  updated_at        :datetime
 #
 
 class World < ActiveRecord::Base
@@ -28,6 +29,9 @@ class World < ActiveRecord::Base
   # A warband belongs to a user through a world.
   has_one :warband
 
+  validates :world_template, :presence => true
+  validates :user, :presence => true
+
   # Create associated regions upon creation
   after_create :create_regions
   # Get the template
@@ -37,6 +41,10 @@ class World < ActiveRecord::Base
 
   def name
     template.name
+  end
+
+  def starting_items
+    template.item_templates
   end
 
   private

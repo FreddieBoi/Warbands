@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110524170448
+# Schema version: 20110603071110
 #
 # Table name: item_templates
 #
@@ -10,6 +10,7 @@
 #  item_type         :string(255)
 #  combat_value      :integer         default(0), not null
 #  enemy_template_id :integer
+#  world_template_id :integer
 #  created_at        :datetime
 #  updated_at        :datetime
 #
@@ -18,6 +19,9 @@ class ItemTemplate < ActiveRecord::Base
 
   # An item template could belong to an enemy template
   belongs_to :enemy_template
+
+  # An item template could be a starting item for members, stored in a world template
+  belongs_to :world_template
 
   # All the items using this template
   has_many :items

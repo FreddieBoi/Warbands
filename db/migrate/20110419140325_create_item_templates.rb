@@ -7,6 +7,7 @@ class CreateItemTemplates < ActiveRecord::Migration
       t.string :item_type
       t.integer :combat_value, :null => false, :default => 0
       t.references :enemy_template
+      t.references :world_template
 
       t.timestamps
     end

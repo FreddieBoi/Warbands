@@ -16,5 +16,8 @@ class WorldTemplate < ActiveRecord::Base
 
   # All the regions in the world
   has_many :region_templates
+  
+  # Starting items for all the members
+  has_many :item_templates
 
 end

@@ -6,6 +6,7 @@ class CreateMembers < ActiveRecord::Migration
       t.integer :experience, :null => false, :default => 0
       t.integer :health, :null => false, :default => 100
       t.integer :max_health, :null => false, :default => 100
+      t.integer :combat_value, :null => false, :default => 0
       t.references :warband
 
       t.timestamps

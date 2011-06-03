@@ -34,6 +34,7 @@ class Warband < ActiveRecord::Base
 
   # Make it possible to find and identify warbands by name
   has_friendly_id :name, :use_slug => true, :strip_non_ascii => true
+
   def user
     world.user
   end
