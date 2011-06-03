@@ -100,4 +100,5 @@ $( function() {
     $.get($("#enemies_search").attr("action"), $("#enemies_search").serialize(), null, "script");
     return false;
   });
+
 });
