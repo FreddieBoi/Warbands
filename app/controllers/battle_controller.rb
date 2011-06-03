@@ -19,6 +19,7 @@ class BattleController < ApplicationController
     @battle = Battle.create(:warband => @warband, :enemy => @enemy, :outcome => "ongoing")
     @item_ids = @enemy.items.map { |i| i.id }
     @battle.resolve
+    @warband.members.map { |m| m.save! }
     @battle.save
     
     redirect_to(:action => :after, :battle_id => @battle.id, :item_ids => @item_ids)

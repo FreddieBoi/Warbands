@@ -31,7 +31,6 @@ class Battle < ActiveRecord::Base
     while true
       warband.members.each do |member|
         if enemy.health <= 0
-          
           enemy.destroy
           self.outcome = "win"
           return
@@ -40,15 +39,13 @@ class Battle < ActiveRecord::Base
           casualties += 1
         end
         if casualties >= warband.members.count
+          enemy.save!
           self.outcome = "defeat"
           return
         end
 
-        enemy.health -= member.combat_value #member hits enemy
-        member.health -= enemy.combat_value #enemy hits warband
-
-        enemy.save
-        member.save
+        enemy.health -= member.combat_value # member hits enemy
+        member.health -= enemy.combat_value # enemy hits warband
       end
     end
   end
