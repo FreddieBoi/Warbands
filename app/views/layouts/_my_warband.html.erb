@@ -1,23 +1,22 @@
 <div id="left_column" class="grid_3 alpha">
 	<div id="my_warband">
 	  <% if user_signed_in? %>
-	  <% if current_user.warband.blank? %>
-	  <p>
-	    You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
-	  </p>
+		  <% if current_user.warband.blank? %>
+		  <p>
+		    You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
+		  </p>
+		  <% else %>
+			  <h2><%= link_to current_user.warband.name, current_user.warband %></h2>
+			  <% current_user.warband.members.each do |member| %>
+				  <h3><%= link_to member.name, member  %></h3>
+				  <div class="hpbar_outer"><div class="hpbar_inner" style="width: <%= member.health.to_f/member.max_health*100 %>%"></div></div>
+					<div class="xpbar_outer"><div class="xpbar_inner" style="width: <%= member.experience.to_f/100*100 %>%"></div></div>
+			  <% end %>
+		  <% end %>
 	  <% else %>
-	  <h2><%= link_to current_user.warband.name, current_user.warband %></h2>
-	  <% current_user.warband.members.each do |member| %>
-	  <h3><%= link_to member.name, member  %></h3>
-	  <div class="hpbar_outer"><div class="hpbar_inner" style="width: <%= member.health.to_f/member.max_health*100 %>%"></div></div>
-	  <br />
-	  <span><%= member.experience %> / 100 </span>
-	  <% end %>
-	  <% end %>
-	  <% else %>
-	  <p>
-	    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up now!", new_user_registration_path %>
-	  </p>
+		  <p>
+		    <%= link_to "Sign in", new_user_session_path %> or <%= link_to "Sign up now!", new_user_registration_path %>
+		  </p>
 	  <% end %>
   </div>
 </div>
