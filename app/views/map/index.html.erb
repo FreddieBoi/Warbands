@@ -192,11 +192,11 @@
     }
 
     function updateWarbandHealth(data) {
-      var bars = $(".hpbar_inner");
-      for (var i = 0; i < bars.length; i++) {
-        var member = data["warband"]["members"][i];
-        bars[i].style.width = ""+member["health"]/member["max_health"]*100+"%";
-      }
+      $(".hpbar_inner").each(function(index) {
+        var member = data["warband"]["members"][index];
+        $(this).width(""+member["health"]/member["max_health"]*100+"%");
+        $(this).parent().attr("title", "HP: "+member["health"]+"/"+member["max_health"]);
+      });
     }
 
     function findRegion(id) {

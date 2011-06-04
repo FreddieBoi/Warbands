@@ -32,7 +32,7 @@ class Battle < ActiveRecord::Base
     casualties = 0
     warband.members.each do |member|
       if member.health <= 0
-      casualties += 1
+        casualties += 1
       end
     end
     while true
@@ -53,6 +53,7 @@ class Battle < ActiveRecord::Base
 
         enemy.health -= member.combat_value # member hits enemy
         member.health -= enemy.combat_value # enemy hits warband
+        member.experience += 1;
       end
     end
   end

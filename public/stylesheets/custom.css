@@ -455,7 +455,14 @@ div.field_with_errors div.ui-effects-wrapper {
 
 .xpbar_inner {
 	height: 15px;
-	background-color: #205791;
+	background-color: #E6EFC2;
+	white-space: nowrap;
+	overflow: visible;
+}
+
+.hp-text {
+  position: relative;
+  top: -10px;
 }
 
 .index {

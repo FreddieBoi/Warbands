@@ -101,4 +101,20 @@ $( function() {
     return false;
   });
 
+  // $(".hpbar_inner").each(function() {
+    // $(this).hover(function() {
+      // $(this).parent().append("<div class='hp-text'>"+$(this).attr("data-hp")+"</div>");
+    // }, function() {
+      // $(".hp-text").remove();
+    // });
+  // });
+  
+  
+  /*for (var i = 0; i < bars.length; i++) {
+    bars[i].onmouseover = function() {
+      alert(this.attr("data-hp"))
+      this.html(this.attr("data-hp"));
+    };
+  }*/
+
 });
