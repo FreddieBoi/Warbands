@@ -48,7 +48,7 @@ class WarbandsController < ApplicationController
   def new
     # Don't allow multiple Warbands!
     redirect_to(current_user.warband, :alert => "You already have a Warband!") and return unless current_user.warband.blank?
-    @title = "New warband"
+    @title = "Create your own warband"
     @warband = Warband.new
     @warband.max_member_count.times do
       @warband.members << Member.new
@@ -62,7 +62,7 @@ class WarbandsController < ApplicationController
 
   # GET /warbands/1/edit
   def edit
-    @title = "Edit warband"
+    @title = "Edit your warband"
     @warband = Warband.find(params[:id])
     @members = @warband.members
   end

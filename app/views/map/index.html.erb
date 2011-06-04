@@ -12,7 +12,7 @@
     <ul id="current_enemies">
       <% @warband.region.enemies.each do |enemy| %>
       <li>
-        <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id) %>
+        <%= link_to enemy.name, battle_before_path(:enemy_id => enemy.id), :class => "engage" %>
       </li>
       <% end %>
     </ul>
@@ -57,7 +57,7 @@
     // Do when document is ready
     $(document).ready( function() {
 
-      $("#current_region a").live("click", rest);
+      $("#current_region a#rest").live("click", rest);
 
       // Register a click handler on the canvas (#map)
       $("#map").live("click", function(e) {
@@ -175,7 +175,7 @@
       warband.y = region.y*regionHeight + offset.y;
       // FIXME! Make this a partial to render instead?!
       $("#current_region").html("");
-      $("#current_region").append("<h2><a href='/regions/"+region.template_id+"'>"+region.name+"</a></h2>");
+      $("#current_region").append("<h2><a href='/regions/"+region.template_id+"' class='engage'>"+region.name+"</a></h2>");
       $("#current_region").append("<p>"+region.desc+"</p>");
       var enemies = "";
       for (var enemy in region.enemies) {

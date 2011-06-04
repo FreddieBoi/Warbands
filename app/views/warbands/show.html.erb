@@ -12,10 +12,10 @@
   <%= link_to @region.name, @region.template %>
 </p>
 <% if current_user?(@user) %>
-<%= link_to 'Edit', edit_warband_path(@warband) %> |
-<%= link_to 'Destroy', @warband, :confirm => 'Are you sure?', :method => :delete %> |
-<% end %>
+<%= link_to 'Edit your warband', edit_warband_path(@warband) %>
+<% else %>
 <%= link_to 'List of all warbands', warbands_path %>
+<% end %>
 <% if current_user.warband.blank? %>
 <p>
   You don't have a warband yet. <%= link_to "Create your own Warband now!", new_warband_path %>
@@ -34,4 +34,21 @@
   <%= render member %>
 </ul>
 <% end %>
+<% end %>
+<h3>Battle reports</h3>
+<% if @warband.battles.blank? %>
+Your warband hasn't engaged in any battles yet.
+<% else %>
+<ul>
+  <% @warband.battles.each do |b| %>
+  <li>
+    Fought <%= link_to b.enemy_template.name, b.enemy_template %> in <%= link_to b.region_template.name, b.region_template %> and
+    <% if b.outcome == "win" %>
+    won
+    <% elsif b.outcome == "defeat" %>
+    lost
+    <% end %>
+  </li>
+  <% end %>
+</ul>
 <% end %>

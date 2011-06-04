@@ -16,22 +16,33 @@ class BattleController < ApplicationController
     @title = "The battle is waging!"
     @warband = current_user.warband
     @enemy = Enemy.find(params[:enemy_id])
-    @battle = Battle.create(:warband => @warband, :enemy => @enemy, :outcome => "ongoing")
+    @battle = Battle.create!(:warband => @warband, :enemy => @enemy, :outcome => "ongoing")
     @item_ids = @enemy.items.map { |i| i.id }
     @battle.resolve
     @warband.members.map { |m| m.save! }
     @battle.save
-    
+
     redirect_to(:action => :after, :battle_id => @battle.id, :item_ids => @item_ids)
   end
 
   def after
     @battle = Battle.find(params[:battle_id])
     @win = @battle.outcome == "win"
-    @items = []
-    params[:item_ids].each do |i|
-      @items.push(Item.find(i))
+    @warband = current_user.warband
+    
+    if @win
+      @items = []
+      @equipped_items = []
+      params[:item_ids].each do |i|
+        member = @warband.get_member_with_lowest_combat_value
+        item = Item.find(i)
+        @items.push(item)
+        if member.equip_if_better?(item)
+          @equipped_items << item
+        end
+      end
     end
+
     respond_to do |format|
       format.html # after.html.erb
     end

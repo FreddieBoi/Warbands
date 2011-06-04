@@ -16,6 +16,8 @@ class Warband < ActiveRecord::Base
 
   # The warband consist of 0 to max_member_count members
   has_many :members, :dependent => :destroy
+  
+  has_many :battles, :dependent => :destroy
 
   # Make it possible to update members through their warband.
   accepts_nested_attributes_for :members
@@ -59,6 +61,18 @@ class Warband < ActiveRecord::Base
       value += member.combat_value
     end
     value
+  end
+  
+  def get_member_with_lowest_combat_value
+    lowest_combat_value = 1000 # should be infinity
+    member = nil
+    members.each do |m|
+      if m.combat_value < lowest_combat_value 
+        lowest_combat_value = m.combat_value
+        member = m
+      end
+    end
+    return member
   end
 
 end

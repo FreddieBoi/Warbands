@@ -1,6 +1,9 @@
 <h2><%= @battle.outcome.humanize %></h2>
 <% if @win %>
-<%= render :partial => "shared/item", :collection => @items %>
+  <% @equipped_items.each do |i| %>
+    <%= i.member.name + " has picked up " + i.name + "!"%>
+    <%= render 'shared/item', :item => i %>
+  <% end %>
 <% else %>
 
 <% end %>

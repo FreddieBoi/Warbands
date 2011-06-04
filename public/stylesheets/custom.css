@@ -228,6 +228,11 @@ footer nav ul li {
   padding: 3px 0;
 }
 
+footer div p {
+  margin: 0 0 5px;
+  padding: 0;
+}
+
 #left_column {
 	margin: 0;
   padding: 0;
@@ -388,9 +393,17 @@ div.field_with_errors div.ui-effects-wrapper {
 }
 
 .battle {
-  width: 200px;
+  width: 350px;
   float: left;
 }
+
+.battle h4 {
+  margin-bottom: 2px;
+}
+
+.battle p {
+  font-size: 13px;
+} 
 
 .vs {
   width: 100px;

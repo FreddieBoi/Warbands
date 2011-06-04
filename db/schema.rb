@@ -13,10 +13,12 @@
 ActiveRecord::Schema.define(:version => 20110603071110) do
 
   create_table "battles", :force => true do |t|
-    t.string   "outcome",    :null => false
+    t.string   "outcome",            :null => false
     t.integer  "enemy_id"
+    t.integer  "enemy_template_id"
     t.integer  "warband_id"
     t.integer  "region_id"
+    t.integer  "region_template_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

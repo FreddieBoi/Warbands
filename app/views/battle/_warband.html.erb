@@ -1,18 +1,8 @@
 <div class="battle warband">
-  <h3><%= warband.name %></h3>
+  <h2><%= warband.name %></h2>
   <% warband.members.each do |member| %>
   <h4><%= member.name %></h4>
-  <span>
-    <b>Health:</b> <%= member.health %> / <%= member.max_health %>
-  </span>
-  <br />
-  <span>
-    <b>Experience:</b> <%= member.experience %>
-  </span>
-  <b>Items</b>
-  <ul class="items">
-    <%= render :partial => "shared/item", :collection => member.items %>
-  </ul>
+  Combat value: <%= member.combat_value %>
   <% end %>
   <p>
     <b>Total combat value:</b><%= warband.combat_value %>

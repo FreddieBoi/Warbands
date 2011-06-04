@@ -21,6 +21,8 @@ class EnemyTemplate < ActiveRecord::Base
   belongs_to :region_template
 
   has_many :item_templates
+  
+  has_many :battles
 
   # Don't allow non-ascii signs, will result in multiple enemies with same slug
   name_regex = /\A[a-z 0-9]*\z/i
