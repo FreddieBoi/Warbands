@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110603071110) do
+ActiveRecord::Schema.define(:version => 20110604123342) do
+
+  create_table "achievements", :force => true do |t|
+    t.string   "name"
+    t.string   "desc"
+    t.integer  "reputation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "battles", :force => true do |t|
     t.string   "outcome",            :null => false
@@ -134,6 +142,13 @@ ActiveRecord::Schema.define(:version => 20110603071110) do
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["name"], :name => "index_users_on_name", :unique => true
+
+  create_table "warband_achievements", :force => true do |t|
+    t.integer  "warband_id"
+    t.integer  "achievement_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "warbands", :force => true do |t|
     t.string   "name",                      :null => false

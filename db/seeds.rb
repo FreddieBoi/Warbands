@@ -35,6 +35,10 @@ puts 'New template: ' << spear_template.name
 bow_template = ItemTemplate.create! :name => 'Bow', :desc => 'A fine bow.', :combat_value => 6, :enemy_template => poacher_template
 puts 'New template: ' << bow_template.name
 
+puts 'Create ACHIEVEMENTS'
+a = Achievement.create! :name => "Created an own warband", :desc => "Created a very own warband and earned some reputation. Good luck!", :reputation => 10
+puts 'New achievement: ' << a.name
+
 # puts 'SETTING UP EXAMPLE USERS'
 # freddie = User.create :name => 'freddieboi', :email => 'freddieboi@gmail.com', :rpx_identifier => 'https://www.google.com/profiles/112693975111415891225' #, :password => 'asdfasdf', :password_confirmation => 'asdfasdf'
 # freddie.admin = true

@@ -476,3 +476,9 @@ div.field_with_errors div.ui-effects-wrapper {
 	padding: 5px;
 	border: none;
 }
+
+span.reputation {
+  font-size: 16px;
+  font-weight: bold;
+  color: #D9CB45;
+}

@@ -73,10 +73,12 @@ class WarbandsController < ApplicationController
     @warband = Warband.new(params[:warband])
     @warband.world = current_user.world
     @warband.region = current_user.world.regions.first
+    @achievement = Achievement.where(:name => "Created an own warband").first
+    WarbandAchievement.create!(:warband => @warband, :achievement => @achievement)
 
     respond_to do |format|
       if @warband.save
-        format.html { redirect_to(@warband, :notice => 'Warband was successfully created.') }
+        format.html { redirect_to(@warband, :notice => 'Warband was successfully created! Achievement gained: '+@achievement.name) }
         format.xml  { render :xml => @warband, :status => :created, :location => @warband }
       else
         format.html { render :action => "new" }

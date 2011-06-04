@@ -1,5 +1,7 @@
 Warbands::Application.routes.draw do
 
+  resources :achievements
+
   match "battle/before"
 
   match "battle/after"

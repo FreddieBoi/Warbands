@@ -35,6 +35,15 @@
 </ul>
 <% end %>
 <% end %>
+<h3>Achievements</h3>
+<ul id="achievements">
+  <% @warband.achievements.each do |a| %>
+  <li class="achievement">
+    Gained
+    <span class="reputation">+<%= a.reputation %></span> reputation for completing <%= link_to a.name, a %>.
+  </li>
+  <% end %>
+</ul>
 <h3>Battle reports</h3>
 <% if @warband.battles.blank? %>
 Your warband hasn't engaged in any battles yet.
