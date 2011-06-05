@@ -1,4 +1,5 @@
-<li class="draggable" data-id="<%= draggable_item.id %>">
+<% draggable = (!draggable_item.member.blank? && current_user.warband.id == draggable_item.member.warband.id) || (!@user.blank? && current_user?(@user)) %>
+<li class="<%= "draggable " if draggable %>item" data-id="<%= draggable_item.id %>">
   <span class="title"><%= link_to draggable_item.name.titleize, draggable_item.template %></span><span class="combat_value"><%= draggable_item.combat_value %></span><br>
   <span class="desc"><%= draggable_item.desc %></span><span class="cost"><%= draggable_item.cost %></span><br>
 

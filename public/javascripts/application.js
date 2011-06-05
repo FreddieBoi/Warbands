@@ -59,7 +59,7 @@ $( function() {
       $("<li></li>", {
         "html": ui.draggable.html(),
         "data-id": item_id,
-        "class": "draggable"
+        "class": "draggable item"
       }).appendTo(this);
       
       //$("#inventory [data-id="+item_id+"]").remove();

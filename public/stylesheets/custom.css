@@ -469,15 +469,19 @@ div.field_with_errors div.ui-effects-wrapper {
   background: #444;
 }
 
-.draggable {
+.item {
   width: 198px;
   background-color: #008000;
   border: #000000 solid 1px;
-  cursor: move;
   list-style-type: none;
   display: block;
   overflow: hidden;
   margin: 0 0 1px;
+}
+
+
+.draggable {
+  cursor: move;
 }
 
 .droppable {
@@ -496,19 +500,19 @@ div.field_with_errors div.ui-effects-wrapper {
   padding: 0;
 }
 
-li.draggable .title {
+li .title {
   float: left;
 }
 
-li.draggable .desc {
+li .desc {
   float: left;
 }
 
-li.draggable .combat_value {
+li .combat_value {
   float: right;
 }
 
-li.draggable .cost {
+li .cost {
   float: right;
 }
 

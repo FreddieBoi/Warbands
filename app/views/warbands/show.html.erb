@@ -1,6 +1,6 @@
 <h2><%= @title %></h2>
 <h3>Inventory</h3>
-<ul class="droppable inventory" data-id="<%= @warband.id %>">
+<ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
   <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
 </ul>
 <p>
