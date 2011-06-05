@@ -1,11 +1,18 @@
 <div id="warband-center">
   <h2><%= @title %></h2>
   
+	<% unless current_user?(@user) %>
+		<% @warband.members.each do |m| %>
+			<%= render m%>
+		<% end %>
+	<% end %>
+
+
   <h3>Inventory</h3>
   <ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
     <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
   </ul>
-  <h3>Achievements</h3>
+  <h3>Achievements ( <%= @warband.achievements.count %> / <%= Achievement.all.count %>)</h3>
   <ul id="achievements">
     <% @warband.achievements.each do |a| %>
     <li class="achievement">

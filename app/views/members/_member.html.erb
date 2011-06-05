@@ -4,7 +4,7 @@
   <b>Level:</b>
   <%= member.level %>
   <b>HP:</b>
-  <%= member.health %>
+  <%= member.health %>/<%= member.max_health %>
   <b>XP:</b>
-  <%= member.experience %> 
+  <%= member.experience %>/<%= member.max_experience*member.level %> 
 </li>
