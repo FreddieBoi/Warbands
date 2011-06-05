@@ -92,6 +92,14 @@ class WarbandsController < ApplicationController
   # PUT /warbands/1.json
   def update
     @warband = Warband.find(params[:id])
+
+    unless params[:item_id].blank?
+      i = Item.find(params[:item_id])
+    i.member = nil
+    i.warband = @warband
+    i.save!
+    end
+
     respond_to do |format|
       if @warband.update_attributes(params[:warband])
         format.html { redirect_to(@warband, :notice => 'Warband was successfully updated.') }
@@ -122,7 +130,7 @@ class WarbandsController < ApplicationController
     warband.members.each do |m|
       m.health = m.max_health
     end
-    
+
     respond_to do |format|
       if warband.save
         format.html { redirect_to(map_path, :notice => 'Warband successfully rested.') }

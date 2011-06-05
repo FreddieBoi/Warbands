@@ -81,14 +81,22 @@ class MembersController < ApplicationController
   # PUT /members/1.xml
   def update
     @member = Member.find(params[:id])
+    unless params[:item_id].blank?
+      i = Item.find(params[:item_id])
+      i.member = @member
+      i.warband = nil
+      i.save!
+    end
 
     respond_to do |format|
       if @member.update_attributes(params[:member])
         format.html { redirect_to(@member, :notice => 'Member was successfully updated.') }
         format.xml  { head :ok }
+        format.json { render :json => @member }
       else
         format.html { render :action => "edit" }
         format.xml  { render :xml => @member.errors, :status => :unprocessable_entity }
+        format.json { render :json => @member.errors, :status => :unprocessable_entity }
       end
     end
   end

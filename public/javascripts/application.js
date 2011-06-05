@@ -21,6 +21,10 @@ function animate_flash() {
   3000);
 }
 
+function update_items() {
+  // Move replaced items back somehow.
+}
+
 // On document load do...
 $( function() {
   // Animate flash if any message
@@ -47,42 +51,33 @@ $( function() {
     appendTo: "body"
   }).disableSelection();
   
-  /*$( "#inventory" ).droppable({
-      drop: function( event, ui ) {
-        $(this).find( "h3" ).html( "Dropped!" );
-        ui.draggable.css('position', 'absolute')
-        ui.draggable.css('left', $(this).offset().left);
-        var offset = 0;
-        $(this).children("li").each(function(i, element) {
-          if ($(element).innerHTML !== ui.draggable.innerHTML) {
-            offset += $(element).outerHeight();
-          }
-        });
-        ui.draggable.css('top', $(this).offset().top+offset);
-      }
-    });*/
-  $( ".droppable" ).droppable({
+
+  $(".droppable").droppable({
     drop: function( event, ui ) {
-      //$(this).find( "h3" ).html( "Dropped!" );
       var item_id = ui.draggable.attr("data-id");
       $(".droppable [data-id="+item_id+"]").remove();
-      var li = $("<li></li>", {
+      $("<li></li>", {
         "html": ui.draggable.html(),
         "data-id": item_id,
-        "class": "draggable" 
-      });
-      /*li.draggable({
-        containment: "#wrapper",
-        revert: "invalid",
-        appendTo: "body"
-      }).disableSelection();*/
-      li.appendTo(this);
+        "class": "draggable"
+      }).appendTo(this);
       
-      $("#inventory [data-id="+item_id+"]").remove();
-      
-      /*ui.draggable.css('position', 'absolute')
-      ui.draggable.css('left', $(this).find(".item-slot").offset().left);
-      ui.draggable.css('top', $(this).find(".item-slot").offset().top);*/
+      //$("#inventory [data-id="+item_id+"]").remove();
+      var member_id = $(this).parent().attr("data-id");
+      var warband_id = $(this).attr("data-id");
+      if (member_id !== undefined) {
+        var url = "/members/"+member_id; // Go to members/:id path
+        var data = { "member[id]": member_id,
+                     "item_id": item_id, // The item to equip
+                     "_method": "put" }; // Use members#update (not show)
+        $.post(url, data, update_items, "json");
+      } else if (warband_id !== undefined) {
+        var url = "/warbands/"+warband_id; // Go to members/:id path
+        var data = { "warband[id]": warband_id,
+                     "item_id": item_id, // The item to equip
+                     "_method": "put" }; // Use members#update (not show)
+        $.post(url, data, update_items, "json");
+      }
     }
   }).sortable({
     items: "li:not(.placeholder)",
@@ -90,5 +85,4 @@ $( function() {
         $(this).removeClass("ui-state-default");
     }
   });
-  /*$( ".sortable" ).disableSelection();*/
 });
