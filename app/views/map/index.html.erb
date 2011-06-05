@@ -76,7 +76,7 @@
       });
 
       // Register a click handler on the canvas (#map)
-      $("#map").live("click", function(e) {
+      $("#map").live("mousedown", function(e) {
         // Get the clicked position
         var pos = getCursorPosition(e);
 
