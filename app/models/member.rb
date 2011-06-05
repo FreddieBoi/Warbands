@@ -25,8 +25,7 @@ class Member < ActiveRecord::Base
 
   after_create :create_starting_items
 
-  before_save :format_health
-
+  before_save :format_health, :update_xp
   # Search for Members matching the name of the specified search term
   def self.search(search)
     if search
@@ -36,36 +35,42 @@ class Member < ActiveRecord::Base
     end
   end
 
-  def combat_value
-    value = 0
+  def calc_combat_value
+    value = combat_value
     items.each do |item|
       value += item.combat_value
     end
     value
   end
-  
+
   def equip_if_better?(item)
     items.each do |i|
       if item.combat_value > i.combat_value
-        i.destroy
-        item.member = self
-        item.save!
-        return true
+      i.destroy
+      item.member = self
+      item.save!
+      return true
       end
     end
     return false
   end
-  
+
   private
 
   def create_starting_items
     t = warband.world.starting_items.sample
     i = Item.create(:item_template => t, :member => self)
   end
-  
+
   def format_health
     if self.health < 0
-      self.health = 0
+    self.health = 0
+    end
+  end
+
+  def update_xp
+    while self.experience >= self.max_experience*self.level do
+      self.level += 1
     end
   end
 

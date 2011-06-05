@@ -2,8 +2,9 @@ class CreateMembers < ActiveRecord::Migration
   def self.up
     create_table :members do |t|
       t.string :name, :null => false
-      t.integer :level, :null => false, :default => 0
+      t.integer :level, :null => false, :default => 1
       t.integer :experience, :null => false, :default => 0
+      t.integer :max_experience, :null => false, :default => 10
       t.integer :health, :null => false, :default => 100
       t.integer :max_health, :null => false, :default => 100
       t.integer :combat_value, :null => false, :default => 0

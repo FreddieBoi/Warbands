@@ -77,12 +77,13 @@ ActiveRecord::Schema.define(:version => 20110604123342) do
   end
 
   create_table "members", :force => true do |t|
-    t.string   "name",                          :null => false
-    t.integer  "level",        :default => 0,   :null => false
-    t.integer  "experience",   :default => 0,   :null => false
-    t.integer  "health",       :default => 100, :null => false
-    t.integer  "max_health",   :default => 100, :null => false
-    t.integer  "combat_value", :default => 0,   :null => false
+    t.string   "name",                            :null => false
+    t.integer  "level",          :default => 1,   :null => false
+    t.integer  "experience",     :default => 0,   :null => false
+    t.integer  "max_experience", :default => 10,  :null => false
+    t.integer  "health",         :default => 100, :null => false
+    t.integer  "max_health",     :default => 100, :null => false
+    t.integer  "combat_value",   :default => 0,   :null => false
     t.integer  "warband_id"
     t.datetime "created_at"
     t.datetime "updated_at"

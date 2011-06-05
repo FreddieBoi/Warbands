@@ -51,7 +51,7 @@ class Battle < ActiveRecord::Base
           return
         end
 
-        enemy.health -= member.combat_value # member hits enemy
+        enemy.health -= member.calc_combat_value # member hits enemy
         member.health -= enemy.combat_value # enemy hits warband
         member.experience += 1;
       end
