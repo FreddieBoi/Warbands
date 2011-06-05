@@ -22,6 +22,8 @@ class Item < ActiveRecord::Base
   belongs_to :member
   # ... or an enemy
   belongs_to :enemy
+  # ... or a warband
+  belongs_to :warband
   
   def template
     item_template

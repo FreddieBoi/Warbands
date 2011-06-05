@@ -1,4 +1,8 @@
 <h2><%= @title %></h2>
+<h3>Inventory</h3>
+<ul class="droppable inventory" >
+  <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
+</ul>
 <p>
   <b>Belongs to:</b>
   <%= gravatar_for(@user, :size => 32) %> <%= link_to @user.name, @user %>
@@ -61,3 +65,4 @@ Your warband hasn't engaged in any battles yet.
   <% end %>
 </ul>
 <% end %>
+

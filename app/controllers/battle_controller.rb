@@ -32,14 +32,11 @@ class BattleController < ApplicationController
     
     if @win
       @items = []
-      @equipped_items = []
       params[:item_ids].each do |i|
-        member = @warband.get_member_with_lowest_combat_value
         item = Item.find(i)
+        item.warband = @warband
+        item.save
         @items.push(item)
-        if member.equip_if_better?(item)
-          @equipped_items << item
-        end
       end
     end
 

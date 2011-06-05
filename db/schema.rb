@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(:version => 20110604123342) do
     t.integer  "item_template_id", :null => false
     t.integer  "enemy_id"
     t.integer  "member_id"
+    t.integer  "warband_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

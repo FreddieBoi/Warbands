@@ -4,6 +4,7 @@ class CreateItems < ActiveRecord::Migration
       t.references :item_template, :null => false
       t.references :enemy
       t.references :member
+      t.references :warband
 
       t.timestamps
     end

@@ -137,7 +137,7 @@ header {
 #wrapper {
 	margin: 0;
 	overflow: hidden;
-	background: #5e5946;
+	background: #62774F;
 	-webkit-border-top-left-radius: 10px;
 	-webkit-border-top-right-radius: 10px;
 	-moz-border-radius-topleft: 10px;
@@ -467,6 +467,49 @@ div.field_with_errors div.ui-effects-wrapper {
 
 .index {
   background: #444;
+}
+
+.draggable {
+  width: 198px;
+  background-color: #008000;
+  border: #000000 solid 1px;
+  cursor: move;
+  list-style-type: none;
+  display: block;
+  overflow: hidden;
+  margin: 0 0 1px;
+}
+
+.droppable {
+  /*width: 200px;*/
+}
+
+.inventory {
+  width: 200px;
+  padding: 0;
+  background-color: #4C5C3D;
+  min-height: 100px;
+}
+
+.item-slot {
+  min-height: 50px;
+  padding: 0;
+}
+
+li.draggable .title {
+  float: left;
+}
+
+li.draggable .desc {
+  float: left;
+}
+
+li.draggable .combat_value {
+  float: right;
+}
+
+li.draggable .cost {
+  float: right;
 }
 
 /**** Forms *****/

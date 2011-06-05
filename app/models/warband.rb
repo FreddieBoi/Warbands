@@ -22,6 +22,8 @@ class Warband < ActiveRecord::Base
   has_many :warband_achievements
   has_many :achievements, :through => :warband_achievements
 
+  has_many :items
+
   # Make it possible to update members through their warband.
   accepts_nested_attributes_for :members
 

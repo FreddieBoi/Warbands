@@ -8,9 +8,14 @@
 		  <% else %>
 			  <h2><%= link_to current_user.warband.name, current_user.warband %></h2>
 			  <% current_user.warband.members.each do |member| %>
-				  <h3><%= link_to member.name, member  %></h3>
-				  <div class="hpbar_outer" title="HP: <%= "#{member.health}/#{member.max_health}" %>"><div class="hpbar_inner" style="width: <%= member.health.to_f/member.max_health*100 %>%"></div></div>
-					<div class="xpbar_outer" title="XP: <%= member.experience %>"><div class="xpbar_inner" style="width: <%= member.experience.to_f/100*100 %>%"></div></div>
+          <div class="member">
+            <h3><%= link_to member.name, member  %></h3>
+  				  <div class="hpbar_outer" title="HP: <%= "#{member.health}/#{member.max_health}" %>"><div class="hpbar_inner" style="width: <%= member.health.to_f/member.max_health*100 %>%"></div></div>
+  					<div class="xpbar_outer" title="XP: <%= member.experience %>"><div class="xpbar_inner" style="width: <%= member.experience.to_f/100*100 %>%"></div></div>
+            <ul class="item-slot droppable">
+              <%= render :partial => "shared/draggable_item", :collection => member.items %>
+            </ul>
+          </div>
 			  <% end %>
 		  <% end %>
 	  <% else %>

@@ -1,7 +1,7 @@
 <h2><%= @battle.outcome.humanize %></h2>
 <% if @win %>
-  <% @equipped_items.each do |i| %>
-    <%= i.member.name + " has picked up " + i.name + "!"%>
+  You looted:<br>
+  <% @items.each do |i| %>
     <%= render 'shared/item', :item => i %>
   <% end %>
 <% else %>
