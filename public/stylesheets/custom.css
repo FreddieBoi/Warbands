@@ -516,6 +516,14 @@ li .cost {
   float: right;
 }
 
+#warband-center {
+  float: left;
+}
+
+#warband-right {
+  float:right;
+}
+
 /**** Forms *****/
 .field input, .field textarea, #search {
 	background: #000000;

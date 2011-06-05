@@ -40,6 +40,10 @@
     var cols = mapWidth/regionWidth;
     var rows = mapHeight/regionHeight;
 
+    var positionRect = new Object();
+
+    var hoverRect = new Object();
+
     var enemyOffset = Object();
     enemyOffset.x = 5;
     enemyOffset.y = 5;
@@ -58,6 +62,18 @@
     $(document).ready( function() {
 
       $("#current_region a#rest").live("click", rest);
+
+      $("#map").live("mousemove", function(e) {
+        var pos = getCursorPosition(e);
+
+        var x = Math.floor(pos.x/regionWidth);
+        var y = Math.floor(pos.y/regionHeight);
+        
+        var region = getRegion(x,y);
+
+        hoverRect.x = x*regionWidth;
+        hoverRect.y = y*regionHeight;
+      });
 
       // Register a click handler on the canvas (#map)
       $("#map").live("click", function(e) {
@@ -126,6 +142,9 @@
         warband.ax = warband.x; // animation x
         warband.ay = warband.y; // animation y
 
+        positionRect.x = <%= @warband.region.pos_x %>*regionWidth;
+        positionRect.y = <%= @warband.region.pos_y %>*regionHeight;
+
         // Get all the regions of the server and put them in regions array
         initRegions();
 
@@ -189,6 +208,8 @@
         $("#current_region").append("<a href='' id='rest'>Rest</a>");
       }
       hasNewPos = true;
+      positionRect.x = region.x*regionWidth;
+      positionRect.y = region.y*regionHeight;
     }
 
     function updateWarbandHealth(data) {
@@ -230,6 +251,13 @@
 
       // Draw the background (map)
       context.drawImage(bg.img, bg.x, bg.y);
+
+      // Draw rects
+      context.strokeStyle = "rgba(255,255,255,1)";
+      context.strokeRect(hoverRect.x,hoverRect.y,regionWidth,regionHeight);
+
+      context.strokeStyle = "rgba(0,0,0,1)";
+      context.strokeRect(positionRect.x,positionRect.y,regionWidth,regionHeight);
 
       // Draw all enemies
       for (var e in enemies) {

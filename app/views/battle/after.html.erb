@@ -4,6 +4,7 @@
   <% @items.each do |i| %>
     <%= render 'shared/item', :item => i %>
   <% end %>
+  <%= link_to "Go to warband and distribute loot", warband_path(@warband) %><br>
 <% else %>
 
 <% end %>

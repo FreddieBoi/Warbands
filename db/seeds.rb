@@ -16,8 +16,19 @@ region_template01 = RegionTemplate.create! :name => 'Mountains', :desc => 'rocks
 puts 'New template: ' << region_template01.name
 region_template10 = RegionTemplate.create! :name => 'Riverside', :desc => 'Holy diver?!', :pos_x => 1, :pos_y => 0, :world_template => starting_world
 puts 'New template: ' << region_template10.name
-region_template11 = RegionTemplate.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 1, :pos_y => 1, :world_template => starting_world
+region_template02 = RegionTemplate.create! :name => 'Steppes of War', :desc => 'It is rather plain here...', :pos_x => 0, :pos_y => 2, :world_template => starting_world
+puts 'New template: ' << region_template02.name
+
+region_template20 = RegionTemplate.create! :name => 'Northern Island', :desc => 'Sandy dunes and beaches', :pos_x => 2, :pos_y => 0, :world_template => starting_world
+puts 'New template: ' << region_template20.name
+region_template21 = RegionTemplate.create! :name => 'Forest', :desc => 'Between the river and the steppes', :pos_x => 2, :pos_y => 1, :world_template => starting_world
+puts 'New template: ' << region_template21.name
+region_template11 = RegionTemplate.create! :name => 'The hills', :desc => 'A cliff in the forest', :pos_x => 1, :pos_y => 1, :world_template => starting_world
 puts 'New template: ' << region_template11.name
+region_template12 = RegionTemplate.create! :name => 'Dark forest', :desc => 'Deep woods surrounds you', :pos_x => 1, :pos_y => 2, :world_template => starting_world
+puts 'New template: ' << region_template12.name
+region_template22 = RegionTemplate.create! :name => 'Rivers crossing', :desc => 'Knee deep waters and riverbanks', :pos_x => 2, :pos_y => 2, :world_template => starting_world
+puts 'New template: ' << region_template22.name
 
 puts 'Create ENEMY TEMPLATES'
 bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region_template => region_template11, :combat_value => 7

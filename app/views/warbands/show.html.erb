@@ -1,68 +1,53 @@
-<h2><%= @title %></h2>
-<h3>Inventory</h3>
-<ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
-  <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
-</ul>
-<p>
-  <b>Belongs to:</b>
-  <%= gravatar_for(@user, :size => 32) %> <%= link_to @user.name, @user %>
-</p>
-<p>
-  <b>Reputation:</b>
-  <%= @warband.reputation %>
-</p>
-<p>
-  <b>Currently in region:</b>
-  <%= link_to @region.name, @region.template %>
-</p>
-<% if current_user?(@user) %>
-<%= link_to 'Edit your warband', edit_warband_path(@warband) %>
-<% else %>
-<%= link_to 'List of all warbands', warbands_path %>
-<% end %>
-<% if current_user.warband.blank? %>
-<p>
-  You don't have a warband yet. <%= link_to "Create your own Warband now!", new_warband_path %>
-</p>
-<% end %>
-<h3>Members</h3>
-<% if current_user?(@user) && @members.count < @warband.max_member_count %>
-<p>
-  This warband has <%= @members.count %> of <%= pluralize(@warband.max_member_count, "possible member") %>.
-  <%= link_to "Add another member to complete your warband!", new_member_path %>
-</p>
-<% end %>
-<% unless @members.count <= 0 %>
-<% @members.each do |member| %>
-<ul class="members">
-  <%= render member %>
-</ul>
-<% end %>
-<% end %>
-<h3>Achievements</h3>
-<ul id="achievements">
-  <% @warband.achievements.each do |a| %>
-  <li class="achievement">
-    Gained
-    <span class="reputation">+<%= a.reputation %></span> reputation for completing <%= link_to a.name, a %>.
-  </li>
-  <% end %>
-</ul>
-<h3>Battle reports</h3>
-<% if @warband.battles.blank? %>
-Your warband hasn't engaged in any battles yet.
-<% else %>
-<ul>
-  <% @warband.battles.each do |b| %>
-  <li>
-    Fought <%= link_to b.enemy_template.name, b.enemy_template %> in <%= link_to b.region_template.name, b.region_template %> and
-    <% if b.outcome == "win" %>
-    won
-    <% elsif b.outcome == "defeat" %>
-    lost
+<div id="warband-center">
+  <h2><%= @title %></h2>
+  
+  <h3>Inventory</h3>
+  <ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
+    <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
+  </ul>
+  <h3>Achievements</h3>
+  <ul id="achievements">
+    <% @warband.achievements.each do |a| %>
+    <li class="achievement">
+      Gained
+      <span class="reputation">+<%= a.reputation %></span> reputation for completing <%= link_to a.name, a %>.
+    </li>
     <% end %>
-  </li>
+  </ul>
+  <h3>Battle reports</h3>
+  <% if @warband.battles.blank? %>
+  Your warband hasn't engaged in any battles yet.
+  <% else %>
+  <ul>
+    <% @warband.battles.each do |b| %>
+    <li>
+      Fought <%= link_to b.enemy_template.name, b.enemy_template %> in <%= link_to b.region_template.name, b.region_template %> and
+      <% if b.outcome == "win" %>
+      won
+      <% elsif b.outcome == "defeat" %>
+      lost
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
   <% end %>
-</ul>
-<% end %>
-
+</div>
+<div id="warband-right">
+  <p>
+    <b>Belongs to:</b>
+    <%= gravatar_for(@user, :size => 32) %> <%= link_to @user.name, @user %>
+  </p>
+  <p>
+    <b>Reputation:</b>
+    <%= @warband.reputation %>
+  </p>
+  <p>
+    <b>Currently in region:</b>
+    <%= link_to @region.name, @region.template %>
+  </p>
+  <% if current_user?(@user) %>
+    <%= link_to 'Edit your warband', edit_warband_path(@warband) %>
+  <% else %>
+    <%= link_to 'List of all warbands', warbands_path %>
+  <% end %>
+</div>
