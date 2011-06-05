@@ -13,12 +13,14 @@
 ActiveRecord::Schema.define(:version => 20110604123342) do
 
   create_table "achievements", :force => true do |t|
-    t.string   "name"
+    t.string   "name",       :null => false
     t.string   "desc"
     t.integer  "reputation"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "achievements", ["name"], :name => "index_achievements_on_name", :unique => true
 
   create_table "battles", :force => true do |t|
     t.string   "outcome",            :null => false

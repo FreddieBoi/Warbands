@@ -1,27 +1,14 @@
-<h1>Listing achievements</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Desc</th>
-    <th>Reputation</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @achievements.each do |achievement| %>
-  <tr>
-    <td><%= achievement.name %></td>
-    <td><%= achievement.desc %></td>
-    <td><%= achievement.reputation %></td>
-    <td><%= link_to 'Show', achievement %></td>
-    <td><%= link_to 'Edit', edit_achievement_path(achievement) %></td>
-    <td><%= link_to 'Destroy', achievement, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
+<h2><%= @title %></h2>
+<%= form_tag achievements_path, :method => 'get', :id => "achievements_search" do %>
+<p>
+  <label>
+    Search by name:
+  </label>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search", :name => nil %>
+</p>
+<div id="achievements">
+  <%= render 'achievements' %>
+</div>
 <% end %>
-</table>
-
 <br />
-
-<%= link_to 'New Achievement', new_achievement_path %>

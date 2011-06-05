@@ -35,7 +35,7 @@ module ApplicationHelper
   TweetButton.default_tweet_button_options = {:via => "WarbandsOnline", :count => "horizontal"}
 
   def link_to_news_feed
-    link_to image_tag("http://www.rssboard.org/images/rss-icon.png", :alt => "RSS Feed", :class => "rss") + "RSS feed", news_index_url(:rss)
+    link_to image_tag("http://www.rssboard.org/images/rss-icon.png", :alt => "News RSS Feed", :class => "rss") + "News RSS feed", news_index_url(:rss)
   end
 
 end

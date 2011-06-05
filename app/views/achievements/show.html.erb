@@ -1,20 +1,10 @@
-<p id="notice"><%= notice %></p>
-
+<h2><%= @title %></h2>
 <p>
-  <b>Name:</b>
-  <%= @achievement.name %>
-</p>
-
-<p>
-  <b>Desc:</b>
+  <b>Description:</b>
   <%= @achievement.desc %>
 </p>
-
 <p>
-  <b>Reputation:</b>
-  <%= @achievement.reputation %>
+  <b>Reputation gained:</b>
+  <span class="reputation">+<%= @achievement.reputation %></span>
 </p>
-
-
-<%= link_to 'Edit', edit_achievement_path(@achievement) %> |
-<%= link_to 'Back', achievements_path %>
+<%= link_to 'Show list of all achievements', achievements_path %>

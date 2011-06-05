@@ -1,0 +1,17 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table class="index">
+  <tr>
+    <th><%= sortable "name" %></th>
+    <th>Description</th>
+    <th><%= sortable "reputation" %></th>
+  </tr>
+  <% @achievements.each do |achievement| %>
+  <tr>
+    <td><%= link_to achievement.name, achievement %></td>
+    <td><%= achievement.desc.blank? ? "No description" : achievement.desc.slice(0,20) %></td>
+    <td><%= achievement.reputation %></td>
+  </tr>
+  <% end %>
+</table>
+<%= will_paginate @achievements %>

@@ -30,13 +30,16 @@
         <%= link_to "Members", members_path %>
       </li>
       <li>
-        <%= link_to "Items", item_templates_path %>
+        <%= link_to "Achievements", achievements_path %>
       </li>
       <li>
         <%= link_to "Regions", region_templates_path %>
       </li>
       <li>
         <%= link_to "Enemies", enemy_templates_path %>
+      </li>
+      <li>
+        <%= link_to "Items", item_templates_path %>
       </li>
     </ul>
   </nav>
@@ -54,10 +57,12 @@
       <%= link_to app_title, root_path %> &copy; 2011
       <b>fpdt</b>
     </p>
-    <p>
-      <%= facebook_like_button %>
+    <div id="tweet-button">
       <%= tweet_button %>
-    </p>
+    </div>
+    <div id="like-button">
+      <%= facebook_like_button %>
+    </div>
   </div>
 </footer>
 <div class="clear">
