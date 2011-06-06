@@ -6,7 +6,7 @@
   <p class="news-info">
     Posted by <%= gravatar_for(news_post.user, :size => 16) %> <%= link_to news_post.user.name, news_post.user %> at
     <em><%= news_post.created_at.to_s(:rfc822) %></em>.
-    <% unless news_post.updated_at.blank? || news_post.updated_at == news_post.created_at %>
+    <% unless news_post.updated_at.blank? || news_post.updated_at == news_post.created_at %><br>
     Last updated at <em><%= news_post.updated_at.to_s(:rfc822) %></em>.
     <% end %>
   </p>
