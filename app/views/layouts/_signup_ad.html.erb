@@ -4,9 +4,8 @@
     You don't have a warband yet. <%= link_to "Create one now!", new_warband_path %>
   </p>
   <% elsif not user_signed_in? %>
-  <%= embed_rpx user_session_url %>
-  <!--<p>
-    <%= link_to_rpx "Sign in now and create your own Warband!", user_session_url %>
-  </p>-->
+  <p>
+    <%= link_to_rpx "Sign in", user_session_url %> now and create your own Warband!
+  </p>
   <% end %>
 </div>

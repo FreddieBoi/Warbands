@@ -3,17 +3,15 @@
   <%= @news.content %>
 </p>
 <p>
-  <%= gravatar_for(@news.user, :size => 32) %> <%= link_to @user.name, @user %>
+  <%= gravatar_for(@news.user, :size => 16) %><%= link_to @user.name, @user %>
 </p>
-<p>
-  <em>
-  <b>Posted at:</b> <%= @news.created_at.to_s(:rfc822) %>
-  </em>
-  <% unless @news.updated_at.blank? %>
+<p class="date">
+  <strong>Posted at:</strong>
+  <em><%= @news.created_at.to_s(:rfc822) %></em>
+  <% unless @news.updated_at.blank? || @news.updated_at == @news.created_at %>
   <br />
-  <em>
-  <b>Last updated at:</b> <%= @news.updated_at.to_s(:rfc822) %>
-  </em>
+  <strong>Last updated at:</strong>
+  <em><%= @news.updated_at.to_s(:rfc822) %></em>
   <% end %>
 </p>
 <p>

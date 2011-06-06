@@ -9,8 +9,8 @@
   <% @achievements.each do |achievement| %>
   <tr>
     <td><%= link_to achievement.name, achievement %></td>
-    <td><%= achievement.desc.blank? ? "No description" : achievement.desc.slice(0,20) %></td>
-    <td><%= achievement.reputation %></td>
+    <td><%= achievement.desc.blank? ? "No description" : achievement.desc.slice(0,55) %></td>
+    <td><span class="reputation"><%= achievement.reputation %></span></td>
   </tr>
   <% end %>
 </table>

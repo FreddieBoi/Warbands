@@ -9,21 +9,21 @@
     <th>Warband</th>
     <th>User</th>
     <% if current_user.admin? %>
-    <th></th>
-    <th></th>
+    <th>Edit</th>
+    <th>Destroy</th>
     <% end %>
   </tr>
   <% @members.each do |member| %>
   <tr>
     <td><%= link_to member.name, member %></td>
-    <td><%= member.level %></td>
-    <td><%= member.experience %></td>
-    <td><%= member.health %> / <%= member.max_health %></td>
+    <td><span class="level"><%= member.level %></span></td>
+    <td><span class="experience"><%= member.experience %> / <%= member.max_experience*member.level %></span></td>
+    <td><span class="health"><%= member.health %> / <%= member.max_health %></span></td>
     <td><%= link_to member.warband.name, member.warband %></td>
     <td><%= link_to member.warband.user.name, member.warband.user %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_member_path(member) %> ]</td>
-    <td>[ <%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <td><%= link_to 'Edit', edit_member_path(member) %></td>
+    <td><%= link_to 'Destroy', member, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
   <% end %>

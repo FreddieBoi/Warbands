@@ -4,9 +4,9 @@
     <%= news_post.content %>
   </p>
   <p>
-    <%= gravatar_for(news_post.user, :size => 32) %> <%= link_to news_post.user.name, news_post.user %>
+    <%= gravatar_for(news_post.user, :size => 16) %><%= link_to news_post.user.name, news_post.user %>
   </p>
-  <p>
+  <p class="date">
     <strong>Posted at:</strong>
     <em><%= news_post.created_at.to_s(:rfc822) %></em>
     <% unless news_post.updated_at.blank? || news_post.updated_at == news_post.created_at %>
