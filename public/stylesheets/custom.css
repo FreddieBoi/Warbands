@@ -70,10 +70,15 @@ h1 a:visited {
 }*/
 h2 {
   color: #A3C979;
-  font-size: 20px;
+  font-size: 22px;
 }
 h3 {
+  font-size: 18px;
   color: #A3C979;
+  padding-top: 20px;
+}
+#my_warband h3 {
+  padding-top: 0px;
 }
 th {
   color: #A3C979;
@@ -513,7 +518,7 @@ div.field_with_errors div.ui-effects-wrapper {
   font-size: 13px;
 }
 
-.news-info em {
+p em {
   color: #A3C979
 }
 
@@ -540,7 +545,7 @@ div.field_with_errors div.ui-effects-wrapper {
 }
 
 .health {
-  color: #8A1F11;
+  color: #D6301A;
   font-weight: bold;
   text-shadow: 0 0 3px #000;
 }
@@ -552,8 +557,8 @@ div.field_with_errors div.ui-effects-wrapper {
 .item {
   width: 198px;
   font-size: 12px;
-  background-color: #444;
-  border: #000000 solid 1px;
+  background-color: #222;
+  border: #000 solid 1px;
   list-style-type: none;
   display: block;
   overflow: hidden;
@@ -561,13 +566,37 @@ div.field_with_errors div.ui-effects-wrapper {
   margin: 0 0 2px;
 }
 
-.item .coins, .item .combat_value {
+.item .coins, .item .combat_value, .item-large .coins, .item-large .combat_value {
   float: right;
 }
 
+.member {
+  list-style-type: none;
+}
+
+.enemy {
+  list-style-type: none;
+}
+
+.items {
+
+}
+
+.item-large {
+  width: 220px;
+  font-size: 16px;
+  background-color: #444;
+  border: #000 solid 2px;
+  list-style-type: none;
+  display: block;
+  overflow: hidden;
+  padding: 4px;
+  margin: 0 0 10px;
+}
 
 .draggable {
   cursor: move;
+  /*border: 1px dashed #A;*/
 }
 
 .droppable {
@@ -575,8 +604,8 @@ div.field_with_errors div.ui-effects-wrapper {
 }
 
 .inventory {
-  width: 204px;
-  padding: 0;
+  width: 205px;
+  padding: 2px;
   background-color: #444;
   min-height: 100px;
   -moz-box-shadow: 0 0 5px 5px #000;
@@ -585,8 +614,13 @@ div.field_with_errors div.ui-effects-wrapper {
 }
 
 .item-slot {
-  min-height: 50px;
-  padding: 0;
+  width: 205px;
+  min-height: 45px;
+  background-color: #444;
+  padding: 2px;
+  -moz-box-shadow: 0 0 3px 3px #000;
+  -webkit-box-shadow: 0 0 3px 3px #000;
+  box-shadow: 0 0 3px 3px #000;
 }
 
 li .title {

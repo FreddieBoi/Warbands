@@ -1,16 +1,27 @@
 <h2><%= @title %></h2>
 <p>
-  <b>Pos x:</b>
-  <%= @region.pos_x %>
-</p>
-<p>
-  <b>Pos y:</b>
-  <%= @region.pos_y %>
-</p>
-<p>
-  <b>Description:</b>
   <%= @region.desc %>
 </p>
+<p>
+  <b>Location in world:</b>
+  <b>X</b>
+  =
+  <%= @region.pos_x %>,
+  <b>Y</b>
+  =
+  <%= @region.pos_y %>
+</p>
+<h3>Enemies starting in this region</h3>
+<% if @region.enemy_templates.blank? %>
+<p>
+  No enemies currently start in this region.
+</p>
+<% else %>
+<ul class="enemies">
+  <%= render :partial => "enemy_templates/enemy", :collection => @region.enemy_templates %>
+  <% end %>
+</ul>
+<br>
 <% if current_user.admin? %>
 <%= link_to 'Edit', edit_region_template_path(@region) %> |
 <%= link_to 'Destroy', @region, :confirm => 'Are you sure?', :method => :delete %> |

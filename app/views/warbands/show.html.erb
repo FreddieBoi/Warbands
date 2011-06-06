@@ -1,5 +1,9 @@
 <h2><%= @title %></h2>
-<%= link_to 'Edit your warband', edit_warband_path(@warband) if current_user?(@user) %>
+<% if current_user?(@user) %>
+<%= link_to 'Edit your warband', edit_warband_path(@warband) %>
+<% else %>
+<%= link_to 'Show list of all warbands', warbands_path %>
+<% end %>
 <p>
   Belongs to <%= gravatar_for(@user, :size => 20) %> <%= link_to @user.name, @user %>
 </p>
@@ -7,16 +11,19 @@
   <b>Reputation:</b>
   <span class="reputation"><%= @warband.reputation %></span>
 </p>
-<p>
+<p id="total_combat_value">
   <b>Total combat value:</b>
   <span class="combat_value"><%= @warband.combat_value %></span>
 </p>
 <p>
   <b>Currently in region:</b>
   <%= link_to @region.name, @region.template %>
-</p> 
-<% unless current_user?(@user) %>
-<%= link_to 'Show list of all warbands', warbands_path %>
+</p>
+<% if current_user?(@user) %>
+<p>
+  <%= link_to "Go to the map", map_path %> for some action!
+</p>
+<% else %>
 <h3>Members</h3>
 <% @warband.members.each do |m| %>
 <ul class="members">
@@ -25,13 +32,31 @@
 <% end %>
 <% end %>
 <h3>Inventory</h3>
-<ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
+<% if current_user?(@user) %>
+<ul class="<%= "droppable inventory" %>" data-id="<%= @warband.id %>">
   <%= render :partial => "shared/draggable_item", :collection => @warband.items %>
 </ul>
+<% elsif @warband.items.blank? %>
+<p>
+  The inventory is empty.
+</p>
+<% else %>
+<ul class="items">
+  <%= render :partial => "shared/item", :collection => @warband.items %>
+</ul>
+<% end %>
+<% if current_user?(@user) %>
+<p>
+  All unused items are stored in your warband's common inventory.
+  <br>
+  <em>You can drag and drop items between the inventory and your warband members.</em>
+</p>
+<% end %>
 <h3>Achievements</h3>
 <p>
   <b>Completed:</b>
   <%= @warband.achievements.count %> / <%= Achievement.all.count %>
+  <%= link_to "Show list of all possible achievements", achievements_path %>
 </p>
 <ul id="achievements">
   <% @warband.achievements.each do |a| %>

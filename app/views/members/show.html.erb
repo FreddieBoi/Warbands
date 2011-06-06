@@ -20,7 +20,8 @@
   <b>Total combat value:</b>
   <span class="combat_value"><%= @member.calc_combat_value %></span>
 </p>
-<h3>Items</h3>
+<% unless current_user?(@member.warband.user) %>
+<h3>Equipped items</h3>
 <% if @member.items.empty? %>
 <p>
   This member doesn't have any items yet.
@@ -31,7 +32,6 @@
 </ul>
 <% end %>
 <br />
-<% unless current_user?(@member.warband.user) %>
 <%= link_to 'Show list of all members', members_path %>
 <% else %>
 <%= link_to 'Show your warband page', current_user.warband %>

@@ -2,7 +2,4 @@
 <li class="<%= "draggable " if draggable %>item" data-id="<%= draggable_item.id %>">
   <span class="title"><%= link_to draggable_item.name.titleize, draggable_item.template %></span><span class="combat_value" title="Combat value: <%= draggable_item.combat_value %>"><%= draggable_item.combat_value %></span><br>
   <span class="desc"><%= draggable_item.desc %></span><span class="coins" title="Cost: <%= draggable_item.cost %>"><%= draggable_item.cost %></span><br>
-
-  <!--<span class="type"><%= draggable_item.item_type %></span>-->
-  
 </li>

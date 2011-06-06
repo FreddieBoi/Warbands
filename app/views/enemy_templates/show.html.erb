@@ -1,5 +1,8 @@
 <h2><%= @title %></h2>
 <p>
+  <%= @enemy.desc %>
+</p>
+<p>
   <b>Region:</b>
   <% if @region.blank? %>
   Currently not in any region.
@@ -8,14 +11,10 @@
   <%end %>
 </p>
 <p>
-  <b>Description:</b>
-  <%= @enemy.desc %>
+  <b>Starting health:</b>
+  <span class="health"><%= @enemy.max_health %></span>
 </p>
-<p>
-  <b>Max health:</b>
-  <%= @enemy.max_health %>
-</p>
-<h3>Items</h3>
+<h3>Equipped items</h3>
 <% if @items.empty? %>
 <p>
   This enemy doesn't have any items.
@@ -25,11 +24,15 @@
   <%= render :partial => "item_templates/item", :collection => @items %>
 </ul>
 <% end %>
-<br />
-<% if current_user.admin? %>
-<%= link_to 'Edit', edit_enemy_template_path(@enemy) %> |
-<%= link_to 'Destroy', @enemy, :confirm => 'Are you sure?', :method => :delete %> |
-<% end %>
-<%= link_to 'List of all enemies', enemy_templates_path %>
+<p>
+  <em>Enemies might drop equiped items upon dying.</em>
+</p>
+<p>
+  <% if current_user.admin? %>
+  <%= link_to 'Edit', edit_enemy_template_path(@enemy) %> |
+  <%= link_to 'Destroy', @enemy, :confirm => 'Are you sure?', :method => :delete %> |
+  <% end %>
+  <%= link_to 'List of all enemies', enemy_templates_path %>
+</p>
 <br>
 <%= raw(disqus_thread) %>

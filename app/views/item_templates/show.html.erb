@@ -1,6 +1,5 @@
 <h2><%= @title %></h2>
 <p>
-  <b>Description:</b>
   <%= @item.desc %>
 </p>
 <p>
@@ -11,6 +10,7 @@
   <b>Cost:</b>
   <span class="coins"><%= @item.cost %></span>
 </p>
+<br>
 <% if current_user.admin? %>
 <%= link_to 'Edit', edit_item_template_path(@item) %> |
 <%= link_to 'Destroy', @item, :confirm => 'Are you sure?', :method => :delete %> |

@@ -1,9 +1,4 @@
-<li>
-  <b><%= link_to item.name.titleize, item %></b>
-  <br>
-  <%= item.desc %>
-  <b>Combat value:</b>
-  <span class="combat_value"><%= item.combat_value %></span>
-  <b>Cost:</b>
-  <span class="coins"><%= item.cost %></span>
+<li class="item-large">
+  <span class="title"><%= link_to item.name.titleize, item %></span><span class="combat_value" title="Combat value: <%= item.combat_value %>"><%= item.combat_value %></span><br>
+  <span class="desc"><%= item.desc %></span><span class="coins" title="Cost: <%= item.cost %>"><%= item.cost %></span><br>
 </li>
