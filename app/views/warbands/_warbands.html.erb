@@ -4,12 +4,16 @@
   <tr>
     <th><%= sortable "name" %></th>
     <th><%= sortable "reputation" %></th>
+    <th>Belongs to</th>
     <th>Currently in region</th>
   </tr>
   <% @warbands.each do |warband| %>
   <tr>
     <td><%= link_to warband.name, warband %></td>
-    <td><span class="reputation"><%= warband.reputation %></span></td>
+    <td>
+    <span class="reputation"><%= warband.reputation %></span>
+    </td>
+    <td> <%= link_to warband.user.name, warband.user %></td>
     <td><%= link_to warband.region.name, warband.region.template %></td>
   </tr>
   <% end %>

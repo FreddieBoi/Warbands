@@ -7,8 +7,8 @@
     <th><%= sortable "pos_y" %></th>
     <th>Description</th>
     <% if current_user.admin? %>
-    <th></th>
-    <th></th>
+    <th>Edit</th>
+    <th>Destroy</th>
     <% end %>
   </tr>
   <% @regions.each do |region| %>
@@ -18,8 +18,8 @@
     <td><%= region.pos_y %></td>
     <td><%= region.desc %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_region_template_path(region) %> ]</td>
-    <td>[ <%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <td><%= link_to 'Edit', edit_region_template_path(region) %></td>
+    <td><%= link_to 'Destroy', region, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
   <% end %>

@@ -1,11 +1,12 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
+<br>
 <table class="index">
   <tr>
     <th><%= sortable "name" %></th>
     <th><%= sortable "level" %></th>
     <th><%= sortable "experience" %></th>
-    <th>Health</th>
+    <th><%= sortable "health" %></th>
     <th>Warband</th>
     <th>User</th>
     <% if current_user.admin? %>
@@ -28,4 +29,5 @@
   </tr>
   <% end %>
 </table>
+<br>
 <%= will_paginate(@members) %>

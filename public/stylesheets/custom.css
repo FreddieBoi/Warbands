@@ -204,6 +204,7 @@ p {
   border-radius: 10px 10px 10px 10px;
   -moz-border-radius: 10px 10px 10px 10px;
   -webkit-border-radius: 10px 10px 10px 10px;
+  width: 100%;
 }
 footer {
   background: #000;
@@ -360,10 +361,6 @@ div.field_with_errors div.ui-effects-wrapper {
   /*background: #444;*/
 }
 
-#dsq-content #dsq-global-toolbar table td {
-  border: none;
-}
-
 #error_explanation {
   width: 400px;
   border: 2px solid red;
@@ -496,7 +493,7 @@ div.field_with_errors div.ui-effects-wrapper {
 
 .xpbar_inner {
 	height: 15px;
-	background-color: #E6EFC2;
+	background-color: #00B2B2;
 	white-space: nowrap;
 	overflow: visible;
 }
@@ -512,12 +509,32 @@ div.field_with_errors div.ui-effects-wrapper {
   text-shadow: 0 0 3px #000;
 }
 
-.date {
-  font-size: 12px;
+.news-info {
+  font-size: 13px;
+}
+
+.news-info em {
+  color: #A3C979
+}
+
+.combat_value {
+  color: #FE6A00;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000;
+  background: url(/images/combat_value.png) no-repeat;
+  padding: 0 0 0 25px;
+}
+
+.coins {
+  color: #999;
+  font-weight: bold;
+  text-shadow: 0 0 3px #000;
+  background: url(/images/silvercoins.png) no-repeat;
+  padding: 0 0 0 25px;
 }
 
 .experience {
-  color: #E6EFC2;
+  color: #00B2B2;
   font-weight: bold;
   text-shadow: 0 0 3px #000;
 }
@@ -542,6 +559,10 @@ div.field_with_errors div.ui-effects-wrapper {
   overflow: hidden;
   padding: 2px;
   margin: 0 0 2px;
+}
+
+.item .coins, .item .combat_value {
+  float: right;
 }
 
 
@@ -576,14 +597,6 @@ li .desc {
   float: left;
 }
 
-li .combat_value {
-  float: right;
-}
-
-li .cost {
-  float: right;
-}
-
 #warband-center {
   float: left;
 }
@@ -601,8 +614,9 @@ li .cost {
 }
 
 span.reputation {
-  font-size: 16px;
   font-weight: bold;
   color: #FF00FF;
   text-shadow: 0 0 3px #000;
+  background: url(/images/reputation.png) no-repeat;
+  padding: 0 0 0 20px;
 }

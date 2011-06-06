@@ -1,28 +1,29 @@
 <h2><%= @title %></h2>
-<%= link_to 'Edit your warband', edit_warband_path(@warband) %>
+<%= link_to 'Edit your warband', edit_warband_path(@warband) if current_user?(@user) %>
 <p>
-  Belongs to <%= gravatar_for(@user, :size => 20) %><%= link_to @user.name, @user %>
+  Belongs to <%= gravatar_for(@user, :size => 20) %> <%= link_to @user.name, @user %>
 </p>
 <p>
   <b>Reputation:</b>
   <span class="reputation"><%= @warband.reputation %></span>
 </p>
 <p>
+  <b>Total combat value:</b>
+  <span class="combat_value"><%= @warband.combat_value %></span>
+</p>
+<p>
   <b>Currently in region:</b>
   <%= link_to @region.name, @region.template %>
-</p>
-<% if current_user?(@user) %>
-<% else %>
-<%= link_to 'List of all warbands', warbands_path %>
-<% end %>
+</p> 
 <% unless current_user?(@user) %>
+<%= link_to 'Show list of all warbands', warbands_path %>
+<h3>Members</h3>
 <% @warband.members.each do |m| %>
 <ul class="members">
   <%= render m %>
 </ul>
 <% end %>
 <% end %>
-
 <h3>Inventory</h3>
 <ul class="<%= "droppable" if current_user?(@user) %> inventory" data-id="<%= @warband.id %>">
   <%= render :partial => "shared/draggable_item", :collection => @warband.items %>

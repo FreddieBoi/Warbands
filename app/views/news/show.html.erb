@@ -2,16 +2,12 @@
 <p>
   <%= @news.content %>
 </p>
-<p>
-  <%= gravatar_for(@news.user, :size => 16) %><%= link_to @user.name, @user %>
-</p>
-<p class="date">
-  <strong>Posted at:</strong>
-  <em><%= @news.created_at.to_s(:rfc822) %></em>
+<p class="news-info">
+  Posted by <%= gravatar_for(@news.user, :size => 16) %> <%= link_to @news.user.name, @news.user %> at
+  <em><%= @news.created_at.to_s(:rfc822) %></em>.
   <% unless @news.updated_at.blank? || @news.updated_at == @news.created_at %>
-  <br />
-  <strong>Last updated at:</strong>
-  <em><%= @news.updated_at.to_s(:rfc822) %></em>
+  Last updated at
+  <em><%= @news.updated_at.to_s(:rfc822) %></em>.
   <% end %>
 </p>
 <p>
@@ -19,7 +15,8 @@
   <%= link_to 'Edit', edit_news_path(@news) %> |
   <%= link_to 'Destroy', @news, :confirm => 'Are you sure?', :method => :delete %> |
   <% end %>
-  <%= link_to 'Read more news', news_index_path %>
+  <%= link_to 'Read more news', news_index_path %> |
+  <%= link_to_news_feed %>
 </p>
 <br />
 <%= raw(disqus_thread) %>

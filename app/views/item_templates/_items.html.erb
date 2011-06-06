@@ -3,21 +3,23 @@
 <table class="index">
   <tr>
     <th><%= sortable "name" %></th>
+    <th><%= sortable "combat_value" %></th>
     <th><%= sortable "cost" %></th>
     <th>Description</th>
     <% if current_user.admin? %>
-    <th></th>
-    <th></th>
+    <th>Edit</th>
+    <th>Destroy</th>
     <% end %>
   </tr>
   <% @items.each do |item| %>
   <tr>
     <td><%= link_to item.name.titleize, item %></td>
-    <td><%= item.cost %></td>
+    <td><span class="combat_value"><%= item.combat_value %></span></td>
+    <td><span class="coins"><%= item.cost %></span></td>
     <td><%= item.desc %></td>
     <% if current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_item_template_path(item) %> ]</td>
-    <td>[ <%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <td><%= link_to 'Edit', edit_item_template_path(item) %></td>
+    <td><%= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
   <% end %>

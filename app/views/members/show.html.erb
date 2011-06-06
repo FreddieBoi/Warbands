@@ -1,6 +1,6 @@
 <h2><%= @member.name %></h2>
 <p>
-  Member of <%= link_to @warband.name, @warband %> of <%= gravatar_for(@user, :size => 16) %><%= link_to @user.name, @user %>
+  Member of <%= link_to @warband.name, @warband %> by <%= gravatar_for(@user, :size => 16) %> <%= link_to @user.name, @user %>
 </p>
 <p>
   <b>Level:</b>
@@ -16,6 +16,10 @@
   <b>Experience:</b>
   <span class="experience"><%= @member.experience %> / <%= @member.max_experience*@member.level %></span>
 </p>
+<p>
+  <b>Total combat value:</b>
+  <span class="combat_value"><%= @member.calc_combat_value %></span>
+</p>
 <h3>Items</h3>
 <% if @member.items.empty? %>
 <p>
@@ -27,9 +31,9 @@
 </ul>
 <% end %>
 <br />
-<% if current_user.admin? %>
-<%= link_to 'Edit', edit_member_path(@member) %> |
-<%= link_to 'Destroy', @member, :confirm => 'Are you sure?', :method => :delete %> |
+<% unless current_user?(@member.warband.user) %>
+<%= link_to 'Show list of all members', members_path %>
+<% else %>
+<%= link_to 'Show your warband page', current_user.warband %>
 <% end %>
-<%= link_to 'List of all members', members_path %>
 

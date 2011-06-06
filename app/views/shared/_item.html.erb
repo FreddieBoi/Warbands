@@ -1,9 +1,9 @@
 <li>
-  <b><%= link_to item.name.titleize, item.template %></b> - <%= item.desc %>
-  <b>Combat Value</b>
-  <%= item.combat_value %>
-  <b>Item type</b>
-  <%= item.item_type %>
+  <b><%= link_to item.name.titleize, item.template %></b>
+  <br>
+  <%= item.desc %>
+  <b>Combat value:</b>
+  <span class="combat_value"><%= item.combat_value %></span>
   <b>Cost:</b>
-  <%= item.cost %>
+  <span class="coins"><%= item.cost %></span>
 </li>

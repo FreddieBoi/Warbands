@@ -2,9 +2,9 @@
   <b><%= link_to member.name, member %></b>
   <br />
   <b>Level:</b>
-  <%= member.level %>
+  <span class="level"><%= member.level %></span>
   <b>HP:</b>
-  <%= member.health %>/<%= member.max_health %>
+  <span class="health"><%= member.health %>/<%= member.max_health %></span>
   <b>XP:</b>
-  <%= member.experience %>/<%= member.max_experience*member.level %> 
+  <span class="experience"><%= member.experience %>/<%= member.max_experience*member.level %></span>
 </li>

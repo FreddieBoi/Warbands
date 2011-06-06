@@ -3,15 +3,11 @@
 
 // Animate the flash if any message to show
 function animate_flash() {
-  // Hide the flash div
-  $(".flash").hide();
   // Nothing to show? Get out!
   if (!$(".flash").html())
     return;
 
   var flash = $(".flash")
-  //flash.show();
-  flash.fadeIn(400);
   // Wait a bit, then fadeOut and hide
   setTimeout( function() {
     flash.fadeOut(800, function() {

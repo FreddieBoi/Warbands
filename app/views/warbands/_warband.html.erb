@@ -4,6 +4,10 @@
   <span class="reputation"><%= @warband.reputation %></span>
 </p>
 <p>
+  <b>Total combat value:</b>
+  <span class="combat_value"><%= @warband.combat_value %></span>
+</p>
+<p>
   <b>Currently in region:</b>
   <%= link_to @warband.region.name, @warband.region.template %>
 </p>

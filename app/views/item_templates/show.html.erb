@@ -4,13 +4,17 @@
   <%= @item.desc %>
 </p>
 <p>
+  <b>Combat value:</b>
+  <span class="combat_value"><%= @item.combat_value %></span>
+</p>
+<p>
   <b>Cost:</b>
-  <%= @item.cost %>
+  <span class="coins"><%= @item.cost %></span>
 </p>
 <% if current_user.admin? %>
 <%= link_to 'Edit', edit_item_template_path(@item) %> |
 <%= link_to 'Destroy', @item, :confirm => 'Are you sure?', :method => :delete %> |
 <% end %>
 <%= link_to 'List of all items', item_templates_path %>
-<br />
+<br>
 <%= raw(disqus_thread) %>
