@@ -88,12 +88,15 @@
         // No region found at clicked location, no need to update.
         // FIXME! Show this to the User in some way...
         if (!region) return;
-
-        var enemy = getClickedEnemy(region, pos);
-        if(enemy) {
-          $(window.location).attr('href', '/battle/before/?enemy_id='+enemy.id);
-          return;
-        }
+        var warx = Math.floor(warband.x/regionWidth);
+        var wary = Math.floor(warband.y/regionHeight);
+				if(x === warx && y === wary) {
+					var enemy = getClickedEnemy(region, pos);
+	        if(enemy) {
+	          $(window.location).attr('href', '/battle/before/?enemy_id='+enemy.id);
+	          return;
+	        }
+				}
 
         // Update the Warband position (database) by sending a PUT request and
         // then the positon of the warband (javascript object) upon success
@@ -237,8 +240,8 @@
 
     function getClickedEnemy(region, pos) {
       if (region.enemies.length > 0) { // if there are enemies in the region
-        if (pos.x > region.x*regionWidth+enemyOffset.x && pos.x < region.x*regionWidth+enemyOffset.x+22 && // 22 is enemy img width
-            pos.y > region.y*regionHeight+enemyOffset.y && pos.y < region.y*regionHeight+enemyOffset.y+28) { // 28 is enemy img height
+        if (pos.x > region.enemies[0].x && pos.x < region.enemies[0].x+22 && // 22 is enemy img width
+            pos.y > region.enemies[0].y && pos.y < region.enemies[0].y+28) { // 28 is enemy img height
           return region.enemies[0];
         }
       }
