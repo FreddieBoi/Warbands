@@ -1,5 +1,6 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
+<br>
 <table class="index">
   <tr>
     <th><%= sortable "title" %></th>
@@ -7,8 +8,8 @@
     <th><%= sortable "created_at", "Posted at" %></th>
     <th><%= sortable "updated_at", "Last updated at" %></th>
     <% if user_signed_in? && current_user.admin? %>
-    <th></th>
-    <th></th>
+    <th>Edit</th>
+    <th>Destroy</th>
     <% end %>
   </tr>
   <% @news.each do |news| %>
@@ -18,10 +19,11 @@
     <td><%= news.created_at %></td>
     <td><%= news.updated_at %></td>
     <% if user_signed_in? && current_user.admin? %>
-    <td>[ <%= link_to 'Edit', edit_news_path(news) %> ]</td>
-    <td>[ <%= link_to 'Destroy', news, :confirm => 'Are you sure?', :method => :delete %> ]</td>
+    <td><%= link_to 'Edit', edit_news_path(news) %></td>
+    <td><%= link_to 'Destroy', news, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
   <% end %>
 </table>
+<br>
 <%= will_paginate @news %>
