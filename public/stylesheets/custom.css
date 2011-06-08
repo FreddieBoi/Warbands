@@ -522,6 +522,14 @@ p em {
   color: #A3C979
 }
 
+span.you {
+  font-style: italic;
+  color: #A3C979;
+  font-size: 14px;
+  float: right;
+  padding-right: 5px;
+}
+
 .combat_value {
   color: #FE6A00;
   font-weight: bold;

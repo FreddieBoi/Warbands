@@ -1,6 +1,5 @@
 <%= hidden_field_tag :direction, params[:direction] %>
 <%= hidden_field_tag :sort, params[:sort] %>
-<br>
 <table class="index">
   <tr>
     <th><%= sortable "name" %></th>
@@ -29,5 +28,6 @@
   </tr>
   <% end %>
 </table>
-<br>
+<p>
 <%= will_paginate(@members) %>
+</p>

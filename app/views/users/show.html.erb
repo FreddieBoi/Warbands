@@ -1,13 +1,16 @@
 <h2><%= gravatar_for @user %>
 <%= @user.name %></h2>
-<% if @user.admin? %>
 <p>
-  <em>Administrator</em>
+  <b>Status:</b>
+  <%= @user.admin? ? "Administrator" : "User"%>
 </p>
-<% end %>
+<p>
+  Account created at
+  <em><%= @user.created_at.to_s(:rfc822) %></em>
+</p>
 <% if current_user?(@user) %>
 <p>
-  <%= link_to 'Edit your account', edit_user_registration_path %>
+  <em>This is you!</em> <%= link_to 'Edit your account', edit_user_registration_path %>
 </p>
 <% end %>
 <h3>Warband</h3>
