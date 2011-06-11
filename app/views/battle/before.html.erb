@@ -1,11 +1,15 @@
 <div id="battle_container">
   <h2><%= @title %></h2>
-  <%= render 'battle/warband', :warband => @warband %>
+  <h2><%= @warband.name.humanize %></h2>
   <div class="battle vs">
     VS
   </div>
-  <%= render 'battle/enemy', :enemy => @enemy %>
+  <div id="enemy">
+		<%= render 'battle/enemy', :enemy => @enemy %>
+	</div>
+	<nav>
+		<%= button_to "Flee", map_path %><%= button_to "Engage in battle", battle_combat_path(:enemy_id => @enemy.id) %>
+	</nav>
 </div>
 <div class="clear">
 </div>
-<%= button_to "Flee", map_path %><%= button_to "Engage in battle", battle_combat_path(:enemy_id => @enemy.id) %>

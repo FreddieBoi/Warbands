@@ -432,12 +432,10 @@ div.field_with_errors div.ui-effects-wrapper {
 
 /* BATTLE */
 #battle_container {
-
+	text-align: center;
 }
 
 .battle {
-  width: 350px;
-  float: left;
 }
 
 .battle h4 {
@@ -449,8 +447,26 @@ div.field_with_errors div.ui-effects-wrapper {
 } 
 
 .vs {
-  width: 100px;
-  text-align: center;
+
+}
+
+#battle_container {
+	width: 300px;
+	text-align: left;
+	margin: auto;
+}
+
+#battle_container ul {
+	padding: 0;
+}
+
+#battle_container nav {
+
+}
+
+#battle_container form {
+	display: inline;
+	float: left;
 }
 
 #combat_container {
