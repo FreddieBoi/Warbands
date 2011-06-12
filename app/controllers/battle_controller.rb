@@ -2,6 +2,9 @@ class BattleController < ApplicationController
 
   # Ensure that the User is signed in
   before_filter :authenticate_user!
+  
+  before_filter :ensure_correct_region!
+  
   # GET /battle/before
   def before
     @title = "Prepare for battle!"
@@ -57,6 +60,18 @@ class BattleController < ApplicationController
     respond_to do |format|
       format.html # after.html.erb
     end
+  end
+  
+  private
+  
+  def ensure_correct_region!
+    @w_region = current_user.warband.region.name
+    if not params[:battle_id].blank?
+      @e_region = Battle.find(params[:battle_id]).enemy_template.region_template.name
+    elsif not params[:enemy_id].blank?
+      @e_region = Enemy.find(params[:enemy_id]).region.name
+    end
+    redirect_to(map_path, :alert => "Your warband has to be in the same region as the enemy") and return unless @w_region == @e_region
   end
 
 end
