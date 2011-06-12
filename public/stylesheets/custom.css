@@ -435,9 +435,6 @@ div.field_with_errors div.ui-effects-wrapper {
 	text-align: center;
 }
 
-.battle {
-}
-
 .battle h4 {
   margin-bottom: 2px;
 }
@@ -445,10 +442,6 @@ div.field_with_errors div.ui-effects-wrapper {
 .battle p {
   font-size: 13px;
 } 
-
-.vs {
-
-}
 
 #battle_container {
 	width: 300px;
@@ -458,10 +451,6 @@ div.field_with_errors div.ui-effects-wrapper {
 
 #battle_container ul {
 	padding: 0;
-}
-
-#battle_container nav {
-
 }
 
 #battle_container form {
