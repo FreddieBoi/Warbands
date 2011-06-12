@@ -432,12 +432,7 @@ div.field_with_errors div.ui-effects-wrapper {
 
 /* BATTLE */
 #battle_container {
-
-}
-
-.battle {
-  width: 350px;
-  float: left;
+	text-align: center;
 }
 
 .warband {
@@ -448,38 +443,20 @@ div.field_with_errors div.ui-effects-wrapper {
   text-align: left;
 }
 
-.vs {
-  width: 100px;
-  text-align: center;
-  font-size: 36px;
+#battle_container {
+	width: 300px;
+	text-align: left;
+	margin: auto;
 }
 
-#battle_action {
-  width: 400px;
-  text-align: center;
-  margin-top: 25px;
-  margin-left: auto;
-  margin-right: auto;
+#battle_container ul {
+	padding: 0;
 }
 
-#flee {
-  padding: 10px;
-  float: left;
-  background: #4C5D3F;
-  -moz-box-shadow: 0 0 5px 5px #000;
-  -webkit-box-shadow: 0 0 5px 5px #000;
-  box-shadow: 0 0 5px 5px #000;
+#battle_container form {
+	display: inline;
+	float: left;
 }
-
-#engage {
-  padding: 10px;
-  float: right;
-  background: #4C5D3F;
-  -moz-box-shadow: 0 0 5px 5px #000;
-  -webkit-box-shadow: 0 0 5px 5px #000;
-  box-shadow: 0 0 5px 5px #000;
-}
-
 
 #combat_container {
 	padding-bottom: 10px;
