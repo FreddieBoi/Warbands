@@ -42,5 +42,13 @@ class EnemyTemplate < ActiveRecord::Base
       scoped # Empty scope, like calling 'all' but not performing the query
     end
   end
+  
+  def calc_combat_value
+    value = combat_value
+    item_templates.each do |i|
+      value += i.combat_value
+    end
+    value
+  end
 
 end

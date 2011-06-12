@@ -14,6 +14,10 @@
   <b>Starting health:</b>
   <span class="health"><%= @enemy.max_health %></span>
 </p>
+<p>
+  <b>Total combat value:</b>
+  <span class="combat_value"><%= @enemy.calc_combat_value %></span>
+</p>
 <h3>Equipped items</h3>
 <% if @items.empty? %>
 <p>
