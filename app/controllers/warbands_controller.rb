@@ -78,7 +78,7 @@ class WarbandsController < ApplicationController
 
     respond_to do |format|
       if @warband.save
-        format.html { redirect_to(@warband, :notice => 'Warband was successfully created! Achievement gained: '+@achievement.name) }
+        format.html { redirect_to(@warband, :notice => 'Warband was successfully created! Achievement completed: '+@achievement.name) }
         format.xml  { render :xml => @warband, :status => :created, :location => @warband }
       else
         format.html { render :action => "new" }

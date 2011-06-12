@@ -1,10 +1,7 @@
 <div class="battle warband">
   <h2><%= warband.name %></h2>
-  <% warband.members.each do |member| %>
-  <h4><%= member.name %></h4>
-  Combat value: <%= member.calc_combat_value %>
-  <% end %>
   <p>
-    <b>Total combat value:</b><%= warband.combat_value %>
+    <b>Total combat value:</b>
+    <span class="combat_value"><%= warband.combat_value %></span>
   </p>
 </div>

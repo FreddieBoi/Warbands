@@ -1,14 +1,17 @@
 <div class="battle enemy">
   <h2><%= enemy.name %></h2>
   <p>
-    <b>Description:</b>
     <%= enemy.desc %>
   </p>
   <p>
     <b>Health:</b>
-    <%= enemy.health %> / <%= enemy.max_health %>
+    <span class="health"><%= enemy.health %> / <%= enemy.max_health %></span>
   </p>
-  <h4>Items</h4>
+  <p>
+    <b>Total combat value:</b>
+    <span class="combat_value"><%= enemy.combat_value %></span>
+  </p>
+  <h3>Items</h3>
   <% if enemy.items.empty? %>
   <p>
     This enemy doesn't have any items.
@@ -17,8 +20,8 @@
   <ul class="items">
     <%= render :partial => "shared/item", :collection => enemy.items %>
   </ul>
-  <% end %>
   <p>
-    <b>Total combat value:</b><%= enemy.combat_value %>
+    <em>Your warband may obtain those items if winning the battle</em>
   </p>
+  <% end %>
 </div>

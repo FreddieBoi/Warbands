@@ -440,18 +440,46 @@ div.field_with_errors div.ui-effects-wrapper {
   float: left;
 }
 
-.battle h4 {
-  margin-bottom: 2px;
+.warband {
+  text-align: right;
 }
 
-.battle p {
-  font-size: 13px;
-} 
+.enemy {
+  text-align: left;
+}
 
 .vs {
   width: 100px;
   text-align: center;
+  font-size: 36px;
 }
+
+#battle_action {
+  width: 400px;
+  text-align: center;
+  margin-top: 25px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#flee {
+  padding: 10px;
+  float: left;
+  background: #4C5D3F;
+  -moz-box-shadow: 0 0 5px 5px #000;
+  -webkit-box-shadow: 0 0 5px 5px #000;
+  box-shadow: 0 0 5px 5px #000;
+}
+
+#engage {
+  padding: 10px;
+  float: right;
+  background: #4C5D3F;
+  -moz-box-shadow: 0 0 5px 5px #000;
+  -webkit-box-shadow: 0 0 5px 5px #000;
+  box-shadow: 0 0 5px 5px #000;
+}
+
 
 #combat_container {
 	padding-bottom: 10px;
