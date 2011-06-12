@@ -65,16 +65,22 @@ region_template04 = RegionTemplate.create! :name => 'Valley', :desc => 'A valley
 puts 'New template: ' << region_template04.name
 
 puts 'Create ENEMY TEMPLATES'
-bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region_template => region_template11, :combat_value => 7
+bandit_template = EnemyTemplate.create! :name => "Bandit", :desc => "A nasty bandit." ,:region_template => region_template10, :combat_value => 7
 puts 'New template: ' << bandit_template.name
-poacher_template = EnemyTemplate.create! :name => "Poacher", :desc => "A nasty poacher." ,:region_template => region_template10, :combat_value => 5
+poacher_template = EnemyTemplate.create! :name => "Poacher", :desc => "A nasty poacher." ,:region_template => region_template42, :combat_value => 5
 puts 'New template: ' << poacher_template.name
 sand_archer_template = EnemyTemplate.create! :name => "Sand Archer", :desc => "An archer of the sand people." ,:region_template => region_template34, :combat_value => 7
 puts 'New template: ' << sand_archer_template.name
-troll_template = EnemyTemplate.create! :name => "Troll", :desc => "An ugly troll." ,:region_template => region_template13, :combat_value => 7
+troll_template = EnemyTemplate.create! :name => "Troll", :desc => "An ugly troll." ,:region_template => region_template12, :combat_value => 7
 puts 'New template: ' << troll_template.name
 thief_template = EnemyTemplate.create! :name => "Thief", :desc => "A simple thief." ,:region_template => region_template23, :combat_value => 8
 puts 'New template: ' << thief_template.name
+dwarf_template = EnemyTemplate.create! :name => "Dwarf", :desc => "An evil dwarf." ,:region_template => region_template43, :combat_value => 10
+puts 'New template: ' << dwarf_template.name
+bandit_lord_template = EnemyTemplate.create! :name => "Bandit lord", :desc => "A bandit lord." ,:region_template => region_template32, :combat_value => 7
+puts 'New template: ' << bandit_lord_template.name
+drunken_sailor_template = EnemyTemplate.create! :name => "Drunken sailor", :desc => "A drunken sailor gone mad." ,:region_template => region_template40, :combat_value => 5
+puts 'New template: ' << drunken_sailor_template.name
 
 puts 'Create ITEM TEMPLATES'
 sword_template = ItemTemplate.create! :name => 'Sword', :desc => 'A mighty sword.', :combat_value => 3, :world_template => starting_world
@@ -91,6 +97,12 @@ knife_template = ItemTemplate.create! :name => 'Knife', :desc => 'A simple knife
 puts 'New template: ' << knife_template.name
 axe_template = ItemTemplate.create! :name => 'Axe', :desc => 'An axe.', :combat_value => 3, :enemy_template => troll_template
 puts 'New template: ' << axe_template.name
+hammer_template = ItemTemplate.create! :name => 'Hammer', :desc => 'A dwarven hammer.', :combat_value => 5, :enemy_template => dwarf_template
+puts 'New template: ' << hammer_template.name
+superior_spear_template = ItemTemplate.create! :name => 'Superior spear', :desc => 'A long superior spear.', :combat_value => 7, :enemy_template => bandit_lord_template
+puts 'New template: ' << superior_spear_template.name
+short_sword_template = ItemTemplate.create! :name => 'Short sword', :desc => 'A short sword.', :combat_value => 4, :enemy_template => drunken_sailor_template
+puts 'New template: ' << short_sword_template.name
 
 puts 'Create ACHIEVEMENTS'
 a1 = Achievement.create! :name => "Created an own warband", :desc => "Created a very own warband and earned some reputation. Good luck!", :reputation => 10
@@ -99,6 +111,8 @@ a2 = Achievement.create! :name => "Blood lust", :desc => "Killed the first enemy
 puts 'New achievement: ' << a2.name
 a3 = Achievement.create! :name => "Sandy killer", :desc => "Killed "+sand_archer_template.name+" in "+sand_archer_template.region_template.name+".", :reputation => 30
 puts 'New achievement: ' << a3.name
+a4 = Achievement.create! :name => "Slayer", :desc => "Killed all the enemies in the world.", :reputation => 30
+puts 'New achievement: ' << a4.name
 
 # puts 'SETTING UP EXAMPLE USERS'
 # freddie = User.create :name => 'freddieboi', :email => 'freddieboi@gmail.com', :rpx_identifier => 'https://www.google.com/profiles/112693975111415891225' #, :password => 'asdfasdf', :password_confirmation => 'asdfasdf'

@@ -1,11 +1,30 @@
 <h2><%= @battle.outcome.humanize %></h2>
 <% if @win %>
-  You looted:<br>
-  <% @items.each do |i| %>
-    <%= render 'shared/item', :item => i %>
+  <p>You won the battle!</p>
+  <% unless @items.blank? %>
+    <h3>Obtained items</h3>
+    <% @items.each do |i| %>
+      <%= render 'shared/item', :item => i %>
+    <% end %>
+    <p>
+    Go to the <%= link_to "warband page", warband_path(@warband) %> to distribute the items to your warband members.<br>
+    </p>
   <% end %>
-  <%= link_to "Go to warband and distribute loot", warband_path(@warband) %><br>
+  <% unless @achievements.blank? %>
+    <h3>Completed achievements</h3>
+    <ul id="achievements">
+      <% @achievements.each do |a| %>
+      <li class="achievement">
+        Gained
+        <span class="reputation">+<%= a.reputation %></span> reputation for completing <%= link_to a.name, a %>.
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
 <% else %>
-
+  <p>You lost the battle!</p>
+  <p><em>Move to an empty region and rest to regain the health of your warband members.</em></p>
 <% end %>
+<p>
 <%= link_to "Return to the map", map_path %>
+</p>
