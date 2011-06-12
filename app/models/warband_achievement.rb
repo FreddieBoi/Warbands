@@ -21,5 +21,6 @@ class WarbandAchievement < ActiveRecord::Base
   # Give the Warband the reputation earned from the achievement
   def update_reputation
     self.warband.reputation += achievement.reputation
+    self.warband.save!
   end
 end
