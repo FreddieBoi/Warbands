@@ -141,6 +141,13 @@ class WarbandsController < ApplicationController
       end
     end
   end
+  
+  def combatvalue
+    warband = Warband.find(params[:id])
+    respond_to do |format|
+        format.json { render :json => warband, :methods => [:combat_value] }
+    end
+  end
 
   private
 

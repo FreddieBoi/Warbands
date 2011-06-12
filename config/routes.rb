@@ -27,6 +27,7 @@ Warbands::Application.routes.draw do
   resources :warbands
   
   match "warbands/:id/rest", :to => "warbands#rest", :path => "warbands/:id/rest", :as => :warband_rest
+  match "warbands/:id/combatvalue", :to => "warbands#combatvalue", :path => "warbands/:id/combatvalue", :as => :warband_combatvalue
   
   resources :members
   

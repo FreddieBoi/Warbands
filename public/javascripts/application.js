@@ -17,8 +17,25 @@ function animate_flash() {
   3000);
 }
 
-function update_items() {
-  // Move replaced items back somehow.
+function update_items(data) {
+  if (data["warband"] && data["warband"]["combat_value"]) {
+    combat_value = data["warband"]["combat_value"];
+    $(".warband_total_combat_value .combat_value").html(combat_value);
+  } else if (data["warband"]) {
+    var url = "/warbands/"+data["warband"]["id"]+"/combatvalue";
+    var data = {
+      "warband[id]": data["warband"]["id"],
+      "_method": "put"
+    };
+    $.post(url, data, update_items, "json");
+  } else if (data["member"]) {
+    var url = "/warbands/"+data["member"]["warband_id"]+"/combatvalue";
+    var data = {
+      "warband[id]": data["member"]["warband_id"],
+      "_method": "put"
+    };
+    $.post(url, data, update_items, "json");
+  }
 }
 
 // On document load do...
@@ -40,13 +57,12 @@ $( function() {
    this.html(this.attr("data-hp"));
    };
    }*/
-  
+
   $(".draggable").draggable({
     containment: "#wrapper",
     revert: "invalid",
     appendTo: "body"
   }).disableSelection();
-  
 
   $(".droppable").droppable({
     drop: function( event, ui ) {
@@ -57,28 +73,32 @@ $( function() {
         "data-id": item_id,
         "class": "draggable item"
       }).appendTo(this);
-      
+
       //$("#inventory [data-id="+item_id+"]").remove();
       var member_id = $(this).parent().attr("data-id");
       var warband_id = $(this).attr("data-id");
       if (member_id !== undefined) {
         var url = "/members/"+member_id; // Go to members/:id path
-        var data = { "member[id]": member_id,
-                     "item_id": item_id, // The item to equip
-                     "_method": "put" }; // Use members#update (not show)
+        var data = {
+          "member[id]": member_id,
+          "item_id": item_id, // The item to equip
+          "_method": "put"
+        }; // Use members#update (not show)
         $.post(url, data, update_items, "json");
       } else if (warband_id !== undefined) {
-        var url = "/warbands/"+warband_id; // Go to members/:id path
-        var data = { "warband[id]": warband_id,
-                     "item_id": item_id, // The item to equip
-                     "_method": "put" }; // Use members#update (not show)
+        var url = "/warbands/"+warband_id; // Go to warbands/:id path
+        var data = {
+          "warband[id]": warband_id,
+          "item_id": item_id, // The item to equip
+          "_method": "put"
+        }; // Use warbands#update (not show)
         $.post(url, data, update_items, "json");
       }
     }
   }).sortable({
     items: "li:not(.placeholder)",
     sort: function() {
-        $(this).removeClass("ui-state-default");
+      $(this).removeClass("ui-state-default");
     }
   });
 });
